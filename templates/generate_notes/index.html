@@ -1,0 +1,33 @@
+<!DOCTYPE html>{% load static %}
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>Achtelbass</title>
+	
+</head>
+<body>
+
+<applet id="MIDIPlugin" code="MIDIPlugin.class" name="MIDIPlugin" archive="http://dl.dropbox.com/u/223827/abcjs/MIDIPlugin.jar" height="1" width="1"></applet>
+
+<textarea id="abc" cols="80" rows="15" style="display:block;">
+{{ generated_notes }}
+</textarea>
+<div id="warnings"></div>
+<button id="triggerRender">Run</button>
+<hr>
+<div id="midi"></div>
+<div id="canvas"></div>
+<!--textarea id="target" cols="80" rows="15"></textarea-->
+<!--
+<script src="abcjs/bin/abcjs_editor_latest-min.js" type="text/javascript"></script>
+-->
+<script src="{% static 'abcjs/bin/abcjs_basic_latest-min.js' %}" type="text/javascript"></script>
+<script type="text/javascript">
+        
+    ABCJS.renderAbc("canvas", document.getElementById("abc").value);
+    ABCJS.renderMidi("midi", document.getElementById("abc").value);
+    		
+
+	</script>
+</body>
+</html>
