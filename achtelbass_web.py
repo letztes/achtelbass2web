@@ -70,13 +70,14 @@ class Achtelbass(object):
                                 '1/32' : 0.03125,
                                }
         self.Diatonic_Notes = 'C D E F G A B C'.split()
+        self.Tonics = ['C', 'G', 'D', 'A', 'E', 'B', 'F#', 'Gb', 'Db', 'Ab', 'Eb', 'Bb', 'F']
+        self.Modes  = ['Major', 'Minor']
 
         self.Tonic = parameters['tonic']
         self.Mode = parameters['mode']
-        self.Changing_Key = parameters['changing_key']
         #self.Key = parameters['tonic'] + '-' + parameters['mode']
         self.Intervals = parameters['intervals'].keys()
-        self.Chords = parameters['chords'] # boolean
+        self.Chords_Frequency = parameters['chords_frequency']
         self.Prolongations_Frequency = parameters['prolongations_frequency']
         self.Inversion = parameters['inversion']
         self.Notes = ["C,,", "D,,", "E,,", "F,,", "G,,", "A,,", "B,,",
@@ -121,15 +122,11 @@ class Achtelbass(object):
         except KeyError:
             self.BPM = self.BPM_For_Tempo[self.Tempo]
 
-        # Ausgabe immer so gestalten, dass etwa 40 bars,
-        # 10 systems pro Seite stehen
-        # 40 bars in 10 systems fit perfectly in 1 page.   
         self.Amount_Of_Bars = 40 
         self.Note_Values = self.get_note_values()
         self.Pitches = self.get_pitches()
         self.Note_String = self.glue_together()
-        #print self.Note_String
-        self.display() #CHAGNEME 
+        self.display()
     
     
     def get_note_values(self):
@@ -176,7 +173,17 @@ class Achtelbass(object):
                     note_string += "\n"
                     note_counter = 0
             else:
-                note_string += self.Pitches[i] + '/' + self.Note_Values[i] + ' '
+                if self.Chords_Frequency > 0:
+                    
+                    index_of_root = self.Notes.index(self.Pitches[i])
+                    
+                    # Only if the root note is not too high to form a chord
+                    if index_of_root + 4 <= len(self.Notes):
+                        # CHANGEME self.Chord_Inversion == 1 | 2 etc
+                        # CHANGEME chord_frequency
+                        note_string += '[' + self.Notes[index_of_root] + self.Notes[index_of_root+2] + self.Notes[index_of_root+4] + ']/' + self.Note_Values[i] + ' '
+                else:
+                    note_string += self.Pitches[i] + '/' + self.Note_Values[i] + ' '
 
         return note_string
     
@@ -190,7 +197,7 @@ class Achtelbass(object):
 
         #print "Content-Type: text/html\n\n"
         #print ''
-        print new_output.print_out()
+        #print new_output.print_out()
         return new_output.print_out()
 
 
@@ -333,11 +340,11 @@ Options are:
                 exit()
 
         if opt in ('-m', '--mode'):
-            if arg in ('Major', 'Minor', 'Changing key'):
+            if arg in ('Major', 'Minor'):
                 parameters['mode'] = arg
             else:
                 print arg, 'is not a valid value for mode.'
-                print "mode must be one of Minor, Major, 'Changing key'"
+                print "mode must be one of Minor, Major"
                 exit()
 
         if opt in ('-k', '--changing_key'):

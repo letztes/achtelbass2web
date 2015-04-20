@@ -1,4 +1,4 @@
-<!DOCTYPE html>{% load static %}
+<!DOCTYPE html>{% load static %}{% load app_filters %}
 <html>
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
@@ -7,13 +7,33 @@
 </head>
 <body>
 
-<applet id="MIDIPlugin" code="MIDIPlugin.class" name="MIDIPlugin" archive="http://dl.dropbox.com/u/223827/abcjs/MIDIPlugin.jar" height="1" width="1"></applet>
+<!--applet id="MIDIPlugin" code="MIDIPlugin.class" name="MIDIPlugin" archive="http://dl.dropbox.com/u/223827/abcjs/MIDIPlugin.jar" height="1" width="1"></applet-->
 
 <textarea id="abc" cols="80" rows="15" style="display:block;">
 {{ generated_notes }}
 </textarea>
 <div id="warnings"></div>
-<button id="triggerRender">Run</button>
+<!--button id="triggerRender">Run</button-->
+
+<form action="." method="post">{% csrf_token %}
+    <select name="tonic" size="5" type="multiple">
+        {% for tonic in tonics %}
+        <option {% ifequal tonic preselected.tonic %}selected="selected" {% endifequal %}>{{ tonic }}</option>
+        {% endfor %}
+    </select>
+    <select name="mode" size="5" type="multiple">
+        {% for mode in modes %}
+        <option {% ifequal mode preselected.mode %}selected="selected" {% endifequal %}>{{ mode }}</option>
+        {% endfor %}
+    </select>
+    <select name="chords_frequency">
+        {% for chords_frequency in 101|get_range %}
+        <option>{{ chords_frequency }}</option>
+        {% endfor %}
+    </select>
+    <button type="Submit">Submit</button>
+</form>
+
 <hr>
 <div id="midi"></div>
 <div id="canvas"></div>
@@ -25,7 +45,7 @@
 <script type="text/javascript">
         
     ABCJS.renderAbc("canvas", document.getElementById("abc").value);
-    ABCJS.renderMidi("midi", document.getElementById("abc").value);
+    //ABCJS.renderMidi("midi", document.getElementById("abc").value);
     		
 
 	</script>

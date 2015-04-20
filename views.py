@@ -10,10 +10,9 @@ def index(request):
     template = loader.get_template('generate_notes/index.html')
     context = RequestContext(request, {})
     context.generated_notes = 'abc'
-    parameters = {'tonic' : 'C',
-                  'mode' : 'Major',
-                  'changing_key' : False,
-                  'chords' : False,
+    parameters = {'tonic' : request.POST.get('tonic', 'C'),
+                  'mode' : request.POST.get('mode', 'Major'),
+                  'chords_frequency' : request.POST.get('chords_frequency', 0),
                   'intervals' : {'Second' : True},
                   'inversion' : False,
                   'display_pdf'    : False,
@@ -30,7 +29,13 @@ def index(request):
                   'bpm' : 60,
                   'tempo' : 'andante',
                  }
-    achtelbass_obj = achtelbass_web.Achtelbass(parameters, locales)#CHANGEME parameter anpassen; die richtigen Werte bergeben;
+    
+    context.preselected = request.POST
+    
+    achtelbass_obj = achtelbass_web.Achtelbass(parameters, locales)
+    
     context.generated_notes = achtelbass_obj.display()
+    context.tonics = achtelbass_obj.Tonics
+    context.modes  = achtelbass_obj.Modes
+    
     return HttpResponse(template.render(context))
-    #return HttpResponse("Hello, world. You're at the generate_notes index.")
