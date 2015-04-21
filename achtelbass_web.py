@@ -173,15 +173,24 @@ class Achtelbass(object):
                     note_string += "\n"
                     note_counter = 0
             else:
-                if self.Chords_Frequency > 0:
+                
+                # If the user requested chords
+                if int(self.Chords_Frequency) > 0:
                     
-                    index_of_root = self.Notes.index(self.Pitches[i])
-                    
-                    # Only if the root note is not too high to form a chord
-                    if index_of_root + 4 <= len(self.Notes):
-                        # CHANGEME self.Chord_Inversion == 1 | 2 etc
-                        # CHANGEME chord_frequency
-                        note_string += '[' + self.Notes[index_of_root] + self.Notes[index_of_root+2] + self.Notes[index_of_root+4] + ']/' + self.Note_Values[i] + ' '
+                    # Calculate whether to show chords or not according
+                    # to the propability that the user specified
+                    if random.randint(0,100) < int(self.Chords_Frequency):
+                        index_of_root = self.Notes.index(self.Pitches[i])
+                        
+                        # Only if the root note is not too high to form a chord
+                        if index_of_root + 4 <= len(self.Notes):
+                            # CHANGEME septachords etc
+                            # CHANGEME self.Chord_Inversion == 1 | 2 etc
+                            note_string += '[' + self.Notes[index_of_root] + self.Notes[index_of_root+2] + self.Notes[index_of_root+4] + ']/' + self.Note_Values[i] + ' '
+                        else:
+                            note_string += self.Pitches[i] + '/' + self.Note_Values[i] + ' '
+                    else:
+                        note_string += self.Pitches[i] + '/' + self.Note_Values[i] + ' '
                 else:
                     note_string += self.Pitches[i] + '/' + self.Note_Values[i] + ' '
 

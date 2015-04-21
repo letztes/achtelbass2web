@@ -34,8 +34,10 @@ def index(request):
     
     achtelbass_obj = achtelbass_web.Achtelbass(parameters, locales)
     
+    context.locales  = locales
     context.generated_notes = achtelbass_obj.display()
     context.tonics = achtelbass_obj.Tonics
     context.modes  = achtelbass_obj.Modes
+    context.debugging_info = achtelbass_obj.Chords_Frequency
     
     return HttpResponse(template.render(context))

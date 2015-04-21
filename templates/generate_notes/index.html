@@ -3,10 +3,12 @@
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	<title>Achtelbass</title>
-	
+	<style>
+        .controls {display:inline-block;padding:2px;margin:2px}
+    </style>
 </head>
 <body>
-
+{{ debugging_info }}
 <!--applet id="MIDIPlugin" code="MIDIPlugin.class" name="MIDIPlugin" archive="http://dl.dropbox.com/u/223827/abcjs/MIDIPlugin.jar" height="1" width="1"></applet-->
 
 <textarea id="abc" cols="80" rows="15" style="display:block;">
@@ -16,22 +18,41 @@
 <!--button id="triggerRender">Run</button-->
 
 <form action="." method="post">{% csrf_token %}
-    <select name="tonic" size="5" type="multiple">
-        {% for tonic in tonics %}
-        <option {% ifequal tonic preselected.tonic %}selected="selected" {% endifequal %}>{{ tonic }}</option>
-        {% endfor %}
-    </select>
-    <select name="mode" size="5" type="multiple">
-        {% for mode in modes %}
-        <option {% ifequal mode preselected.mode %}selected="selected" {% endifequal %}>{{ mode }}</option>
-        {% endfor %}
-    </select>
-    <select name="chords_frequency">
-        {% for chords_frequency in 101|get_range %}
-        <option>{{ chords_frequency }}</option>
-        {% endfor %}
-    </select>
-    <button type="Submit">Submit</button>
+    <div id="controls_tonic" class="controls">
+        {{ locales.Tonic }}<br>
+        <select name="tonic" size="5" type="multiple">
+            {% for tonic in tonics %}
+            <option {% ifequal tonic preselected.tonic %}selected="selected" {% endifequal %}>{{ tonic }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div id="controls_mode" class="controls">
+        {{ locales.Mode }}<br>
+        <select name="mode" size="5" type="multiple">
+            {% for mode in modes %}
+            <option {% ifequal mode preselected.mode %}selected="selected" {% endifequal %}>{{ mode }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div id="controls_chords" class="controls">
+        {{ locales.Chords }}<br>
+        <select name="chords_frequency">
+            <option value="0">0 %</option>
+            <option value="10">10 %</option>
+            <option value="20">20 %</option>
+            <option value="30">30 %</option>
+            <option value="40">40 %</option>
+            <option value="50">50 %</option>
+            <option value="60">60 %</option>
+            <option value="70">70 %</option>
+            <option value="80">80 %</option>
+            <option value="90">90 %</option>
+            <option value="100">100 %</option>
+        </select>
+    </div>
+    <div id="controls_submit" class="controls">
+        <button type="Submit">Submit</button>
+    </div>
 </form>
 
 <hr>
