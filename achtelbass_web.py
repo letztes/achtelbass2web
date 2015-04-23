@@ -162,6 +162,12 @@ class Achtelbass(object):
 
         note_string = ''
         
+        #~ previous_pitch = self.Pitches[0]
+        #~ previous_clef = 'c'
+        #~ _tie_pending = False
+        #~ if self.Notes.index(previous_pitch) < self.Notes.index('c4'):
+            #~ previous_clef = 'b'
+        
         # Line break after at least 20 notes
         note_counter = 0
 

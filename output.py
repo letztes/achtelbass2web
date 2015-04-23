@@ -23,6 +23,11 @@ class Output(object):
         self.mode_abbreviation = {'Minor':'min',
                                   'Major':'maj',
                                  }
+        self.Notes = ["C,,", "D,,", "E,,", "F,,", "G,,", "A,,", "B,,",
+                      "C,", "D,", "E,", "F,", "G,", "A,", "B,",
+                      "C", "D", "E", "F", "G", "A", "B",
+                      "c", "d", "e", "f", "g", "a", "b",
+                      "c'", "d'", "e'", "f'", "g'", "a'", "b'"]
         
         ## Hier faengt die Definition der Praeambelelemente an.
         ## Zwoelf Zahlen stehen als erstes in der Praeambel, durch whitespace
@@ -73,6 +78,7 @@ class Output(object):
         praeambel += "T:" + self.Title + "\n"
         praeambel += "M:" + self.Time_Signature_Numerator + "/" + self.Time_Signature_Denominator + "\n" # 4/4 or so
         praeambel += "K:" + self.Tonic + self.mode_abbreviation[self.Mode] + "\n" # The Key
+        praeambel += "K:" + 'clef='+self.Clef + "\n" # The Key
         praeambel += "L:" + self.Time_Signature_Numerator + '' + "/" + self.Time_Signature_Denominator + "\n" # 4/4 or so # The reference note length
         
         
@@ -85,9 +91,10 @@ class Output(object):
         return output_string
         
     
-    def get_clef(self, notenhoehe):
-        if re.search(r"[4567]$", notenhoehe):
-            return 't'
-        if re.search(r"[123]$", notenhoehe):
-            return 'b'
+    def get_clef(self, pitch):
+        
+        if self.Notes.index(pitch) < self.Notes.index('C'):
+            return 'bass'
+        
+        return 'treble'
 
