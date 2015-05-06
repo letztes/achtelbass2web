@@ -78,6 +78,7 @@ class Achtelbass(object):
         #self.Key = parameters['tonic'] + '-' + parameters['mode']
         self.Intervals = parameters['intervals'].keys()
         self.Chords_Frequency = parameters['chords_frequency']
+        self.Grand_Staff = parameters['grand_staff']
         self.Prolongations_Frequency = parameters['prolongations_frequency']
         self.Inversion = parameters['inversion']
         self.Notes = ["C,,", "D,,", "E,,", "F,,", "G,,", "A,,", "B,,",
@@ -126,6 +127,13 @@ class Achtelbass(object):
         self.Note_Values = self.get_note_values()
         self.Pitches = self.get_pitches()
         self.Note_String = self.glue_together()
+        
+        if self.Grand_Staff:
+            self.Note_Values2 = self.get_note_values()
+            self.Pitches2 = self.get_pitches()
+            self.Note_String2 = self.glue_together()
+            
+            
         self.display()
     
     
@@ -212,9 +220,9 @@ class Achtelbass(object):
     
     def display(self):
         
-        new_output = output.Output(self.Tonic, self.Mode,
+        new_output = output.Output(self.Tonic, self.Mode, self.Grand_Staff,
                 self.Min_Pitch, self.Max_Pitch, self.Intervals,
-                self.Pitches, self.Note_String, self.Amount_Of_Bars,
+                self.Pitches, self.Pitches2, self.Note_String, self.Note_String2, self.Amount_Of_Bars,
                 self.Time_Signature_Numerator,
                 self.Time_Signature_Denominator, self.Locales, self.BPM)
 

@@ -12,6 +12,7 @@ def index(request):
     context.generated_notes = 'abc'
     parameters = {'tonic' : request.POST.get('tonic', 'C'),
                   'mode' : request.POST.get('mode', 'Major'),
+                  'grand_staff' : request.POST.get('grand_staff', '1'),#CHANGEME default to 0
                   'chords_frequency' : request.POST.get('chords_frequency', 0),
                   'intervals' : {'Second' : True},
                   'inversion' : False,

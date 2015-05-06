@@ -9,16 +9,20 @@
 import re
 
 class Output(object):
-    def __init__(self, tonic, mode, min_pitch, max_pitch, intervals, pitches, note_string, amount_of_bars, time_signature_numerator, time_signature_denominator, locales, bpm):
+    def __init__(self, tonic, mode, grand_staff, min_pitch, max_pitch, intervals, pitches, pitches2, note_string, note_string2, amount_of_bars, time_signature_numerator, time_signature_denominator, locales, bpm):
         self.Locales = locales
         self.Tonic = tonic
         self.Mode = mode
         self.Min_Pitch = min_pitch
         self.Max_Pitch = max_pitch
         self.Intervals = intervals
-        self.Note_String = note_string
+        self.Note_String  = note_string
+        self.Note_String2 = note_string2
+        self.Pitches  = pitches
+        self.Pitches2 = pitches2
         self.Time_Signature_Numerator = time_signature_numerator
         self.Time_Signature_Denominator = time_signature_denominator
+        self.Grand_Staff = grand_staff
         self.BPM = bpm
         self.mode_abbreviation = {'Minor':'min',
                                   'Major':'maj',
@@ -80,6 +84,8 @@ class Output(object):
         praeambel += "K:" + self.Tonic + self.mode_abbreviation[self.Mode] + "\n" # The Key
         praeambel += "K:" + 'clef='+self.Clef + "\n" # The Key
         praeambel += "L:" + self.Time_Signature_Numerator + '' + "/" + self.Time_Signature_Denominator + "\n" # 4/4 or so # The reference note length
+        if self.BPM:
+            praeambel += "Q:1/4=" + str(self.BPM) + "\n"
         
         
         output_string += praeambel
