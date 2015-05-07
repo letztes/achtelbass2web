@@ -6,14 +6,19 @@
 import random
 
 class Pitches(object):
-    def __init__(self, amount, min_pitch, max_pitch, tonic, intervals, inversion):
+    def __init__(self, amount, min_pitch, max_pitch, tonic, intervals, inversion, previous_pitch):
         self.Amount = amount
         self.Min_Pitch = min_pitch
         self.Max_Pitch = max_pitch
-# Because the accidentals will be set according to the actual tonic name,
-# we don't need the sharp or b in the tonic name here.
+        
+        # Because the accidentals will be set according to the actual tonic name,
+        # we don't need the sharp or b in the tonic name here.
         self.Tonic = tonic[0] # Tonart
         self.Intervals = intervals
+        
+        # If the next step into the randomly selected direction would
+        # exceed the tonal range, reenter the tonal range on the opposite
+        # side
         self.Inversion = inversion
         
         self.Notes = ["C,,", "D,,", "E,,", "F,,", "G,,", "A,,", "B,,",
@@ -23,15 +28,27 @@ class Pitches(object):
                       "c'", "d'", "e'", "f'", "g'", "a'", "b'"]
         _min_index = self.Notes.index(self.Min_Pitch)
         _max_index = self.Notes.index(self.Max_Pitch)
-# Plus one because the slice does not include the element with the _max_index
+        
+        # Plus one because the slice does not include the element with the _max_index
         self.Selectable_Pitches = self.Notes[_min_index:_max_index+1]
-# Find all the notes within selectable span that are a tonic of the key
-        tonics = [note for note in self.Selectable_Pitches if note[0] == self.Tonic.lower()]
-# If no actual tonic found, take the lowest note in the selectable span
-        self.First_Note = self.Selectable_Pitches[0]
-# The first found tonic in the selectable span is the first note to print
-        if tonics:
+            
+        # Find all the notes within selectable span that are a tonic of the key
+        tonics = [note for note in self.Selectable_Pitches if note[0].lower() == self.Tonic[0].lower()]
+        
+        # If the currently created bar is not the first one but in the
+        # middle of the score, consider the last pitch in the previous
+        # bar
+        if previous_pitch:
+            self.First_Note = previous_pitch
+            
+        # The first found tonic in the selectable span is the first note to print
+        elif tonics:
             self.First_Note = tonics[0]
+            
+        # If no actual tonic found, take the lowest note in the selectable span
+        else:
+            self.First_Note = self.Selectable_Pitches[0]
+            
         # Im nachfolgenden Dictionary wäre es nicht sinnvoll, zwischen kleinen
         # großen Intervallen zu unterscheiden, weil in den verwendeten
         # Tonleitern die Intervalle an manchen Stellen vorgegebenerweise groß
@@ -39,14 +56,14 @@ class Pitches(object):
         # braucht nicht von vornherein definiert zu werden, es reicht wenn man
         # die Intervalle generisch benennt.
         self.Interval_Values = {
-                                'Unison' : 0,
-                                'Second' : 1,
-                                'Third' : 2,
-                                'Fourth' : 3,
-                                'Fifth' : 4,
-                                'Sixth' : 5,
+                                'Unison'  : 0,
+                                'Second'  : 1,
+                                'Third'   : 2,
+                                'Fourth'  : 3,
+                                'Fifth'   : 4,
+                                'Sixth'   : 5,
                                 'Seventh' : 6,
-                                'Octave' : 7,
+                                'Octave'  : 7,
                                }
         
         self.Result = []

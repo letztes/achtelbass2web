@@ -94,6 +94,8 @@ class Achtelbass(object):
             self.Min_Pitch = parameters['max_pitch']
             self.Max_Pitch = parameters['min_pitch']
         
+        self.Clef_Left_Hand = 'treble'
+        self.Clef_Right_Hand = 'treble'
         self.Rest_Frequency = self.Frequency_Values[parameters['rest_frequency']]
         self.Selectable_Note_Values = [self.Fraction_Values[note_value] for note_value in parameters['note_values'].keys()]
         self.Selectable_Note_Values.sort()
@@ -123,34 +125,127 @@ class Achtelbass(object):
         except KeyError:
             self.BPM = self.BPM_For_Tempo[self.Tempo]
 
-        self.Amount_Of_Bars = 40 
-        self.Note_Values = self.get_note_values()
-        self.Pitches = self.get_pitches()
-        self.Note_String = self.glue_together()
-        
+        self.Amount_Of_Bars = 40
+        self.Note_String    = ''
+                
         if self.Grand_Staff:
-            self.Note_Values2 = self.get_note_values()
-            self.Pitches2 = self.get_pitches()
-            self.Note_String2 = self.glue_together()
             
+            range_of_tones = self.Notes.index(self.Max_Pitch) - self.Notes.index(self.Min_Pitch)
+            # Left hand gets the lower 2/3
+            min_pitch_left_hand = self.Min_Pitch
+            max_pitch_left_hand = self.Notes[self.Notes.index(self.Max_Pitch) - int(range_of_tones/3)]
+            # Right hand gets the upper 2/3
+            min_pitch_right_hand = self.Notes[self.Notes.index(self.Min_Pitch) + int(range_of_tones/3)]
+            max_pitch_right_hand = self.Max_Pitch
             
+            note_string_left_hand  = '[V:B] '
+            note_string_right_hand = '[V:T] '
+            
+            clef_left_hand  = 'treble'
+            clef_right_hand = 'treble'
+            
+            self.Clef_Left_Hand = clef_left_hand
+            self.Clef_Right_Hand = clef_right_hand
+            
+            selectable_pitches_left_hand  = self.Notes[self.Notes.index(min_pitch_left_hand):self.Notes.index(max_pitch_left_hand)+1]
+            selectable_pitches_right_hand = self.Notes[self.Notes.index(min_pitch_right_hand):self.Notes.index(max_pitch_right_hand)+1]
+
+            tonics_left_hand  = [note for note in selectable_pitches_left_hand  if note[0].lower() == self.Tonic[0].lower()]
+            tonics_right_hand = [note for note in selectable_pitches_right_hand if note[0].lower() == self.Tonic[0].lower()]
+            #fifth  = self.Notes[self.Notes.index(tonics[0]) + 4]#CHANGEME DELETEME
+            #fifths = [note for note in self.Selectable_Pitches if note[0].lower() == fifth.lower()]#CHANGEME DELETEME
+            
+            previous_pitch_left_hand  = tonics_left_hand[0]#CHANGEME
+            previous_pitch_right_hand = tonics_right_hand[0]#CHANGEME
+            
+            print tonics_left_hand[0]
+            print tonics_right_hand[0]
+            
+            # One bar after another
+            for i in range(self.Amount_Of_Bars):
+                note_values_left_hand = self.get_note_values(1)# one bar
+                pitches_left_hand     = self.get_pitches(current_tonic  = '',
+                                                min_pitch      = min_pitch_left_hand,
+                                                max_pitch      = max_pitch_left_hand,
+                                                note_values    = note_values_left_hand,
+                                                previous_pitch = previous_pitch_left_hand)
+                
+                previous_pitch_left_hand = pitches_left_hand[-1]
+                
+                if i == 0 and self.Notes.index(pitches_left_hand[0]) < self.Notes.index('C'):
+                    clef_left_hand = 'bass'
+                    self.Clef_Left_Hand = clef_left_hand
+                
+                note_values_right_hand = self.get_note_values(1)
+                pitches_right_hand     = self.get_pitches(current_tonic  = '',
+                                                min_pitch      = min_pitch_right_hand,
+                                                max_pitch      = max_pitch_right_hand,
+                                                note_values    = note_values_right_hand,
+                                                previous_pitch = previous_pitch_right_hand)
+                
+                previous_pitch_right_hand = pitches_right_hand[-1]
+                
+                if i == 0 and self.Notes.index(pitches_right_hand[0]) < self.Notes.index('C'):
+                    clef_right_hand = 'bass'
+                    self.Clef_Right_Hand = clef_right_hand
+                
+                bar_left_hand, clef_left_hand = self.glue_together(note_values_left_hand, pitches_left_hand, clef_left_hand)
+                bar_right_hand, clef_right_hand = self.glue_together(note_values_right_hand, pitches_right_hand, clef_right_hand)
+                
+                note_string_left_hand  += bar_left_hand
+                note_string_right_hand += bar_right_hand
+
+                # Line break after 20 notes
+                if (note_string_left_hand.count('/') > 20 or note_string_right_hand.count('/') > 20):
+                    self.Note_String += note_string_right_hand + "\n"
+                    self.Note_String += note_string_left_hand + "\n"
+                    
+                    # Prevent a possible empty last line only with clef
+                    # but no notes
+                    if i < self.Amount_Of_Bars-1:
+                        note_string_left_hand = "[V:B "
+                        note_string_right_hand = "[V:T "
+                        
+                        if clef_left_hand == 'bass':
+                            note_string_left_hand += 'K:clef=bass] '
+                        if clef_left_hand == 'treble':
+                            note_string_left_hand += 'K:clef=treble] '
+                        if clef_right_hand == 'bass':
+                            note_string_right_hand += 'K:clef=bass] '
+                        if clef_right_hand == 'treble':
+                            note_string_right_hand += 'K:clef=treble] '
+                        
+                        note_string_left_hand += "] "
+                        note_string_right_hand += "] "
+                    
+                    
+            self.Note_String += note_string_right_hand + "\n"
+            self.Note_String += note_string_left_hand  + "\n"
+            
+        else:
+            #CHANGEME must iterate over each bar as in grand staff
+            self.Note_Values = self.get_note_values()
+            self.Pitches = self.get_pitches('',self.Note_Values)
+            self.Note_String = self.glue_together()
+
         self.display()
+        return
     
-    
-    def get_note_values(self):
+    def get_note_values(self, amount_of_bars):
         new_note_values = note_values.NoteValues(self.Selectable_Note_Values,
                                                  self.Time_Signature,
                                                  self.Tuplets,
                                                  self.Tuplets_Frequency)
-        for i in range(self.Amount_Of_Bars):
+        for i in range(amount_of_bars):
             new_note_values.calculate()
         
         return new_note_values.Result
     
-    def get_pitches(self, current_tonic=''):
-# current_tonic is only needed when key is changed and new tonic occurs
-        amount = len(self.Note_Values)
-        for note_value in self.Note_Values:
+    def get_pitches(self, current_tonic, note_values, min_pitch, max_pitch, previous_pitch):
+        # current_tonic is only needed when key is changed and new tonic occurs
+        
+        amount = len(note_values)
+        for note_value in note_values:
             if isinstance(note_value, str) and note_value.count('x'):
                 tuplet_value = note_value[2:len(note_value)]
                 amount += int(tuplet_value)
@@ -158,34 +253,27 @@ class Achtelbass(object):
         if not current_tonic:
             current_tonic = self.Tonic
 
-        new_pitches = pitches.Pitches(amount, self.Min_Pitch,
-                                      self.Max_Pitch, current_tonic,
-                                      self.Intervals, self.Inversion)
+        new_pitches = pitches.Pitches(amount,
+                                      min_pitch,
+                                      max_pitch,
+                                      current_tonic,
+                                      self.Intervals,
+                                      self.Inversion,
+                                      previous_pitch)
         
         return new_pitches.easy()
 
 
 
-    def glue_together(self):
+    def glue_together(self, note_values, pitches, previous_clef):
 
         note_string = ''
-        
-        previous_pitch = self.Pitches[0]
-        previous_clef = 'treble'
-        _tie_pending = False
-        if self.Notes.index(previous_pitch) < self.Notes.index('C'):
-            previous_clef = 'bass'
-        
-        # Line break after at least 20 notes
-        note_counter = 0
 
-        for i in range(len(self.Note_Values)):
-            note_counter += 1
-            if self.Note_Values[i] == " | ":
+        _tie_pending = False
+
+        for i in range(len(note_values)):
+            if note_values[i] == " | ":
                 note_string += " | "
-                if note_counter > 20:
-                    note_string += "\n"
-                    note_counter = 0
             else:
                 
                 # If the user requested chords
@@ -194,35 +282,36 @@ class Achtelbass(object):
                     # Calculate whether to show chords or not according
                     # to the propability that the user specified
                     if random.randint(0,100) < int(self.Chords_Frequency):
-                        index_of_root = self.Notes.index(self.Pitches[i])
+                        index_of_root = self.Notes.index(pitches[i])
                         
                         # Only if the root note is not too high to form a chord
                         if index_of_root + 4 <= len(self.Notes):
                             # CHANGEME septachords etc
                             # CHANGEME self.Chord_Inversion == 1 | 2 etc
-                            note_string += '[' + self.Notes[index_of_root] + self.Notes[index_of_root+2] + self.Notes[index_of_root+4] + ']/' + self.Note_Values[i] + ' '
+                            note_string += '[' + self.Notes[index_of_root] + self.Notes[index_of_root+2] + self.Notes[index_of_root+4] + ']/' + note_values[i] + ' '
                         else:
-                            note_string += self.Pitches[i] + '/' + self.Note_Values[i] + ' '
+                            note_string += pitches[i] + '/' + note_values[i] + ' '
                     else:
-                        note_string += self.Pitches[i] + '/' + self.Note_Values[i] + ' '
+                        note_string += pitches[i] + '/' + note_values[i] + ' '
                 else:
-                    note_string += self.Pitches[i] + '/' + self.Note_Values[i] + ' '
+                    note_string += pitches[i] + '/' + note_values[i] + ' '
                     
                 
-                if previous_clef == 'bass' and self.Notes.index(self.Pitches[i]) > self.Notes.index('E'):
+                if previous_clef == 'bass' and self.Notes.index(pitches[i]) > self.Notes.index('E'):
                     note_string += ' [K:clef=treble] '
                     previous_clef = 'treble'
-                if previous_clef == 'treble' and self.Notes.index(self.Pitches[i]) < self.Notes.index('A,'):
+                if previous_clef == 'treble' and self.Notes.index(pitches[i]) < self.Notes.index('A,'):
                     note_string += ' [K:clef=bass] '
                     previous_clef = 'bass'
 
-        return note_string
+        return note_string, previous_clef
+
     
     def display(self):
         
         new_output = output.Output(self.Tonic, self.Mode, self.Grand_Staff,
                 self.Min_Pitch, self.Max_Pitch, self.Intervals,
-                self.Pitches, self.Pitches2, self.Note_String, self.Note_String2, self.Amount_Of_Bars,
+                self.Clef_Left_Hand, self.Clef_Right_Hand, self.Note_String, self.Amount_Of_Bars,
                 self.Time_Signature_Numerator,
                 self.Time_Signature_Denominator, self.Locales, self.BPM)
 

@@ -18,7 +18,6 @@ class NoteValues(object):
                              1.0/32 : '32',
                              }
         self.Result = []
-        print selectable_note_values
     
     def calculate(self):
         remaining_bar_length = self.Time_Signature # Zum Beispiel 3.0/4 = 0.75
