@@ -35,7 +35,7 @@
         </select>
     </div>
     <div id="controls_chords" class="controls">
-        {{ preselected.grand_staff }}<br>
+        <input type="checkbox" name="grand_staff" {% if preselected.grand_staff %}checked="checked"{% endif %}>Grand Staff<br>
         {{ locales.Chords }}<br>
         <select name="chords_frequency">
             <option value="0">0 %</option>

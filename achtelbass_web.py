@@ -89,7 +89,8 @@ class Achtelbass(object):
         self.Note_Letters = ['c', 'd', 'e', 'f', 'g', 'a', 'b']
         self.Min_Pitch = parameters['min_pitch']
         self.Max_Pitch = parameters['max_pitch']
-#if max_pitch is lower than min_pitch, swap them
+        
+        #if max_pitch is lower than min_pitch, swap them
         if self.Notes.index(self.Min_Pitch) > self.Notes.index(self.Max_Pitch):
             self.Min_Pitch = parameters['max_pitch']
             self.Max_Pitch = parameters['min_pitch']
@@ -125,7 +126,7 @@ class Achtelbass(object):
         except KeyError:
             self.BPM = self.BPM_For_Tempo[self.Tempo]
 
-        self.Amount_Of_Bars = 40
+        self.Amount_Of_Bars = 8
         self.Note_String    = ''
                 
         if self.Grand_Staff:
@@ -155,11 +156,8 @@ class Achtelbass(object):
             #fifth  = self.Notes[self.Notes.index(tonics[0]) + 4]#CHANGEME DELETEME
             #fifths = [note for note in self.Selectable_Pitches if note[0].lower() == fifth.lower()]#CHANGEME DELETEME
             
-            previous_pitch_left_hand  = tonics_left_hand[0]#CHANGEME
+            previous_pitch_left_hand  = tonics_left_hand[0]#CHANGEME Tonika besteht aus einem Zeichen, z.B. C. Tonhoehe besteht meistens aus mehr als einem z.B. C,,!
             previous_pitch_right_hand = tonics_right_hand[0]#CHANGEME
-            
-            print tonics_left_hand[0]
-            print tonics_right_hand[0]
             
             # One bar after another
             for i in range(self.Amount_Of_Bars):
@@ -197,8 +195,8 @@ class Achtelbass(object):
 
                 # Line break after 20 notes
                 if (note_string_left_hand.count('/') > 20 or note_string_right_hand.count('/') > 20):
-                    self.Note_String += note_string_right_hand + "\n"
-                    self.Note_String += note_string_left_hand + "\n"
+                    note_string_right_hand += "\n"
+                    note_string_left_hand  += "\n"
                     
                     # Prevent a possible empty last line only with clef
                     # but no notes
@@ -223,10 +221,22 @@ class Achtelbass(object):
             self.Note_String += note_string_left_hand  + "\n"
             
         else:
-            #CHANGEME must iterate over each bar as in grand staff
-            self.Note_Values = self.get_note_values()
-            self.Pitches = self.get_pitches('',self.Note_Values)
-            self.Note_String = self.glue_together()
+            self.Note_Values = self.get_note_values(self.Amount_Of_Bars)
+            
+            self.Pitches = self.get_pitches(current_tonic  = '',
+                                            min_pitch      = self.Min_Pitch,
+                                            max_pitch      = self.Max_Pitch,
+                                            note_values    = self.Note_Values,
+                                            previous_pitch = self.Min_Pitch)
+                                            
+            self.Clef_Left_Hand  = 'treble'               
+            if self.Notes.index(self.Pitches[0]) < self.Notes.index('C'):
+                self.Clef_Left_Hand = 'bass'
+                
+            note_string,clef = self.glue_together(note_values   = self.Note_Values,
+                                                  pitches       = self.Pitches,
+                                                  previous_clef = self.Clef_Left_Hand)
+            self.Note_String = note_string
 
         self.display()
         return
