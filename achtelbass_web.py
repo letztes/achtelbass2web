@@ -195,12 +195,12 @@ class Achtelbass(object):
 
                 # Line break after 20 notes
                 if (note_string_left_hand.count('/') > 20 or note_string_right_hand.count('/') > 20):
-                    note_string_right_hand += "\n"
-                    note_string_left_hand  += "\n"
                     
-                    # Prevent a possible empty last line only with clef
-                    # but no notes
+                    # But not if it is the last iteration
                     if i < self.Amount_Of_Bars-1:
+                        self.Note_String += note_string_right_hand + "\n"
+                        self.Note_String += note_string_left_hand  + "\n"
+
                         note_string_left_hand = "[V:B "
                         note_string_right_hand = "[V:T "
                         
