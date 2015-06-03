@@ -26,8 +26,8 @@ class Achtelbass(object):
 
     """
     def __init__(self, parameters, locales):
-        self.Parameters = parameters
-        self.Locales = locales
+        self.Parameters       = parameters
+        self.Locales          = locales
         self.Frequency_Values = {'None' : 0,
                                  'no rests' : 0,
                                  '0.1' : 0.1,
@@ -69,16 +69,16 @@ class Achtelbass(object):
                                 '1/16' : 0.0625,
                                 '1/32' : 0.03125,
                                }
-        self.Diatonic_Notes = 'C D E F G A B C'.split()
-        self.Tonics = ['C', 'G', 'D', 'A', 'E', 'B', 'F#', 'Gb', 'Db', 'Ab', 'Eb', 'Bb', 'F']
-        self.Modes  = ['Major', 'Minor']
+        self.Diatonic_Notes          = 'C D E F G A B C'.split()
+        self.Tonics                  = ['C', 'G', 'D', 'A', 'E', 'B', 'F#', 'Gb', 'Db', 'Ab', 'Eb', 'Bb', 'F']
+        self.Modes                   = ['Major', 'Minor']
 
-        self.Tonic = parameters['tonic']
-        self.Mode = parameters['mode']
-        #self.Key = parameters['tonic'] + '-' + parameters['mode']
-        self.Intervals = parameters['intervals'].keys()
-        self.Chords_Frequency = parameters['chords_frequency']
-        self.Grand_Staff = parameters['grand_staff']
+        self.Tonic                   = parameters['tonic']
+        self.Mode                    = parameters['mode']
+        #self.Key                    = parameters['tonic'] + '-' + parameters['mode']
+        self.Intervals               = parameters['intervals'].keys()
+        self.Chords_Frequency        = parameters['chords_frequency']
+        self.Grand_Staff             = parameters['grand_staff']
         self.Prolongations_Frequency = parameters['prolongations_frequency']
         self.Inversion = parameters['inversion']
         self.Notes = ["C,,", "D,,", "E,,", "F,,", "G,,", "A,,", "B,,",
@@ -86,7 +86,6 @@ class Achtelbass(object):
                       "C", "D", "E", "F", "G", "A", "B",
                       "c", "d", "e", "f", "g", "a", "b",
                       "c'", "d'", "e'", "f'", "g'", "a'", "b'"]
-        self.Note_Letters = ['c', 'd', 'e', 'f', 'g', 'a', 'b']
         self.Min_Pitch = parameters['min_pitch']
         self.Max_Pitch = parameters['max_pitch']
         
@@ -95,19 +94,22 @@ class Achtelbass(object):
             self.Min_Pitch = parameters['max_pitch']
             self.Max_Pitch = parameters['min_pitch']
         
-        self.Clef_Left_Hand = 'treble'
-        self.Clef_Right_Hand = 'treble'
-        self.Rest_Frequency = self.Frequency_Values[parameters['rest_frequency']]
+        # CHANGEME if pitch range is smaller than greatest interval, discard the
+        # intervals that are too big
+        
+        self.Clef_Left_Hand         = 'treble'
+        self.Clef_Right_Hand        = 'treble'
+        self.Rest_Frequency         = self.Frequency_Values[parameters['rest_frequency']]
         self.Selectable_Note_Values = [self.Fraction_Values[note_value] for note_value in parameters['note_values'].keys()]
         self.Selectable_Note_Values.sort()
 
-        self.Time_Signature_Numerator = parameters['time_signature'][0]
+        self.Time_Signature_Numerator   = parameters['time_signature'][0]
         self.Time_Signature_Denominator = parameters['time_signature'][2]
-        self.Time_Signature = self.Fraction_Values[parameters['time_signature']]
-        self.Tuplets = self.Tuplets_Values[parameters['tuplets']]
+        self.Time_Signature             = self.Fraction_Values[parameters['time_signature']]
+        
+        self.Tuplets           = self.Tuplets_Values[parameters['tuplets']]
         self.Tuplet_Same_Pitch = parameters['tuplet_same_pitch']
         self.Tuplets_Frequency = parameters['tuplets_frequency']
-        self.Display_PDF = parameters['display_pdf']
         
         self.BPM_For_Tempo = {'grave' : 40,
                             'largo' : 44,
@@ -151,18 +153,26 @@ class Achtelbass(object):
             selectable_pitches_left_hand  = self.Notes[self.Notes.index(min_pitch_left_hand):self.Notes.index(max_pitch_left_hand)+1]
             selectable_pitches_right_hand = self.Notes[self.Notes.index(min_pitch_right_hand):self.Notes.index(max_pitch_right_hand)+1]
 
+            # Caveat, can be empty if the pitch range does not include the tonic
+            # E.g. for Cmajor in F,,-G,, there is no C between F,, and G,,
             tonics_left_hand  = [note for note in selectable_pitches_left_hand  if note[0].lower() == self.Tonic[0].lower()]
             tonics_right_hand = [note for note in selectable_pitches_right_hand if note[0].lower() == self.Tonic[0].lower()]
             
             # A fifth can be only set if there are at least five notes
-            # The fifth will be the starting note for the left hand and
-            # for the left the notes begin from the lowest
+            # The fifth will be the starting note for the right hand
             fifth   = False
-            if len(self.Notes) >= 5:
-                fifth  = self.Notes[self.Notes.index(tonics_left_hand[0]) + 4]
+            if tonics_right_hand:
+                if self.Notes.index(max_pitch_right_hand) >= self.Notes.index(tonics_right_hand[0]) + 4:
+                    fifth  = self.Notes[self.Notes.index(tonics_right_hand[0]) + 4]
+                elif self.Notes.index(min_pitch_right_hand) <= self.Notes.index(tonics_right_hand[0]) - 3:
+                    fifth  = self.Notes[self.Notes.index(tonics_right_hand[0]) -3]
             
-            previous_pitch_left_hand  = tonics_left_hand[0]#CHANGEME Tonika besteht aus einem Zeichen, z.B. C. Tonhoehe besteht meistens aus mehr als einem z.B. C,,!
-            previous_pitch_right_hand = tonics_right_hand[0]#CHANGEME
+            previous_pitch_left_hand  = min_pitch_left_hand
+            previous_pitch_right_hand = min_pitch_right_hand
+            if tonics_left_hand:
+                previous_pitch_left_hand  = tonics_left_hand[0]
+            if tonics_right_hand:
+                previous_pitch_right_hand = tonics_right_hand[0]
             
             first_bar = True
             
@@ -225,7 +235,7 @@ class Achtelbass(object):
                         note_string_left_hand += "] "
                         note_string_right_hand += "] "
                         
-                    first_bar = False
+                first_bar = False
                     
                     
             self.Note_String += note_string_right_hand + "\n"

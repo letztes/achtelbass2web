@@ -17,7 +17,26 @@
 <div id="warnings"></div>
 <!--button id="triggerRender">Run</button-->
 
+{# TODO Prevent via javascript selecting smaller pitch range than greatest interval #}
+{# TODO Prevent via javascript selecting greater interval than smallest pitch range #}
+
 <form action="." method="post">{% csrf_token %}
+    <div id="controls_min_pitch" class="controls">
+        {{ locales|get_key:'Min pitch' }}<br>
+        <select name="min_pitch" size="5" type="multiple">
+            {% for note in notes %}
+            <option {% ifequal note preselected.min_pitch %}selected="selected" {% endifequal %}>{{ note }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div id="controls_max_pitch" class="controls">
+        {{ locales|get_key:'Max pitch' }}<br>
+        <select name="max_pitch" size="5" type="multiple">
+            {% for note in notes %}
+            <option {% ifequal note preselected.max_pitch %}selected="selected" {% endifequal %}>{{ note }}</option>
+            {% endfor %}
+        </select>
+    </div>
     <div id="controls_tonic" class="controls">
         {{ locales.Tonic }}<br>
         <select name="tonic" size="5" type="multiple">

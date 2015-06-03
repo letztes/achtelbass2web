@@ -10,35 +10,36 @@ def index(request):
     template = loader.get_template('generate_notes/index.html')
     context = RequestContext(request, {})
     context.generated_notes = 'abc'
-    parameters = {'tonic' : request.POST.get('tonic', 'C'),
-                  'mode' : request.POST.get('mode', 'Major'),
-                  'grand_staff' : request.POST.get('grand_staff', False),
-                  'chords_frequency' : request.POST.get('chords_frequency', 0),
-                  'intervals' : {'Second' : True},
-                  'inversion' : False,
-                  'display_pdf'    : False,
-                  'min_pitch' : 'E,,',
-                  'max_pitch' : "d",
-                  'rest_frequency' : 'no rests',
-                  'time_signature' : '4/4',
-                  'note_values' : {'1' : True, '1/2' : True, '1/4' : True},
-                  'tuplets' : 'None',
-                  'tuplet_same_pitch' : False,
-                  'tuplets_frequency' : 'None',
-                  'prolongations' : False,
+    parameters = {'tonic'                   : request.POST.get('tonic', 'C'),
+                  'mode'                    : request.POST.get('mode', 'Major'),
+                  'grand_staff'             : request.POST.get('grand_staff', False),
+                  'chords_frequency'        : request.POST.get('chords_frequency', 0),
+                  'intervals'               : {'Second' : True},
+                  'inversion'               : False,
+                  'display_pdf'             : False,
+                  'min_pitch'               : request.POST.get('min_pitch', 'E,,'),
+                  'max_pitch'               : request.POST.get('max_pitch', "d"),
+                  'rest_frequency'          : 'no rests',
+                  'time_signature'          : '4/4',
+                  'note_values'             : {'1' : True, '1/2' : True, '1/4' : True},
+                  'tuplets'                 : 'None',
+                  'tuplet_same_pitch'       : False,
+                  'tuplets_frequency'       : 'None',
+                  'prolongations'           : False,
                   'prolongations_frequency' : 'None',
-                  'bpm' : 60,
-                  'tempo' : 'andante',
+                  'bpm'                     : 60,
+                  'tempo'                   : 'andante',
                  }
     
     context.preselected = request.POST
     
     achtelbass_obj = achtelbass_web.Achtelbass(parameters, locales)
     
-    context.locales  = locales
+    context.locales         = locales
     context.generated_notes = achtelbass_obj.display()
-    context.tonics = achtelbass_obj.Tonics
-    context.modes  = achtelbass_obj.Modes
-    context.debugging_info = achtelbass_obj.Chords_Frequency
+    context.tonics          = achtelbass_obj.Tonics
+    context.notes           = achtelbass_obj.Notes
+    context.modes           = achtelbass_obj.Modes
+    context.debugging_info  = achtelbass_obj.Chords_Frequency
     
     return HttpResponse(template.render(context))
