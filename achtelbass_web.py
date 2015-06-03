@@ -75,8 +75,8 @@ class Achtelbass(object):
 
         self.Tonic                   = parameters['tonic']
         self.Mode                    = parameters['mode']
-        #self.Key                    = parameters['tonic'] + '-' + parameters['mode']
-        self.Intervals               = parameters['intervals'].keys()
+        self.Possible_Intervals      = ['Unison', 'Second', 'Third', 'Fourth', 'Fifth', 'Sixth', 'Seventh', 'Octave']
+        self.Intervals               = parameters['intervals']
         self.Chords_Frequency        = parameters['chords_frequency']
         self.Grand_Staff             = parameters['grand_staff']
         self.Prolongations_Frequency = parameters['prolongations_frequency']

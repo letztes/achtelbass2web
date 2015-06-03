@@ -14,7 +14,7 @@ def index(request):
                   'mode'                    : request.POST.get('mode', 'Major'),
                   'grand_staff'             : request.POST.get('grand_staff', False),
                   'chords_frequency'        : request.POST.get('chords_frequency', 0),
-                  'intervals'               : {'Second' : True},
+                  'intervals'               : request.POST.getlist('intervals', ['Second']),
                   'inversion'               : False,
                   'display_pdf'             : False,
                   'min_pitch'               : request.POST.get('min_pitch', 'E,,'),
@@ -31,15 +31,17 @@ def index(request):
                   'tempo'                   : 'andante',
                  }
     
-    context.preselected = request.POST
     
     achtelbass_obj = achtelbass_web.Achtelbass(parameters, locales)
     
-    context.locales         = locales
+    context.__dict__.update(achtelbass_obj.__dict__)
+    
+    context.preselected = request.POST.copy()
+    
+    # The multiselect is one zero byte separated string, we want a list
+    context.preselected.intervals_list  = request.POST.getlist('intervals')
+    
     context.generated_notes = achtelbass_obj.display()
-    context.tonics          = achtelbass_obj.Tonics
-    context.notes           = achtelbass_obj.Notes
-    context.modes           = achtelbass_obj.Modes
-    context.debugging_info  = achtelbass_obj.Chords_Frequency
+#    context.debugging_info  = achtelbass_obj.Chords_Frequency
     
     return HttpResponse(template.render(context))

@@ -8,7 +8,7 @@
     </style>
 </head>
 <body>
-{{ debugging_info }}
+{# debugging_info #}
 <!--applet id="MIDIPlugin" code="MIDIPlugin.class" name="MIDIPlugin" archive="http://dl.dropbox.com/u/223827/abcjs/MIDIPlugin.jar" height="1" width="1"></applet-->
 
 <textarea id="abc" cols="80" rows="15" style="display:block;">
@@ -21,41 +21,49 @@
 {# TODO Prevent via javascript selecting greater interval than smallest pitch range #}
 
 <form action="." method="post">{% csrf_token %}
+    <div id="controls_intervals" class="controls">
+        {{ Locales.Intervals }}<br>
+        <select name="intervals" size="5" multiple>
+            {% for interval in Possible_Intervals %}
+            <option {% if interval in preselected.intervals_list %}selected="selected" {% endif %}>{{ interval }}</option>
+            {% endfor %}
+        </select>
+    </div>
     <div id="controls_min_pitch" class="controls">
-        {{ locales|get_key:'Min pitch' }}<br>
-        <select name="min_pitch" size="5" type="multiple">
-            {% for note in notes %}
+        {{ Locales|get_key:'Min pitch' }}<br>
+        <select name="min_pitch" size="5">
+            {% for note in Notes %}
             <option {% ifequal note preselected.min_pitch %}selected="selected" {% endifequal %}>{{ note }}</option>
             {% endfor %}
         </select>
     </div>
     <div id="controls_max_pitch" class="controls">
-        {{ locales|get_key:'Max pitch' }}<br>
-        <select name="max_pitch" size="5" type="multiple">
-            {% for note in notes %}
+        {{ Locales|get_key:'Max pitch' }}<br>
+        <select name="max_pitch" size="5">
+            {% for note in Notes %}
             <option {% ifequal note preselected.max_pitch %}selected="selected" {% endifequal %}>{{ note }}</option>
             {% endfor %}
         </select>
     </div>
     <div id="controls_tonic" class="controls">
-        {{ locales.Tonic }}<br>
-        <select name="tonic" size="5" type="multiple">
-            {% for tonic in tonics %}
+        {{ Locales.Tonic }}<br>
+        <select name="tonic" size="5">
+            {% for tonic in Tonics %}
             <option {% ifequal tonic preselected.tonic %}selected="selected" {% endifequal %}>{{ tonic }}</option>
             {% endfor %}
         </select>
     </div>
     <div id="controls_mode" class="controls">
-        {{ locales.Mode }}<br>
-        <select name="mode" size="5" type="multiple">
-            {% for mode in modes %}
+        {{ Locales.Mode }}<br>
+        <select name="mode" size="5">
+            {% for mode in Modes %}
             <option {% ifequal mode preselected.mode %}selected="selected" {% endifequal %}>{{ mode }}</option>
             {% endfor %}
         </select>
     </div>
     <div id="controls_chords" class="controls">
         <input type="checkbox" name="grand_staff" {% if preselected.grand_staff %}checked="checked"{% endif %}>Grand Staff<br>
-        {{ locales.Chords }}<br>
+        {{ Locales.Chords }}<br>
         <select name="chords_frequency">
             <option value="0">0 %</option>
             <option value="10" {% if preselected.chords_frequency == "10" %}selected="selected" {% endif %}>10 %</option>
