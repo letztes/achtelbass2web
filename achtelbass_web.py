@@ -153,11 +153,18 @@ class Achtelbass(object):
 
             tonics_left_hand  = [note for note in selectable_pitches_left_hand  if note[0].lower() == self.Tonic[0].lower()]
             tonics_right_hand = [note for note in selectable_pitches_right_hand if note[0].lower() == self.Tonic[0].lower()]
-            #fifth  = self.Notes[self.Notes.index(tonics[0]) + 4]#CHANGEME DELETEME
-            #fifths = [note for note in self.Selectable_Pitches if note[0].lower() == fifth.lower()]#CHANGEME DELETEME
+            
+            # A fifth can be only set if there are at least five notes
+            # The fifth will be the starting note for the left hand and
+            # for the left the notes begin from the lowest
+            fifth   = False
+            if len(self.Notes) >= 5:
+                fifth  = self.Notes[self.Notes.index(tonics_left_hand[0]) + 4]
             
             previous_pitch_left_hand  = tonics_left_hand[0]#CHANGEME Tonika besteht aus einem Zeichen, z.B. C. Tonhoehe besteht meistens aus mehr als einem z.B. C,,!
             previous_pitch_right_hand = tonics_right_hand[0]#CHANGEME
+            
+            first_bar = True
             
             # One bar after another
             for i in range(self.Amount_Of_Bars):
@@ -166,6 +173,7 @@ class Achtelbass(object):
                                                 min_pitch      = min_pitch_left_hand,
                                                 max_pitch      = max_pitch_left_hand,
                                                 note_values    = note_values_left_hand,
+                                                first_note     = previous_pitch_left_hand if (first_bar) else False,
                                                 previous_pitch = previous_pitch_left_hand)
                 
                 previous_pitch_left_hand = pitches_left_hand[-1]
@@ -179,6 +187,7 @@ class Achtelbass(object):
                                                 min_pitch      = min_pitch_right_hand,
                                                 max_pitch      = max_pitch_right_hand,
                                                 note_values    = note_values_right_hand,
+                                                first_note     = fifth if (fifth and first_bar) else previous_pitch_right_hand,
                                                 previous_pitch = previous_pitch_right_hand)
                 
                 previous_pitch_right_hand = pitches_right_hand[-1]
@@ -215,6 +224,8 @@ class Achtelbass(object):
                         
                         note_string_left_hand += "] "
                         note_string_right_hand += "] "
+                        
+                    first_bar = False
                     
                     
             self.Note_String += note_string_right_hand + "\n"
@@ -227,6 +238,7 @@ class Achtelbass(object):
                                             min_pitch      = self.Min_Pitch,
                                             max_pitch      = self.Max_Pitch,
                                             note_values    = self.Note_Values,
+                                            first_note     = self.Min_Pitch,
                                             previous_pitch = self.Min_Pitch)
                                             
             self.Clef_Left_Hand  = 'treble'               
@@ -251,7 +263,7 @@ class Achtelbass(object):
         
         return new_note_values.Result
     
-    def get_pitches(self, current_tonic, note_values, min_pitch, max_pitch, previous_pitch):
+    def get_pitches(self, current_tonic, note_values, min_pitch, max_pitch, first_note, previous_pitch):
         # current_tonic is only needed when key is changed and new tonic occurs
         
         amount = len(note_values)
@@ -269,6 +281,7 @@ class Achtelbass(object):
                                       current_tonic,
                                       self.Intervals,
                                       self.Inversion,
+                                      first_note,
                                       previous_pitch)
         
         return new_pitches.easy()
