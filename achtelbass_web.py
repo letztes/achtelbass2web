@@ -61,13 +61,13 @@ class Achtelbass(object):
                                 '8' : 'x8',
                                 '9' : 'x9',
                               }
-        self.Fraction_Values = {'2/2' : 1.0,
-                                '3/4' : 0.75,
-                                '4/4' : 1.0,
-                                '1' : 1.0,
-                                '1/2' : 0.5,
-                                '1/4' : 0.25,
-                                '1/8' : 0.125,
+        self.Fraction_Values = {'2/2'  : 1.0,
+                                '3/4'  : 0.75,
+                                '4/4'  : 1.0,
+                                '1'    : 1.0,
+                                '1/2'  : 0.5,
+                                '1/4'  : 0.25,
+                                '1/8'  : 0.125,
                                 '1/16' : 0.0625,
                                 '1/32' : 0.03125,
                                }
@@ -84,7 +84,15 @@ class Achtelbass(object):
                                 'Seventh' : 6,
                                 'Octave'  : 7,
                                }
-        self.Possible_Intervals      = self.Interval_Values.keys()
+        self.Possible_Intervals   = self.Interval_Values.keys()
+        self.Possible_Note_Values = [
+                                '1',
+                                '1/2',
+                                '1/4',
+                                '1/8',
+                                '1/16',
+                                '1/32',
+                               ]
 
         self.Tonic                   = parameters['tonic']
         self.Mode                    = parameters['mode']
@@ -121,7 +129,7 @@ class Achtelbass(object):
         self.Clef_Left_Hand         = 'treble'
         self.Clef_Right_Hand        = 'treble'
         self.Rest_Frequency         = self.Frequency_Values[parameters['rest_frequency']]
-        self.Selectable_Note_Values = [self.Fraction_Values[note_value] for note_value in parameters['note_values'].keys()]
+        self.Selectable_Note_Values = [self.Fraction_Values[note_value] for note_value in parameters['note_values']]
         self.Selectable_Note_Values.sort()
 
         self.Time_Signature_Numerator   = parameters['time_signature'][0]

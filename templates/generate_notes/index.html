@@ -29,6 +29,14 @@
             {% endfor %}
         </select>
     </div>
+    <div id="controls_note_values" class="controls">
+        {{ Locales.Intervals }}<br>
+        <select name="note_values" size="5" multiple>
+            {% for note_value in Possible_Note_Values %}
+            <option {% if note_value in preselected.note_values_list %}selected="selected" {% endif %}>{{ note_value }}</option>
+            {% endfor %}
+        </select>
+    </div>
     <div id="controls_min_pitch" class="controls">
         {{ Locales|get_key:'Min pitch' }}<br>
         <select name="min_pitch" size="5">
