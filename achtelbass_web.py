@@ -72,11 +72,20 @@ class Achtelbass(object):
         self.Diatonic_Notes          = 'C D E F G A B C'.split()
         self.Tonics                  = ['C', 'G', 'D', 'A', 'E', 'B', 'F#', 'Gb', 'Db', 'Ab', 'Eb', 'Bb', 'F']
         self.Modes                   = ['Major', 'Minor']
+        self.Interval_Values = {
+                                'Unison'  : 0,
+                                'Second'  : 1,
+                                'Third'   : 2,
+                                'Fourth'  : 3,
+                                'Fifth'   : 4,
+                                'Sixth'   : 5,
+                                'Seventh' : 6,
+                                'Octave'  : 7,
+                               }
+        self.Possible_Intervals      = self.Interval_Values.keys()
 
         self.Tonic                   = parameters['tonic']
         self.Mode                    = parameters['mode']
-        self.Possible_Intervals      = ['Unison', 'Second', 'Third', 'Fourth', 'Fifth', 'Sixth', 'Seventh', 'Octave']
-        self.Intervals               = parameters['intervals']
         self.Chords_Frequency        = parameters['chords_frequency']
         self.Grand_Staff             = parameters['grand_staff']
         self.Prolongations_Frequency = parameters['prolongations_frequency']
@@ -94,8 +103,18 @@ class Achtelbass(object):
             self.Min_Pitch = parameters['max_pitch']
             self.Max_Pitch = parameters['min_pitch']
         
-        # CHANGEME if pitch range is smaller than greatest interval, discard the
+        self.Pitch_Range = self.Notes.index(self.Max_Pitch) - self.Notes.index(self.Min_Pitch)
+        
+        # If pitch range is smaller than greatest interval, discard the
         # intervals that are too big
+        self.Intervals = []
+        for current_interval in parameters['intervals']:
+            if self.Interval_Values[current_interval] <= self.Pitch_Range:
+                self.Intervals.append(current_interval)
+        if not self.Intervals:
+            # fall back to unison
+            self.Intervals = ['Unison']
+        
         
         self.Clef_Left_Hand         = 'treble'
         self.Clef_Right_Hand        = 'treble'
