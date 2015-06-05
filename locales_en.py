@@ -84,8 +84,10 @@ locales = {
             'no rests' : 'no rests',
 # Time signature
             'Time signature' : 'Time signature',
+            'time_signature' : 'Time signature',
 # Note value
             'Note values' : 'Note values',
+            'note_values' : 'Note values',
 # Tempo
             'Tempo' : 'Tempo',
 # Tuplet

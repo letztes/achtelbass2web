@@ -61,7 +61,7 @@ class Output(object):
         praeambel += "T:" + self.Title + "\n"
         praeambel += "M:" + self.Time_Signature_Numerator + "/" + self.Time_Signature_Denominator + "\n" # 4/4 or so
         praeambel += "K:" + self.Tonic + self.mode_abbreviation[self.Mode] + "\n" # The Key
-        praeambel += "L:" + self.Time_Signature_Numerator + '' + "/" + self.Time_Signature_Denominator + "\n" # 4/4 or so # The reference note length
+        praeambel += "L:" + '4/4' + "\n" # The reference note length
         if self.BPM:
             praeambel += "Q:1/4=" + str(self.BPM) + "\n"
         

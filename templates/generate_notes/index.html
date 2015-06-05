@@ -30,7 +30,7 @@
         </select>
     </div>
     <div id="controls_note_values" class="controls">
-        {{ Locales.Intervals }}<br>
+        {{ Locales.note_values }}<br>
         <select name="note_values" size="5" multiple>
             {% for note_value in Possible_Note_Values %}
             <option {% if note_value in preselected.note_values_list %}selected="selected" {% endif %}>{{ note_value }}</option>
@@ -50,6 +50,14 @@
         <select name="max_pitch" size="5">
             {% for note in Notes %}
             <option {% ifequal note preselected.max_pitch %}selected="selected" {% endifequal %}>{{ note }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div id="controls_time_signature" class="controls">
+        {{ Locales.time_signature }}<br>
+        <select name="time_signature" size="5">
+            {% for time_signature in Possible_Time_Signatures %}
+            <option {% ifequal time_signature preselected.time_signature %}selected="selected" {% endifequal %}>{{ time_signature }}</option>
             {% endfor %}
         </select>
     </div>

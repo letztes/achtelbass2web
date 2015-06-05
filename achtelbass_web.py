@@ -61,10 +61,12 @@ class Achtelbass(object):
                                 '8' : 'x8',
                                 '9' : 'x9',
                               }
-        self.Fraction_Values = {'2/2'  : 1.0,
-                                '3/4'  : 0.75,
+        self.Fraction_Values = {'12/8' : 1.5,
+                                '2/2'  : 1.0,
                                 '4/4'  : 1.0,
                                 '1'    : 1.0,
+                                '3/4'  : 0.75,
+                                '6/8'  : 0.75,
                                 '1/2'  : 0.5,
                                 '1/4'  : 0.25,
                                 '1/8'  : 0.125,
@@ -92,6 +94,13 @@ class Achtelbass(object):
                                 '1/8',
                                 '1/16',
                                 '1/32',
+                               ]
+        self.Possible_Time_Signatures = [
+                                '2/2',
+                                '3/4',
+                                '4/4',
+                                '6/8',
+                                '12/8',
                                ]
 
         self.Tonic                   = parameters['tonic']
@@ -132,9 +141,19 @@ class Achtelbass(object):
         self.Selectable_Note_Values = [self.Fraction_Values[note_value] for note_value in parameters['note_values']]
         self.Selectable_Note_Values.sort()
 
-        self.Time_Signature_Numerator   = parameters['time_signature'][0]
-        self.Time_Signature_Denominator = parameters['time_signature'][2]
-        self.Time_Signature             = self.Fraction_Values[parameters['time_signature']]
+        self.Time_Signature_Numerator, self.Time_Signature_Denominator = parameters['time_signature'].split('/')
+        self.Time_Signature    = self.Fraction_Values[parameters['time_signature']]
+        
+        # if note values can not sum up to one full bar, change the
+        # time signature to the greatest note value
+        can_sum_up = False
+        for note_value in self.Selectable_Note_Values:
+            if self.Time_Signature % note_value == 0:
+                can_sum_up = True
+        if not can_sum_up:
+            inverse_fractions   = dict([[v,k] for k,v in self.Fraction_Values.items() if '/' in k])
+            self.Time_Signature = self.Selectable_Note_Values[-1]
+            self.Time_Signature_Numerator, self.Time_Signature_Denominator = inverse_fractions[self.Time_Signature].split('/')
         
         self.Tuplets           = self.Tuplets_Values[parameters['tuplets']]
         self.Tuplet_Same_Pitch = parameters['tuplet_same_pitch']
