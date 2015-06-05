@@ -30,6 +30,8 @@ class Achtelbass(object):
         self.Locales          = locales
         self.Frequency_Values = {'None' : 0,
                                  'no rests' : 0,
+                                 0     : 0,
+                                 '0'   : 0,
                                  '0.1' : 0.1,
                                  '0.2' : 0.2,
                                  '0.3' : 0.3,
@@ -327,26 +329,29 @@ class Achtelbass(object):
             if note_values[i] == " | ":
                 note_string += " | "
             else:
-                
-                # If the user requested chords
-                if int(self.Chords_Frequency) > 0:
                     
-                    # Calculate whether to show chords or not according
-                    # to the propability that the user specified
-                    if random.randint(0,100) < int(self.Chords_Frequency):
-                        index_of_root = self.Notes.index(pitches[i])
-                        
-                        # Only if the root note is not too high to form a chord
-                        if index_of_root + 4 <= len(self.Notes):
-                            # CHANGEME septachords etc
-                            # CHANGEME self.Chord_Inversion == 1 | 2 etc
-                            note_string += '[' + self.Notes[index_of_root] + self.Notes[index_of_root+2] + self.Notes[index_of_root+4] + ']/' + note_values[i] + ' '
+                if random.uniform(0, 1) < self.Rest_Frequency:
+                    note_string += 'z/' + note_values[i] + ' '
+                else:
+                
+                    # If the user requested chords
+                    if int(self.Chords_Frequency) > 0:
+                        # Calculate whether to show chords or not according
+                        # to the propability that the user specified
+                        if random.randint(0,100) < int(self.Chords_Frequency):
+                            index_of_root = self.Notes.index(pitches[i])
+                            
+                            # Only if the root note is not too high to form a chord
+                            if index_of_root + 4 <= len(self.Notes):
+                                # CHANGEME septachords etc
+                                # CHANGEME self.Chord_Inversion == 1 | 2 etc
+                                note_string += '[' + self.Notes[index_of_root] + self.Notes[index_of_root+2] + self.Notes[index_of_root+4] + ']/' + note_values[i] + ' '
+                            else:
+                                note_string += pitches[i] + '/' + note_values[i] + ' '
                         else:
                             note_string += pitches[i] + '/' + note_values[i] + ' '
                     else:
                         note_string += pitches[i] + '/' + note_values[i] + ' '
-                else:
-                    note_string += pitches[i] + '/' + note_values[i] + ' '
                     
                 
                 if previous_clef == 'bass' and self.Notes.index(pitches[i]) > self.Notes.index('E'):

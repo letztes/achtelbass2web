@@ -61,8 +61,10 @@
             {% endfor %}
         </select>
     </div>
-    <div id="controls_chords" class="controls">
+    <div id="controls_grand_staff" class="controls">
         <input type="checkbox" name="grand_staff" {% if preselected.grand_staff %}checked="checked"{% endif %}>Grand Staff<br>
+    </div>
+    <div id="controls_chords" class="controls">
         {{ Locales.Chords }}<br>
         <select name="chords_frequency">
             <option value="0">0 %</option>
@@ -76,6 +78,22 @@
             <option value="80" {% if preselected.chords_frequency == "80" %}selected="selected" {% endif %}>80 %</option>
             <option value="90" {% if preselected.chords_frequency == "90" %}selected="selected" {% endif %}>90 %</option>
             <option value="100" {% if preselected.chords_frequency == "100" %}selected="selected" {% endif %}>100 %</option>
+        </select>
+    </div>
+    <div id="controls_rests" class="controls">
+        {{ Locales.Rests }}<br>
+        <select name="rest_frequency">
+            <option value="0">0 %</option>
+            <option value="0.1" {% if preselected.rest_frequency == "0.1" %}selected="selected" {% endif %}>10 %</option>
+            <option value="0.2" {% if preselected.rest_frequency == "0.2" %}selected="selected" {% endif %}>20 %</option>
+            <option value="0.3" {% if preselected.rest_frequency == "0.3" %}selected="selected" {% endif %}>30 %</option>
+            <option value="0.4" {% if preselected.rest_frequency == "0.4" %}selected="selected" {% endif %}>40 %</option>
+            <option value="0.5" {% if preselected.rest_frequency == "0.5" %}selected="selected" {% endif %}>50 %</option>
+            <option value="0.6" {% if preselected.rest_frequency == "0.6" %}selected="selected" {% endif %}>60 %</option>
+            <option value="0.7" {% if preselected.rest_frequency == "0.7" %}selected="selected" {% endif %}>70 %</option>
+            <option value="0.8" {% if preselected.rest_frequency == "0.8" %}selected="selected" {% endif %}>80 %</option>
+            <option value="0.9" {% if preselected.rest_frequency == "0.9" %}selected="selected" {% endif %}>90 %</option>
+            <option value="1" {% if preselected.rest_frequency == "1" %}selected="selected" {% endif %}>100 %</option>
         </select>
     </div>
     <div id="controls_submit" class="controls">

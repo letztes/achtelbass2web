@@ -79,6 +79,7 @@ locales = {
             'Octave' : 'Octave',
             'Inversion' : 'Inversion',
 # Rest
+            'Rests' : 'Rests',
             'Rest frequency' : 'Rest frequency',
             'no rests' : 'no rests',
 # Time signature

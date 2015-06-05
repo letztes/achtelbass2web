@@ -19,7 +19,7 @@ def index(request):
                   'display_pdf'             : False,
                   'min_pitch'               : request.POST.get('min_pitch', 'E,,'),
                   'max_pitch'               : request.POST.get('max_pitch', "d"),
-                  'rest_frequency'          : 'no rests',
+                  'rest_frequency'          : request.POST.get('rest_frequency', 0),
                   'time_signature'          : '4/4',
                   'note_values'             : {'1' : True, '1/2' : True, '1/4' : True},
                   'tuplets'                 : 'None',
