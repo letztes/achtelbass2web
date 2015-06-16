@@ -4,14 +4,207 @@
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	<title>Achtelbass</title>
 	<style>
-        .controls {display:inline-block;padding:2px;margin:2px}
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+            background: #fff;
+            color: #111;
+        }
+
+        main {
+            overflow: hidden;
+            margin: 0 auto;
+            max-width: 2000px;
+        }
+
+        #abc {
+            display: none;
+        }
+
+        form {
+            overflow: hidden;
+            background: url('/achtelbass/static/images/bg_texture___wood_by_nortago.jpg') top left #402107;
+            box-shadow: -5px -5px 5px #210 inset;
+            padding-bottom: 3em;
+        }
+
+        form > fieldset *:not(input),
+        form h2 {
+            color: #f2ecdc;
+        }
+
+        form h2 {
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+            text-shadow: 2px 2px 2px #333;
+        }
+
+		.controls {
+            float: left;
+            border: 0;
+            padding: 1em;
+        }
+
+        @media (min-width: 1200px) {
+            form {
+                float: left;
+                width: 300px;
+            }
+
+            #canvas {
+                float: right;
+            }
+        }
+
+        @media (min-width: 1300px) {
+            form {
+                width: 400px;
+            }
+        }
+
+        @media (min-width: 1500px) {
+            form {
+                width: 600px;
+            }
+        }
+
+        @media (min-width: 1700px) {
+            form {
+                width: 800px;
+            }
+        }
+    
+        @media (min-width: 1900px) {
+            form {
+                width: 1000px;
+            }
+        }
+
+        .controls input[type="checkbox"],
+            .controls input[type="radio"] {
+                display: none;
+            }
+
+        .controls input[type="checkbox"] + label,
+        .controls input[type="radio"] + label,
+        .controls input[type="submit"] {
+            line-height: 2em;
+            padding: 0 0.5em;
+            border-radius: 0.5em;
+            color: #888;
+            background-color: #f2ecdc;
+            display: inline-block;
+            margin-bottom: 1em;
+            text-align: center;
+            cursor: pointer;
+            box-shadow: -3px -3px 3px #ccc inset;
+            border: none;
+        }
+
+        .controls input:checked + label,
+        .controls input[type="submit"]:active {
+            color: #111;
+            background: #ad9968;
+            box-shadow: 3px 3px 3px #888 inset;
+        }
+
+        .controls input[type="submit"] {
+            color: #111;
+            font-weight: bold;
+            margin-top: 1em;
+            font-size: 1.2em;
+        }
+
+        .controls.chords,
+        .controls.submit {
+            clear: left;
+        }
+
+        .pitch_container {
+            clear: left;
+            float: left;
+            overflow: hidden;
+            padding: 1em;
+        }	
+
+            .pitch_container fieldset {
+                float: left;
+                color: #111;
+                margin: 0;
+                padding: 0;
+                width: 5em;
+                background: #fff;
+            }
+
+            .pitch_container fieldset:first-of-type {
+                padding-left: 1em;
+            }
+
+            .pitch_container fieldset:last-of-type {
+                padding-right: 1em;
+            }
+
+            .pitch_container h3 {
+                text-align: center;
+            }
+
+            .pitch_container p {
+                margin: 0;
+                font-size: 9px;
+                height: 1em;
+                position: relative;
+                overflow: visible;
+            }
+
+            .pitch_container p:nth-of-type(odd) {
+                border-bottom: 1px solid #111;
+             }
+
+            .pitch_container .controls input[type="radio"] {
+                font-size: 9px;
+                display: inline-block;
+                margin: 0;
+                height: 1em;
+                opacity: 0;
+                z-index: 0;
+            }
+
+            .pitch_container .controls input[type="radio"] + label {
+                background: none;
+                padding: 0;
+                line-height: 2em;
+                width: 1.7em;
+                height: 1.7em;
+                text-shadow: none;
+                margin: 0;
+                box-shadow: none;
+                position: absolute;
+                top: 0.15em;
+                left: 3em;
+                border-radius: 2em;
+                transition: background-color 0.5s;
+                z-index: 2;
+            }
+
+            .pitch_container .controls input[type="radio"]:checked + label {
+                background: #111;
+            }
+
+        label[for="chords_frequency"],
+        label[for="rest_frequency"] {
+            min-width: 3em;
+            display: inline-block;
+            text-align: right;
+        }
     </style>
 </head>
 <body>
 {# debugging_info #}
 <!--applet id="MIDIPlugin" code="MIDIPlugin.class" name="MIDIPlugin" archive="http://dl.dropbox.com/u/223827/abcjs/MIDIPlugin.jar" height="1" width="1"></applet-->
 
-<textarea id="abc" cols="80" rows="15" style="display:block;">
+<textarea id="abc">
 {{ generated_notes }}
 </textarea>
 <div id="warnings"></div>
@@ -20,115 +213,98 @@
 {# TODO Prevent via javascript selecting smaller pitch range than greatest interval #}
 {# TODO Prevent via javascript selecting greater interval than smallest pitch range #}
 
-<form action="." method="post">{% csrf_token %}
-    <div id="controls_intervals" class="controls">
-        {{ Locales.Intervals }}<br>
-        <select name="intervals" size="5" multiple>
+<main>
+    <form action="." method="post">{% csrf_token %}
+        <fieldset class="controls intervals">
+            <h2>{{ Locales.Intervals }}</h2>
             {% for interval in Possible_Intervals %}
-            <option {% if interval in preselected.intervals_list %}selected="selected" {% endif %}>{{ interval }}</option>
+                <input type="checkbox" id="interval_{{ interval }}" name="intervals" value="{{ interval }}"{% if interval in preselected.intervals_list %} checked="checked"{% endif %} />
+                <label for="interval_{{ interval }}">{{ interval }}</label>
             {% endfor %}
-        </select>
-    </div>
-    <div id="controls_note_values" class="controls">
-        {{ Locales.note_values }}<br>
-        <select name="note_values" size="5" multiple>
+        </fieldset>
+        <fieldset class="controls note_values">
+            <h2>{{ Locales.note_values }}</h2>
             {% for note_value in Possible_Note_Values %}
-            <option {% if note_value in preselected.note_values_list %}selected="selected" {% endif %}>{{ note_value }}</option>
+                <input type="checkbox" id="note_values_{{ note_value }}" name="note_values" value="{{ note_value }}"{% if note_value in preselected.note_values_list %} checked="checked"{% endif %} />
+                <label for="note_values_{{ note_value }}">{{ note_value }}</label>
             {% endfor %}
-        </select>
-    </div>
-    <div id="controls_min_pitch" class="controls">
-        {{ Locales|get_key:'Min pitch' }}<br>
-        <select name="min_pitch" size="5">
-            {% for note in Notes %}
-            <option {% ifequal note preselected.min_pitch %}selected="selected" {% endifequal %}>{{ note }}</option>
-            {% endfor %}
-        </select>
-    </div>
-    <div id="controls_max_pitch" class="controls">
-        {{ Locales|get_key:'Max pitch' }}<br>
-        <select name="max_pitch" size="5">
-            {% for note in Notes %}
-            <option {% ifequal note preselected.max_pitch %}selected="selected" {% endifequal %}>{{ note }}</option>
-            {% endfor %}
-        </select>
-    </div>
-    <div id="controls_time_signature" class="controls">
-        {{ Locales.time_signature }}<br>
-        <select name="time_signature" size="5">
+        </fieldset>
+        <div class="pitch_container">
+            <h2>Pitch</h2>
+            <fieldset class="controls min_pitch">
+                <h3>min</h3>
+                {% for note in Notes %}
+                    <p>
+                        <input type="radio" id="min_pitch_{{ note }}" name="min_pitch" value="{{ note }}"{% ifequal note preselected.min_pitch %} checked="checked"{% endifequal %} />
+                        <label for="min_pitch_{{ note }}"></label>
+                    </p>
+                {% endfor %}
+            </fieldset>
+            <fieldset class="controls max_pitch">
+                <h3>max</h3>
+                {% for note in Notes %}
+                    <p>
+                        <input type="radio" id="max_pitch_{{ note }}" name="max_pitch" value="{{ note }}"{% ifequal note preselected.max_pitch %} checked="checked"{% endifequal %} />
+                        <label for="max_pitch_{{ note }}"></label>
+                    </p>
+                {% endfor %}
+            </fieldset>
+        </div>
+        <fieldset class="controls time_signature">
+            <h2>{{ Locales.time_signature }}</h2>
             {% for time_signature in Possible_Time_Signatures %}
-            <option {% ifequal time_signature preselected.time_signature %}selected="selected" {% endifequal %}>{{ time_signature }}</option>
+                <input type="radio" id="time_signature_{{ time_signature }}" name="time_signature" value="{{ time_signature }}"{% ifequal time_signature preselected.time_signature %} checked="checked"{% endifequal %} />
+                <label for="time_signature_{{ time_signature }}">{{ time_signature }}</label>
             {% endfor %}
-        </select>
-    </div>
-    <div id="controls_tonic" class="controls">
-        {{ Locales.Tonic }}<br>
-        <select name="tonic" size="5">
+        </fieldset>
+        <fieldset class="controls tonic">
+            <h2>{{ Locales.Tonic }}</h2>
             {% for tonic in Tonics %}
-            <option {% ifequal tonic preselected.tonic %}selected="selected" {% endifequal %}>{{ tonic }}</option>
+                <input type="radio" id="tonic_{{ tonic }}" name="tonic" value="{{ tonic }}"{% ifequal tonic preselected.tonic %} checked="checked"{% endifequal %} />
+                <label for="tonic_{{ tonic }}">{{ tonic }}</label>
             {% endfor %}
-        </select>
-    </div>
-    <div id="controls_mode" class="controls">
-        {{ Locales.Mode }}<br>
-        <select name="mode" size="5">
+        </fieldset>
+        <fieldset class="controls mode">
+            <h2>{{ Locales.Mode }}</h2>
             {% for mode in Modes %}
-            <option {% ifequal mode preselected.mode %}selected="selected" {% endifequal %}>{{ mode }}</option>
+                <input type="radio" id="mode_{{ mode }}" name="mode" value="{{ mode }}"{% ifequal mode preselected.mode %} checked="checked"{% endifequal %} />
+                <label for="mode_{{ mode }}">{{ mode }}</label>
             {% endfor %}
-        </select>
-    </div>
-    <div id="controls_grand_staff" class="controls">
-        <input type="checkbox" name="grand_staff" {% if preselected.grand_staff %}checked="checked"{% endif %}>Grand Staff<br>
-    </div>
-    <div id="controls_chords" class="controls">
-        {{ Locales.Chords }}<br>
-        <select name="chords_frequency">
-            <option value="0">0 %</option>
-            <option value="10" {% if preselected.chords_frequency == "10" %}selected="selected" {% endif %}>10 %</option>
-            <option value="20" {% if preselected.chords_frequency == "20" %}selected="selected" {% endif %}>20 %</option>
-            <option value="30" {% if preselected.chords_frequency == "30" %}selected="selected" {% endif %}>30 %</option>
-            <option value="40" {% if preselected.chords_frequency == "40" %}selected="selected" {% endif %}>40 %</option>
-            <option value="50" {% if preselected.chords_frequency == "50" %}selected="selected" {% endif %}>50 %</option>
-            <option value="60" {% if preselected.chords_frequency == "60" %}selected="selected" {% endif %}>60 %</option>
-            <option value="70" {% if preselected.chords_frequency == "70" %}selected="selected" {% endif %}>70 %</option>
-            <option value="80" {% if preselected.chords_frequency == "80" %}selected="selected" {% endif %}>80 %</option>
-            <option value="90" {% if preselected.chords_frequency == "90" %}selected="selected" {% endif %}>90 %</option>
-            <option value="100" {% if preselected.chords_frequency == "100" %}selected="selected" {% endif %}>100 %</option>
-        </select>
-    </div>
-    <div id="controls_rests" class="controls">
-        {{ Locales.Rests }}<br>
-        <select name="rest_frequency">
-            <option value="0">0 %</option>
-            <option value="0.1" {% if preselected.rest_frequency == "0.1" %}selected="selected" {% endif %}>10 %</option>
-            <option value="0.2" {% if preselected.rest_frequency == "0.2" %}selected="selected" {% endif %}>20 %</option>
-            <option value="0.3" {% if preselected.rest_frequency == "0.3" %}selected="selected" {% endif %}>30 %</option>
-            <option value="0.4" {% if preselected.rest_frequency == "0.4" %}selected="selected" {% endif %}>40 %</option>
-            <option value="0.5" {% if preselected.rest_frequency == "0.5" %}selected="selected" {% endif %}>50 %</option>
-            <option value="0.6" {% if preselected.rest_frequency == "0.6" %}selected="selected" {% endif %}>60 %</option>
-            <option value="0.7" {% if preselected.rest_frequency == "0.7" %}selected="selected" {% endif %}>70 %</option>
-            <option value="0.8" {% if preselected.rest_frequency == "0.8" %}selected="selected" {% endif %}>80 %</option>
-            <option value="0.9" {% if preselected.rest_frequency == "0.9" %}selected="selected" {% endif %}>90 %</option>
-            <option value="1" {% if preselected.rest_frequency == "1" %}selected="selected" {% endif %}>100 %</option>
-        </select>
-    </div>
-    <div id="controls_submit" class="controls">
-        <button type="Submit">Submit</button>
-    </div>
-</form>
-
-<hr>
-<div id="midi"></div>
-<div id="canvas"></div>
-<!--textarea id="target" cols="80" rows="15"></textarea-->
-<!--
-<script src="abcjs/bin/abcjs_editor_latest-min.js" type="text/javascript"></script>
--->
+        </fieldset>
+        <fieldset class="controls grand_staff">
+            <h2>Grand Staff</h2>
+            <input type="checkbox" id="grand_staff_{{ grand_staff }}" name="grand_staff" value="{{ grand_staff }}"{% if preselected.grand_staff %} checked="checked"{% endif %} />
+            <label for="grand_staff_{{ grand_staff }}">Grand Staff</label>
+        </fieldset>
+        <fieldset class="controls chords">
+            <h2>{{ Locales.Chords }}</h2>
+            <input type="range" min="0" max="1" step="0.01" name="chords_frequency" id="chords_frequency" value="{{ preselected.chords_frequency }}" />
+            <label for="chords_frequency">{{ preselected.chords_frequency }}%</label>
+        </fieldset>
+        <fieldset class="controls rests">
+            <h2>{{ Locales.Rests }}</h2>
+            <input type="range" min="0" max="1" step="0.01" name="rest_frequency" id="rest_frequency" value="{{ preselected.rest_frequency }}" />
+            <label for="rest_frequency">{{ preselected.rest_frequency }}%</label>
+        </fieldset>
+        <fieldset class="controls submit">
+            <input type="submit" value="Submit" />
+        </fieldset>
+    </form>
+    <div id="midi"></div>
+    <div id="canvas"></div>
+</main>
 <script src="{% static 'abcjs/bin/abcjs_basic_latest-min.js' %}" type="text/javascript"></script>
 <script type="text/javascript">
         
     ABCJS.renderAbc("canvas", document.getElementById("abc").value);
     //ABCJS.renderMidi("midi", document.getElementById("abc").value);
+
+    Array.prototype.forEach.call(document.querySelectorAll('input[type="range"]'), function(el, i) {
+	el.nextElementSibling.textContent = parseInt(el.value * 100) + '%';
+        el.addEventListener('input', function() {
+            el.nextElementSibling.textContent = parseInt(el.value * 100) + '%';
+        });
+    });
     		
 
 	</script>
