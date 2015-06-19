@@ -105,9 +105,23 @@ class Achtelbass(object):
 
         self.Tonic                   = parameters['tonic']
         self.Mode                    = parameters['mode']
-        self.Chords_Frequency        = parameters['chords_frequency']
+        
+        if isinstance(parameters['chords_frequency'], basestring):
+            self.Chords_Frequency        = float(parameters['chords_frequency'])
+        elif isinstance(parameters['chords_frequency'], float):
+            self.Chords_Frequency        = parameters['chords_frequency']
+        else:
+            self.Chords_Frequency        = 0
+            
         self.Grand_Staff             = parameters['grand_staff']
-        self.Prolongations_Frequency = parameters['prolongations_frequency']
+        
+        if isinstance(parameters['prolongations_frequency'], basestring):
+            self.Prolongations_Frequency        = float(parameters['prolongations_frequency'])
+        elif isinstance(parameters['prolongations_frequency'], float):
+            self.Prolongations_Frequency        = parameters['prolongations_frequency']
+        else:
+            self.Prolongations_Frequency        = 0
+        
         self.Inversion = parameters['inversion']
         self.Notes = ["C,,", "D,,", "E,,", "F,,", "G,,", "A,,", "B,,",
                       "C,", "D,", "E,", "F,", "G,", "A,", "B,",
@@ -137,7 +151,14 @@ class Achtelbass(object):
         
         self.Clef_Left_Hand         = 'treble'
         self.Clef_Right_Hand        = 'treble'
-        self.Rest_Frequency         = self.Frequency_Values[parameters['rest_frequency']]
+        
+        if isinstance(parameters['rest_frequency'], basestring):
+            self.Rest_Frequency        = float(parameters['rest_frequency'])
+        elif isinstance(parameters['rest_frequency'], float):
+            self.Rest_Frequency        = parameters['rest_frequency']
+        else:
+            self.Rest_Frequency        = 0
+        
         self.Selectable_Note_Values = [self.Fraction_Values[note_value] for note_value in parameters['note_values']]
         self.Selectable_Note_Values.sort()
 
@@ -157,7 +178,13 @@ class Achtelbass(object):
         
         self.Tuplets           = self.Tuplets_Values[parameters['tuplets']]
         self.Tuplet_Same_Pitch = parameters['tuplet_same_pitch']
-        self.Tuplets_Frequency = parameters['tuplets_frequency']
+
+        if isinstance(parameters['tuplets_frequency'], basestring):
+            self.Tuplets_Frequency        = float(parameters['tuplets_frequency'])
+        elif isinstance(parameters['tuplets_frequency'], float):
+            self.Tuplets_Frequency        = parameters['tuplets_frequency']
+        else:
+            self.Tuplets_Frequency        = 0
         
         self.BPM_For_Tempo = {'grave' : 40,
                             'largo' : 44,
@@ -362,10 +389,10 @@ class Achtelbass(object):
                 else:
                 
                     # If the user requested chords
-                    if int(self.Chords_Frequency) > 0:
+                    if self.Chords_Frequency > 0:
                         # Calculate whether to show chords or not according
                         # to the propability that the user specified
-                        if random.randint(0,100) < int(self.Chords_Frequency):
+                        if random.uniform(0, 1) < self.Chords_Frequency:
                             index_of_root = self.Notes.index(pitches[i])
                             
                             # Only if the root note is not too high to form a chord

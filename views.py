@@ -24,9 +24,9 @@ def index(request):
                   'note_values'             : request.POST.getlist('note_values', ['1', '1/2', '1/4']),
                   'tuplets'                 : 'None',
                   'tuplet_same_pitch'       : False,
-                  'tuplets_frequency'       : 'None',
+                  'tuplets_frequency'       : 0,
                   'prolongations'           : False,
-                  'prolongations_frequency' : 'None',
+                  'prolongations_frequency' : 0,
                   'bpm'                     : 60,
                   'tempo'                   : 'andante',
                  }
