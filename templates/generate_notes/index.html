@@ -233,7 +233,7 @@
             <h2>Pitch</h2>
             <fieldset class="controls min_pitch">
                 <h3>min</h3>
-                {% for note in Notes %}
+                {% for note in Notes reversed %}
                     <p>
                         <input type="radio" id="min_pitch_{{ note }}" name="min_pitch" value="{{ note }}"{% ifequal note preselected.min_pitch %} checked="checked"{% endifequal %} />
                         <label for="min_pitch_{{ note }}"></label>
@@ -242,7 +242,7 @@
             </fieldset>
             <fieldset class="controls max_pitch">
                 <h3>max</h3>
-                {% for note in Notes %}
+                {% for note in Notes reversed %}
                     <p>
                         <input type="radio" id="max_pitch_{{ note }}" name="max_pitch" value="{{ note }}"{% ifequal note preselected.max_pitch %} checked="checked"{% endifequal %} />
                         <label for="max_pitch_{{ note }}"></label>

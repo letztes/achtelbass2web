@@ -38,6 +38,9 @@ def index(request):
     
     context.preselected = request.POST.copy()
     
+    context.preselected.min_pitch = request.POST.get('min_pitch', 'E,,')
+    context.preselected.max_pitch = request.POST.get('max_pitch', "d")
+    
     # The multiselect is one zero byte separated string, we want a list
     context.preselected.intervals_list    = request.POST.getlist('intervals')
     context.preselected.note_values_list  = request.POST.getlist('note_values')
