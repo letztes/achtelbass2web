@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Create your views here.
 from django.http import HttpResponse
 from django.template import RequestContext, loader
@@ -44,6 +45,15 @@ def index(request):
     # The multiselect is one zero byte separated string, we want a list
     context.preselected.intervals_list    = request.POST.getlist('intervals')
     context.preselected.note_values_list  = request.POST.getlist('note_values')
+    context.note_value_symbols = {
+        '1'    : u'𝅝',
+        '1/2'  : u'𝅗𝅥',
+        '1/4'  : u'♩',
+        '1/8'  : u'♪',
+        '1/16' : u'𝅘𝅥𝅯',
+        '1/32' : u'𝅘𝅥𝅰',
+        '1/64' : u'𝅘𝅥𝅱',
+    }
     
     context.generated_notes = achtelbass_obj.display()
 #    context.debugging_info  = achtelbass_obj.Chords_Frequency

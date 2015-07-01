@@ -25,7 +25,7 @@
 
         form {
             overflow: hidden;
-            background: url('/achtelbass/static/images/bg_texture___wood_by_nortago.jpg') top left #402107;
+            background: url('{% static "images/bg_texture___wood_by_nortago.jpg" %}') top left #402107;
             box-shadow: -5px -5px 5px #210 inset;
             padding-bottom: 3em;
         }
@@ -119,7 +119,7 @@
 
         .controls.chords,
         .controls.submit {
-            clear: left;
+            /*clear: left;*/
         }
 
         .pitch_container {
@@ -223,11 +223,14 @@
             {% endfor %}
         </fieldset>
         <fieldset class="controls note_values">
-            <h2>{{ Locales.note_values }}</h2>
+            <h2>{{ Locales.note_values }} {{ note_values_symbol_entities.1 }} </h2>
             {% for note_value in Possible_Note_Values %}
                 <input type="checkbox" id="note_values_{{ note_value }}" name="note_values" value="{{ note_value }}"{% if note_value in preselected.note_values_list %} checked="checked"{% endif %} />
-                <label for="note_values_{{ note_value }}">{{ note_value }}</label>
+                <label for="note_values_{{ note_value }}">{{ note_value_symbols|get_key:note_value }}</label>
             {% endfor %}
+        </fieldset>
+        <fieldset class="controls submit">
+            <input type="submit" value="Submit" />
         </fieldset>
         <div class="pitch_container">
             <h2>Pitch</h2>
@@ -257,13 +260,6 @@
                 <label for="time_signature_{{ time_signature }}">{{ time_signature }}</label>
             {% endfor %}
         </fieldset>
-        <fieldset class="controls tonic">
-            <h2>{{ Locales.Tonic }}</h2>
-            {% for tonic in Tonics %}
-                <input type="radio" id="tonic_{{ tonic }}" name="tonic" value="{{ tonic }}"{% ifequal tonic preselected.tonic %} checked="checked"{% endifequal %} />
-                <label for="tonic_{{ tonic }}">{{ tonic }}</label>
-            {% endfor %}
-        </fieldset>
         <fieldset class="controls mode">
             <h2>{{ Locales.Mode }}</h2>
             {% for mode in Modes %}
@@ -286,8 +282,12 @@
             <input type="range" min="0" max="1" step="0.01" name="rest_frequency" id="rest_frequency" value="{{ preselected.rest_frequency }}" />
             <label for="rest_frequency">{{ preselected.rest_frequency }}%</label>
         </fieldset>
-        <fieldset class="controls submit">
-            <input type="submit" value="Submit" />
+        <fieldset class="controls tonic">
+            <h2>{{ Locales.Tonic }}</h2>
+            {% for tonic in Tonics %}
+                <input type="radio" id="tonic_{{ tonic }}" name="tonic" value="{{ tonic }}"{% ifequal tonic preselected.tonic %} checked="checked"{% endifequal %} />
+                <label for="tonic_{{ tonic }}">{{ tonic }}</label>
+            {% endfor %}
         </fieldset>
     </form>
     <div id="midi"></div>
