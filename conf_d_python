@@ -1,0 +1,12 @@
+# apt-get install libapache2-mod-wsgi
+
+
+WSGIScriptAlias / /home/achtelbass/achtelbass/wsgi.py
+WSGIPythonPath /home/achtelbass
+
+<Directory /home/achtelbass/achtelbass>
+<Files wsgi.py>
+Order deny,allow
+Allow from all
+</Files>
+</Directory>

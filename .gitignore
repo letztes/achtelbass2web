@@ -2,3 +2,6 @@
 *deleteme*
 *DELETEME*
 *pyc
+static/
+.goutputstream*
+abcjs/
