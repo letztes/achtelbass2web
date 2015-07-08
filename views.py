@@ -17,7 +17,6 @@ def index(request):
                   'chords_frequency'        : request.POST.get('chords_frequency', 0),
                   'intervals'               : request.POST.getlist('intervals', ['Second']),
                   'inversion'               : False,
-                  'display_pdf'             : False,
                   'min_pitch'               : request.POST.get('min_pitch', 'E,,'),
                   'max_pitch'               : request.POST.get('max_pitch', "d"),
                   'rest_frequency'          : request.POST.get('rest_frequency', 0),
@@ -37,14 +36,8 @@ def index(request):
     
     context.__dict__.update(achtelbass_obj.__dict__)
     
-    context.preselected = request.POST.copy()
-    
-    context.preselected.min_pitch = request.POST.get('min_pitch', 'E,,')
-    context.preselected.max_pitch = request.POST.get('max_pitch', "d")
-    
-    # The multiselect is one zero byte separated string, we want a list
-    context.preselected.intervals_list    = request.POST.getlist('intervals')
-    context.preselected.note_values_list  = request.POST.getlist('note_values')
+    context.preselected = parameters
+
     context.note_value_symbols = {
         '1'    : u'𝅝',
         '1/2'  : u'𝅗𝅥',
@@ -56,6 +49,5 @@ def index(request):
     }
     
     context.generated_notes = achtelbass_obj.display()
-#    context.debugging_info  = achtelbass_obj.Chords_Frequency
     
     return HttpResponse(template.render(context))

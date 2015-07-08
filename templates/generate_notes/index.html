@@ -218,14 +218,14 @@
         <fieldset class="controls intervals">
             <h2>{{ Locales.Intervals }}</h2>
             {% for interval_index, interval_name in Possible_Intervals.items %}
-                <input type="checkbox" id="interval_{{ interval_name }}" name="intervals" value="{{ interval_name }}"{% if interval_name in preselected.intervals_list %} checked="checked"{% endif %} />
+                <input type="checkbox" id="interval_{{ interval_name }}" name="intervals" value="{{ interval_name }}"{% if interval_name in preselected.intervals %} checked="checked"{% endif %} />
                 <label for="interval_{{ interval_name }}">{{ interval_name }}</label>
             {% endfor %}
         </fieldset>
         <fieldset class="controls note_values">
             <h2>{{ Locales.note_values }} {{ note_values_symbol_entities.1 }} </h2>
             {% for note_value in Possible_Note_Values %}
-                <input type="checkbox" id="note_values_{{ note_value }}" name="note_values" value="{{ note_value }}"{% if note_value in preselected.note_values_list %} checked="checked"{% endif %} />
+                <input type="checkbox" id="note_values_{{ note_value }}" name="note_values" value="{{ note_value }}"{% if note_value in preselected.note_values %} checked="checked"{% endif %} />
                 <label for="note_values_{{ note_value }}">{{ note_value_symbols|get_key:note_value }}</label>
             {% endfor %}
         </fieldset>
