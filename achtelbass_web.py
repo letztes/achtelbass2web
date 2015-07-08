@@ -86,7 +86,7 @@ class Achtelbass(object):
                                 'Seventh' : 6,
                                 'Octave'  : 7,
                                }
-        self.Possible_Intervals   = self.Interval_Values.keys()
+        self.Possible_Intervals   = {v: k for k, v in self.Interval_Values.items()}
         self.Possible_Note_Values = [
                                 '1',
                                 '1/2',

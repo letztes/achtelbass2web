@@ -217,9 +217,9 @@
     <form action="." method="post">{% csrf_token %}
         <fieldset class="controls intervals">
             <h2>{{ Locales.Intervals }}</h2>
-            {% for interval in Possible_Intervals %}
-                <input type="checkbox" id="interval_{{ interval }}" name="intervals" value="{{ interval }}"{% if interval in preselected.intervals_list %} checked="checked"{% endif %} />
-                <label for="interval_{{ interval }}">{{ interval }}</label>
+            {% for interval_index, interval_name in Possible_Intervals.items %}
+                <input type="checkbox" id="interval_{{ interval_name }}" name="intervals" value="{{ interval_name }}"{% if interval_name in preselected.intervals_list %} checked="checked"{% endif %} />
+                <label for="interval_{{ interval_name }}">{{ interval_name }}</label>
             {% endfor %}
         </fieldset>
         <fieldset class="controls note_values">
