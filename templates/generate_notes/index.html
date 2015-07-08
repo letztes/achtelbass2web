@@ -236,19 +236,19 @@
             <h2>Pitch</h2>
             <fieldset class="controls min_pitch">
                 <h3>min</h3>
-                {% for note in Notes reversed %}
-                    <p>
-                        <input type="radio" id="min_pitch_{{ note }}" name="min_pitch" value="{{ note }}"{% ifequal note preselected.min_pitch %} checked="checked"{% endifequal %} />
-                        <label for="min_pitch_{{ note }}"></label>
+                {% for note_object in Note_Objects %}
+                    <p class="{{ note_object.line_type }}">
+                        <input type="radio" id="min_pitch_{{ note_object.note }}" name="min_pitch" value="{{ note_object.note }}"{% ifequal note_object.note preselected.min_pitch %} checked="checked"{% endifequal %} />
+                        <label for="min_pitch_{{ note_object.note }}"></label>
                     </p>
                 {% endfor %}
             </fieldset>
             <fieldset class="controls max_pitch">
                 <h3>max</h3>
-                {% for note in Notes reversed %}
-                    <p>
-                        <input type="radio" id="max_pitch_{{ note }}" name="max_pitch" value="{{ note }}"{% ifequal note preselected.max_pitch %} checked="checked"{% endifequal %} />
-                        <label for="max_pitch_{{ note }}"></label>
+                {% for note_object in Note_Objects %}
+                    <p class="{{ note_object.line_type }}">
+                        <input type="radio" id="max_pitch_{{ note_object.note }}" name="max_pitch" value="{{ note_object.note }}"{% ifequal note_object.note preselected.max_pitch %} checked="checked"{% endifequal %} />
+                        <label for="max_pitch_{{ note_object.note }}"></label>
                     </p>
                 {% endfor %}
             </fieldset>

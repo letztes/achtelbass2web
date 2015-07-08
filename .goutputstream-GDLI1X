@@ -123,8 +123,16 @@ class Achtelbass(object):
             self.Prolongations_Frequency        = 0
         
         self.Inversion = parameters['inversion']
+        self.Notes = ["C,,", "D,,", "E,,", "F,,", "G,,", "A,,", "B,,",
+                      "C,", "D,", "E,", "F,", "G,", "A,", "B,",
+                      "C", "D", "E", "F", "G", "A", "B",
+                      "c", "d", "e", "f", "g", "a", "b",
+                      "c'", "d'", "e'", "f'", "g'", "a'", "b'"]
 
-        self.Note_Objects                  = [{"note":"b'", "line_position": "online",  "line_type": "ledger_line"},
+
+    
+    
+    self.Note_Objects                  = [{"note":"b'", "line_position": "online",  "line_type": "ledger_line"},
                                             {"note":"a'", "line_position": "offline", "line_type": "ledger_line"},
                                             {"note":"g'", "line_position": "online",  "line_type": "ledger_line"},
                                             {"note":"f'", "line_position": "offline", "line_type": "ledger_line"},
@@ -163,8 +171,6 @@ class Achtelbass(object):
                                             {"note":"E,,", "line_position": "online",  "line_type": "ledger_line"},
                                             {"note":"D,,", "line_position": "offline", "line_type": "ledger_line"},
                                             {"note":"C,,", "line_position": "online",  "line_type": "ledger_line"}]
-
-        self.Notes = [x["note"] for x in reversed(self.Note_Objects)]
                       
         self.Min_Pitch = parameters['min_pitch']
         self.Max_Pitch = parameters['max_pitch']

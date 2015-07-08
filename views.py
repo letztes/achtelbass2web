@@ -10,7 +10,7 @@ locales_inverse = dict([[v,k] for k,v in locales.items()]) #CHANGEME braucht man
 def index(request):
     template = loader.get_template('generate_notes/index.html')
     context = RequestContext(request, {})
-    context.generated_notes = 'abc'
+
     parameters = {'tonic'                   : request.POST.get('tonic', 'C'),
                   'mode'                    : request.POST.get('mode', 'Major'),
                   'grand_staff'             : request.POST.get('grand_staff', False),
