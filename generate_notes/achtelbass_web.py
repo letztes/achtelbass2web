@@ -434,7 +434,7 @@ class Achtelbass(object):
                             index_of_root = self.Notes.index(pitches[i])
                             
                             # Only if the root note is not too high to form a chord
-                            if index_of_root + 4 <= len(self.Notes):
+                            if index_of_root + 5 <= len(self.Notes):
                                 # CHANGEME septachords etc
                                 # CHANGEME self.Chord_Inversion == 1 | 2 etc
                                 note_string += '[' + self.Notes[index_of_root] + self.Notes[index_of_root+2] + self.Notes[index_of_root+4] + ']/' + note_values[i] + ' '
