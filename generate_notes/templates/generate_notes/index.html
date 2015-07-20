@@ -134,21 +134,24 @@
                 color: #111;
                 margin: 0;
                 padding: 0;
-                width: 5em;
                 background: #fff;
             }
 
             .pitch_container fieldset:first-of-type {
-                padding-left: 1em;
-            }
+				padding-left: 0.7em;
+			}
 
             .pitch_container fieldset:last-of-type {
-                padding-right: 1em;
-            }
+				padding-right: 0.7em;
+			}
 
-            .pitch_container h3 {
-                text-align: center;
-            }
+				.pitch_container fieldset:first-of-type p {
+					padding-left: 2em;
+				}
+
+				.pitch_container fieldset:last-of-type p {
+					padding-right: 2em;
+				}
 
             .pitch_container p {
                 margin: 0;
@@ -158,9 +161,25 @@
                 overflow: visible;
             }
 
-            .pitch_container p:nth-of-type(odd) {
+            .pitch_container p.regular_line:nth-of-type(odd) {
                 border-bottom: 1px solid #111;
              }
+
+            .pitch_container p.ledger_line:nth-of-type(odd) {
+                border-bottom: 1px solid #ccc;
+             }
+
+            .pitch_container p:first-of-type {
+				border-bottom: none;
+			}
+
+			.pitch_container fieldset:last-of-type p.regular_line {
+				border-right: 1px solid #111;
+			}
+
+			.pitch_container fieldset:last-of-type p.ledger_line + p.regular_line {
+				border-right: none;
+			}
 
             .pitch_container .controls input[type="radio"] {
                 font-size: 9px;
@@ -182,15 +201,26 @@
                 box-shadow: none;
                 position: absolute;
                 top: 0.15em;
-                left: 3em;
+                left: 1em;
                 border-radius: 2em;
                 transition: background-color 0.5s;
                 z-index: 2;
+				overflow: visible;
             }
 
             .pitch_container .controls input[type="radio"]:checked + label {
                 background: #111;
             }
+
+			.pitch_container p.ledger_line:nth-of-type(odd) input[type="radio"]:checked + label:before {
+				content: '.';
+				border-top: 2px solid #111;
+				width: 2.3em;
+				margin-left: -0.3em;
+				text-align: center;
+				display: block;
+				margin-top: 0.8em;
+			}
 
         label[for="chords_frequency"],
         label[for="rest_frequency"] {
@@ -201,7 +231,7 @@
     </style>
 </head>
 <body>
-{# debugging_info #}
+{{ debugging_info }}
 <!--applet id="MIDIPlugin" code="MIDIPlugin.class" name="MIDIPlugin" archive="http://dl.dropbox.com/u/223827/abcjs/MIDIPlugin.jar" height="1" width="1"></applet-->
 
 <textarea id="abc">
@@ -214,7 +244,7 @@
 {# TODO Prevent via javascript selecting greater interval than smallest pitch range #}
 
 <main>
-    <form action="." method="post">{% csrf_token %}
+    <form id="configure" action="." method="post">{% csrf_token %}
         <fieldset class="controls intervals">
             <h2>{{ Locales.Intervals }}</h2>
             {% for interval_index, interval_name in Possible_Intervals.items %}
@@ -229,26 +259,21 @@
                 <label for="note_values_{{ note_value }}">{{ note_value_symbols|get_key:note_value }}</label>
             {% endfor %}
         </fieldset>
-        <fieldset class="controls submit">
-            <input type="submit" value="Submit" />
-        </fieldset>
         <div class="pitch_container">
             <h2>Pitch</h2>
             <fieldset class="controls min_pitch">
-                <h3>min</h3>
                 {% for note_object in Note_Objects %}
                     <p class="{{ note_object.line_type }}">
                         <input type="radio" id="min_pitch_{{ note_object.note }}" name="min_pitch" value="{{ note_object.note }}"{% ifequal note_object.note preselected.min_pitch %} checked="checked"{% endifequal %} />
-                        <label for="min_pitch_{{ note_object.note }}"></label>
+                        <label title="{{ note_object.note }}" for="min_pitch_{{ note_object.note }}"></label>
                     </p>
                 {% endfor %}
             </fieldset>
             <fieldset class="controls max_pitch">
-                <h3>max</h3>
                 {% for note_object in Note_Objects %}
                     <p class="{{ note_object.line_type }}">
                         <input type="radio" id="max_pitch_{{ note_object.note }}" name="max_pitch" value="{{ note_object.note }}"{% ifequal note_object.note preselected.max_pitch %} checked="checked"{% endifequal %} />
-                        <label for="max_pitch_{{ note_object.note }}"></label>
+                        <label title="{{ note_object.note }}" for="max_pitch_{{ note_object.note }}"></label>
                     </p>
                 {% endfor %}
             </fieldset>
@@ -293,9 +318,24 @@
     <div id="midi"></div>
     <div id="canvas"></div>
 </main>
+<footer>
+<ul>
+	<li>
+		<a href="http://www.freepik.com/free-vector/musical-notes_795161.htm">Musical Notes designed by Freepik</a>
+	<l/i>
+	<li>
+		<a href="http://nortago.deviantart.com/art/Bg-Texture-wood-38841113">Wood-Background by nortago</a>
+	</li>
+</ul>
+</footer>
 <script src="{% static 'abcjs/bin/abcjs_basic_latest-min.js' %}" type="text/javascript"></script>
 <script type="text/javascript">
-        
+	var configure 	= document.getElementById('configure');
+
+	var submit_configure = function() {
+		configure.submit();
+	}
+
     ABCJS.renderAbc("canvas", document.getElementById("abc").value);
     //ABCJS.renderMidi("midi", document.getElementById("abc").value);
 
@@ -306,6 +346,9 @@
         });
     });
     		
+	Array.prototype.forEach.call(configure.querySelectorAll('input'), function(el, i) {
+		el.addEventListener('change', submit_configure);
+	});
 
 	</script>
 </body>
