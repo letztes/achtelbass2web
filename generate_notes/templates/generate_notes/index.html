@@ -137,7 +137,7 @@ border: 1px solid blue;
 				border: 1px solid green;
 				transform: rotate(-90deg);
 				position: relative;
-					margin: 5em;
+				margin: 5em 0;
             }
 
 				.pitch_container fieldset .background {
@@ -148,7 +148,7 @@ border: 1px solid blue;
 					display: block;
 					position: absolute;
 					top: 0;
-					left: 0.4em;
+					left: 0;
 					display: table;
 					z-index: -1;
 				}
@@ -161,29 +161,33 @@ border: 1px solid blue;
 
 					.pitch_container fieldset p {
 						display: block;
-						height: 15em;
+						height: 5em;
 						margin: 0;
 						padding: 0;
-						/* background: #fff;	*/
+						background: #fff;
 						display: table-cell;
 					}
 
-						.pitch_container fieldset p:nth-of-type(odd) {
-							border-left: 1px solid black;
+						.pitch_container fieldset p:nth-of-type(odd):before {
+							content: '.';
+							width: 50%;
+							height: 100%;
+							border-right: 1px solid black;
+							display: block;
 						}
 
-						.pitch_container fieldset p.ledger_line {
-							border-left-color: silver;
+						.pitch_container fieldset p.ledger_line:before {
+							border-right-color: silver;
 						}
 
 		.pitch_container input[type="range"] {
 			-webkit-appearance: none;
-			width: 17em;
+			width: 17.625em;
 			height: 5em;
 			outline-width: 0;
-			border: 1px solid red;
-			background: none;
-			margin-left: 2em;
+			display: block;
+			background: linear-gradient(90deg, #000 0em, #fff 0.1em) repeat-x 0 2.5em content-box;
+			background-size: 0.5em 100%;
 		}
 
 		.pitch_container input[type="range"]:focus {
@@ -197,12 +201,12 @@ border: 1px solid blue;
 		.pitch_container input[type=range]::-webkit-slider-runnable-track {
 			-webkit-appearance: none;
 			background: none;
-			width: 100%;
+			width: 17.625em;
 		}
 
 		.pitch_container input[type=range]::-moz-range-track {
 			background: none;
-			width: 100%;
+			width: 17.625em;
 		}
 
 		.pitch_container input[type=range]::-ms-track,
@@ -211,7 +215,7 @@ border: 1px solid blue;
 			color: transparent;
 			background: none;
 			border: none;
-			width: 100%;
+			width: 17.625em;
 		}
 
 		.pitch_container input[type=range]::-webkit-slider-thumb {
@@ -221,6 +225,7 @@ border: 1px solid blue;
 			height: 0.7em;
 			border-radius: 0.7em;
 			opacity: 1;
+			margin-top: 0.25em;
 		}
 
 		.pitch_container input[type=range]::-moz-range-thumb {
@@ -230,6 +235,7 @@ border: 1px solid blue;
 			border-radius: 0.7em;
 			opacity: 1;
 			border: none;
+			margin-top: -1.75em;
 		}
 
 		.pitch_container input[type=range]::-ms-thumb {
@@ -239,6 +245,7 @@ border: 1px solid blue;
 			border-radius: 0.7em;
 			opacity: 1;
 			border: none;
+			margin-top: -1.75em;
 		}
 
 		.pitch_container input[type=range]::-ms-tooltip {
@@ -287,7 +294,8 @@ border: 1px solid blue;
             <h2>Pitch</h2>
             <fieldset class="controls pitch">
 				<div class="range_container">
-					<input type="range" name="pitch[]" min="0" max="35" value="13" step="1" />
+					<input type="range" name="pitch[]" min="1" max="{{ Note_Objects|length }}" value="13" step="1" id="range_0" />
+					<label for="range_0"></label>
 					<div class="background">
 						<div class="row">
 							{% for note_object in Note_Objects %}
@@ -300,7 +308,8 @@ border: 1px solid blue;
 
             <fieldset class="controls pitch">
 				<div class="range_container">
-					<input type="range" name="pitch[]" min="0" max="35" value="17" step="1" />
+					<input type="range" name="pitch[]" min="1" max="{{ Note_Objects|length }}" value="17" step="1" id="range_1" />
+					<label for="range_1"></label>
 					<div class="background">
 						<div class="row">
 							{% for note_object in Note_Objects %}
@@ -362,12 +371,15 @@ border: 1px solid blue;
     ABCJS.renderAbc("canvas", document.getElementById("abc").value);
     //ABCJS.renderMidi("midi", document.getElementById("abc").value);
 
-    Array.prototype.forEach.call(document.querySelectorAll('fieldset:not(.pitch) input[type="range"]'), function(el, i) {
-		el.nextElementSibling.textContent = parseInt(el.value * 100) + '%';
-		el.addEventListener('input', function() {
+	if (document.querySelectorAll('fieldset input[type="range"] + label').length) {
+		Array.prototype.forEach.call(document.querySelectorAll('fieldset input[type="range"]'), function(el, i) {
+console.log(el.value);
 			el.nextElementSibling.textContent = parseInt(el.value * 100) + '%';
+			el.addEventListener('input', function() {
+				el.nextElementSibling.textContent = parseInt(el.value * 100) + '%';
+			});
 		});
-    });
+	}
     		
 	Array.prototype.forEach.call(configure.querySelectorAll('fieldset:not(.pitch) input'), function(el, i) {
 		el.addEventListener('change', submit_configure);
