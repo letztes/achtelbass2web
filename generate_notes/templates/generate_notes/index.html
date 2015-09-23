@@ -41,7 +41,7 @@
             text-shadow: 2px 2px 2px #333;
         }
 
-		.controls {
+	.controls {
             float: left;
             border: 0;
             padding: 1em;
@@ -83,9 +83,9 @@
         }
 
         .controls input[type="checkbox"],
-		.controls input[type="radio"] {
-			display: none;
-		}
+	.controls input[type="radio"] {
+		display: none;
+	}
 
         .controls input[type="checkbox"] + label,
         .controls input[type="radio"] + label,
@@ -121,24 +121,69 @@
 			overflow: hidden;
             clear: left;
             float: left;
-            overflow: hidden;
             padding: 1em;
+border: 1px solid blue;
 		}
 
-            .pitch_container fieldset {
-                float: left;
-                color: #111;
-                margin: 0;
-                padding: 0;
+		.pitch_container fieldset {
+			float: left;
+			color: #111;
+			margin: 0;
+			padding: 0;
+				border: 1px solid lime;
+		}
+
+            .pitch_container .range_container {
+				border: 1px solid green;
+				transform: rotate(-90deg);
+				position: relative;
+					margin: 5em;
             }
 
+				.pitch_container fieldset .background {
+					transform: rotate(180deg);
+					background: yellow;
+					width: 100%;
+					height: 100%;
+					display: block;
+					position: absolute;
+					top: 0;
+					left: 0.4em;
+					display: table;
+					z-index: -1;
+				}
+
+				.pitch_container fieldset .background .row {
+					display: table-row;
+					height: 100%;
+					overflow: hidden;
+				}
+
+					.pitch_container fieldset p {
+						display: block;
+						height: 15em;
+						margin: 0;
+						padding: 0;
+						/* background: #fff;	*/
+						display: table-cell;
+					}
+
+						.pitch_container fieldset p:nth-of-type(odd) {
+							border-left: 1px solid black;
+						}
+
+						.pitch_container fieldset p.ledger_line {
+							border-left-color: silver;
+						}
+
 		.pitch_container input[type="range"] {
-			transform: rotateZ(-90deg);
 			-webkit-appearance: none;
-			background: grey;
-			/* linear gradient with lines */
-			height: 10em;
+			width: 17em;
+			height: 5em;
 			outline-width: 0;
+			border: 1px solid red;
+			background: none;
+			margin-left: 2em;
 		}
 
 		.pitch_container input[type="range"]:focus {
@@ -152,33 +197,36 @@
 		.pitch_container input[type=range]::-webkit-slider-runnable-track {
 			-webkit-appearance: none;
 			background: none;
+			width: 100%;
 		}
 
 		.pitch_container input[type=range]::-moz-range-track {
 			background: none;
+			width: 100%;
 		}
 
 		.pitch_container input[type=range]::-ms-track,
 		.pitch_container input[type=range]::-ms-fill-lower,
 		.pitch_container input[type=range]::-ms-fill-upper {
-			background: none;
 			color: transparent;
+			background: none;
 			border: none;
+			width: 100%;
 		}
 
 		.pitch_container input[type=range]::-webkit-slider-thumb {
 			-webkit-appearance: none;
 			background: #000;
-			width: 1em;
-			height: 1em;
+			width: 0.7em;
+			height: 0.7em;
 			border-radius: 0.7em;
 			opacity: 1;
 		}
 
 		.pitch_container input[type=range]::-moz-range-thumb {
 			background: #000;
-			width: 1em;
-			height: 1em;
+			width: 0.7em;
+			height: 0.7em;
 			border-radius: 0.7em;
 			opacity: 1;
 			border: none;
@@ -186,8 +234,8 @@
 
 		.pitch_container input[type=range]::-ms-thumb {
 			background: #000;
-			width: 1em;
-			height: 1em;
+			width: 0.7em;
+			height: 0.7em;
 			border-radius: 0.7em;
 			opacity: 1;
 			border: none;
@@ -238,29 +286,30 @@
         <div class="pitch_container">
             <h2>Pitch</h2>
             <fieldset class="controls pitch">
-				<input type="range" name="pitch[]" min="0" max="20" value="13" />
-            </fieldset>
+				<div class="range_container">
+					<input type="range" name="pitch[]" min="0" max="35" value="13" step="1" />
+					<div class="background">
+						<div class="row">
+							{% for note_object in Note_Objects %}
+								<p class="{{ note_object.line_type }}"></p>
+							{% endfor %}
+						</div>
+					</div>
+				</div>
+			</fieldset>
+
             <fieldset class="controls pitch">
-				<input type="range" name="pitch[]" min="0" max="20" value="17" />
-            </fieldset>
-<hr />
-		{{ Note_Objects.0 }}
-            <fieldset class="controls min_pitch">
-                {% for note_object in Note_Objects %}
-                    <p class="{{ note_object.line_type }}">
-                        <input type="radio" id="min_pitch_{{ note_object.note }}" name="min_pitch" value="{{ note_object.note }}"{% ifequal note_object.note preselected.min_pitch %} checked="checked"{% endifequal %} />
-                        <label title="{{ note_object.note }}" for="min_pitch_{{ note_object.note }}"></label>
-                    </p>
-                {% endfor %}
-            </fieldset>
-            <fieldset class="controls max_pitch">
-                {% for note_object in Note_Objects %}
-                    <p class="{{ note_object.line_type }}">
-                        <input type="radio" id="max_pitch_{{ note_object.note }}" name="max_pitch" value="{{ note_object.note }}"{% ifequal note_object.note preselected.max_pitch %} checked="checked"{% endifequal %} />
-                        <label title="{{ note_object.note }}" for="max_pitch_{{ note_object.note }}"></label>
-                    </p>
-                {% endfor %}
-            </fieldset>
+				<div class="range_container">
+					<input type="range" name="pitch[]" min="0" max="35" value="17" step="1" />
+					<div class="background">
+						<div class="row">
+							{% for note_object in Note_Objects %}
+								<p class="{{ note_object.line_type }}"></p>
+							{% endfor %}
+						</div>
+					</div>
+				</div>
+			</fieldset>
         </div>
         <fieldset class="controls time_signature">
             <h2>{{ Locales.time_signature }}</h2>
@@ -313,14 +362,14 @@
     ABCJS.renderAbc("canvas", document.getElementById("abc").value);
     //ABCJS.renderMidi("midi", document.getElementById("abc").value);
 
-    Array.prototype.forEach.call(document.querySelectorAll('input[type="range"]'), function(el, i) {
-	el.nextElementSibling.textContent = parseInt(el.value * 100) + '%';
-        el.addEventListener('input', function() {
-            el.nextElementSibling.textContent = parseInt(el.value * 100) + '%';
-        });
+    Array.prototype.forEach.call(document.querySelectorAll('fieldset:not(.pitch) input[type="range"]'), function(el, i) {
+		el.nextElementSibling.textContent = parseInt(el.value * 100) + '%';
+		el.addEventListener('input', function() {
+			el.nextElementSibling.textContent = parseInt(el.value * 100) + '%';
+		});
     });
     		
-	Array.prototype.forEach.call(configure.querySelectorAll('input'), function(el, i) {
+	Array.prototype.forEach.call(configure.querySelectorAll('fieldset:not(.pitch) input'), function(el, i) {
 		el.addEventListener('change', submit_configure);
 	});
 
