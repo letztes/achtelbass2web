@@ -141,53 +141,50 @@ border: 1px solid blue;
             }
 
 				.pitch_container fieldset .background {
-					transform: rotate(180deg);
+					transform: rotate(90deg);
 					background: yellow;
 					width: 100%;
-					height: 100%;
+					height: 17.125em;
 					display: block;
 					position: absolute;
 					top: 0;
 					left: 0;
-					display: table;
 					z-index: -1;
-				}
-
-				.pitch_container fieldset .background .row {
-					display: table-row;
-					height: 100%;
-					overflow: hidden;
 				}
 
 					.pitch_container fieldset p {
 						display: block;
-						height: 5em;
+						height: 0.5em;
+						width: 100%;
 						margin: 0;
 						padding: 0;
 						background: #fff;
-						display: table-cell;
+						box-sizing: border-box;
+					}
+
+					.pitch_container fieldset p:last-child {
+						display: none;	
 					}
 
 						.pitch_container fieldset p:nth-of-type(odd):before {
 							content: '.';
-							width: 50%;
-							height: 100%;
-							border-right: 1px solid black;
+							height: 2.941176470588%;
+							width: 100%;
+							border-bottom: 1px solid black;
 							display: block;
 						}
 
 						.pitch_container fieldset p.ledger_line:before {
-							border-right-color: silver;
+							border-bottom-color: silver;
 						}
 
 		.pitch_container input[type="range"] {
 			-webkit-appearance: none;
-			width: 17.625em;
+			width: 21.125em;
 			height: 5em;
 			outline-width: 0;
 			display: block;
-			background: linear-gradient(90deg, #000 0em, #fff 0.1em) repeat-x 0 2.5em content-box;
-			background-size: 0.5em 100%;
+			background: none;
 		}
 
 		.pitch_container input[type="range"]:focus {
@@ -201,12 +198,11 @@ border: 1px solid blue;
 		.pitch_container input[type=range]::-webkit-slider-runnable-track {
 			-webkit-appearance: none;
 			background: none;
-			width: 17.625em;
 		}
 
 		.pitch_container input[type=range]::-moz-range-track {
 			background: none;
-			width: 17.625em;
+			width: 17.125em;
 		}
 
 		.pitch_container input[type=range]::-ms-track,
@@ -215,7 +211,7 @@ border: 1px solid blue;
 			color: transparent;
 			background: none;
 			border: none;
-			width: 17.625em;
+			width: 17.125em;
 		}
 
 		.pitch_container input[type=range]::-webkit-slider-thumb {
@@ -251,6 +247,19 @@ border: 1px solid blue;
 		.pitch_container input[type=range]::-ms-tooltip {
 			display: none;
 		}
+
+		/* Chrome/ Opera */
+		input[type='range']:not(*:root) {
+		  overflow: hidden;
+			width: 21.125em;
+		}
+
+		/* IE */
+		_:-ms-input-placeholder, :root input[type='range'] {
+		  width: 17.625em;
+		  background-size: 17.125em 1em;
+		}
+
 
         label[for="chords_frequency"],
         label[for="rest_frequency"] {
@@ -297,11 +306,9 @@ border: 1px solid blue;
 					<input type="range" name="pitch[]" min="1" max="{{ Note_Objects|length }}" value="13" step="1" id="range_0" />
 					<label for="range_0"></label>
 					<div class="background">
-						<div class="row">
 							{% for note_object in Note_Objects %}
 								<p class="{{ note_object.line_type }}"></p>
 							{% endfor %}
-						</div>
 					</div>
 				</div>
 			</fieldset>
@@ -311,11 +318,9 @@ border: 1px solid blue;
 					<input type="range" name="pitch[]" min="1" max="{{ Note_Objects|length }}" value="17" step="1" id="range_1" />
 					<label for="range_1"></label>
 					<div class="background">
-						<div class="row">
 							{% for note_object in Note_Objects %}
 								<p class="{{ note_object.line_type }}"></p>
 							{% endfor %}
-						</div>
 					</div>
 				</div>
 			</fieldset>
