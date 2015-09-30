@@ -121,60 +121,43 @@
             clear: left;
             float: left;
             padding: 1em;
-			width: 5.5em;
+			width: 12em;
 			height: 20.5em;
 			position: relative;	
 			overflow: hidden;
 		}
 
 		.pitch_container fieldset {
-			float: left;
 			color: #111;
 			margin: 0;
-			padding: 0;
-			height: 17.5em;
-			width: 3em;
-			position: absolute;
-			bottom: 0;
-			left: 1em;
+			padding: 0 0 1em 0;
+			height: 28.5em;
+			position: relative;
+			background: #0ff;
 		}
-
-		.pitch_container fieldset:last-of-type {
-			left: 4em;
-		}
-
-            .pitch_container .range_container {
-				transform: rotate(-90deg);
-				position: relative;
-				margin: 7.5em 0 0 -7.5em;
-				max-height: 3em;
-				float: left;
-            }
 
 				.pitch_container fieldset .background {
-					transform: rotate(90deg);
-					width: 100%;
 					height: 17.125em;
 					display: block;
 					position: absolute;
 					top: 0;
 					left: 0;
-					z-index: -1;
-					background: #fff;
+					margin-bottom: 1em;
 				}
 
 					.pitch_container fieldset p {
 						display: block;
-						background: #fff;
-						width: 3em;
+						width: 8em;
 						margin: 0;
 						padding: 0;
 						box-sizing: border-box;
 						cursor: help;
 						height: 2.941176470588%;
+						background: #fff;
+						position: relative;
 					}
 
-						.pitch_container fieldset p:nth-of-type(odd):before {
+						.pitch_container fieldset p:nth-of-type(even):before {
 							content: '.';
 							color: rgba(255,255,255,0);
 							height: 50%;
@@ -183,10 +166,34 @@
 							display: block;
 						}
 
+						.pitch_container fieldset p:nth-of-type(7n):after {
+							content: attr(title);
+							background: #000;
+							color: #fff;
+							font-size: 0.9em;
+							padding: 0 0.25em;
+							border-radius: 0.5em 0 0 0.5em;
+							position: absolute;
+							right: 0;
+							top: -0.25em;
+							z-index: 1;
+						}
+
 						.pitch_container fieldset p.ledger_line:before {
 							border-bottom-color: silver;
 						}
 
+            .pitch_container .range_container {
+				transform: rotate(-90deg);
+				float: left;
+				position: absolute;
+				top: 7.25em;
+				left: -7em;
+            }
+
+            .pitch_container .range_container:last-of-type {
+				left: -4.5em;
+			}
 
 		.pitch_container label {
 			position: absolute;
@@ -197,13 +204,14 @@
 
 		.pitch_container input[type="range"] {
 			-webkit-appearance: none;
-			width: 21.125em;
+			width: 21.225em;
 			height: 1em;
 			outline-width: 0;
 			display: block;
-			margin-left: -0.05em;
 			background: none;
 			cursor: pointer;
+			margin-top: 2em;
+			margin-left: 0;
 		}
 
 		.pitch_container input[type="range"]:focus {
@@ -272,14 +280,14 @@
 		/* Chrome/ Opera */
 		input[type='range']:not(*:root) {
 			overflow: hidden;
-			width: 21.125em;
-			margin-left: -0.40em;
+			width: 21.25em;
+			margin-left: -0.45em;
 		}
 
 		/* IE */
 		_:-ms-input-placeholder, :root input[type='range'] {
-			width: 17.78em;
-			margin-left: -0.4em;
+			width: 17.8em;
+			margin-left: -0.3em;
 			padding: 0;
 		}
 
@@ -325,25 +333,17 @@
         <div class="pitch_container">
             <h2>Pitch</h2>
             <fieldset class="controls pitch">
+				<div class="background">
+					{% for note_object in Note_Objects %}
+						<p class="{{ note_object.line_type }}" title="{{ note_object.name }}"></p>
+					{% endfor %}
+				</div>
 				<div class="range_container">
 					<input type="range" name="pitch[]" min="1" max="{{ Note_Objects|length }}" value="13" step="1" id="range_0" />
-					<div class="background">
-						{% for note_object in Note_Objects %}
-							<p class="{{ note_object.line_type }}" title="{{ note_object.name }}"></p>
-						{% endfor %}
-					</div>
 				</div>
 				<label for="range_0"></label>
-			</fieldset>
-
-            <fieldset class="controls pitch">
 				<div class="range_container">
 					<input type="range" name="pitch[]" min="1" max="{{ Note_Objects|length }}" value="17" step="1" id="range_1" />
-					<div class="background">
-						{% for note_object in Note_Objects %}
-							<p class="{{ note_object.line_type }}" title="{{ note_object.name }}"></p>
-						{% endfor %}
-					</div>
 				</div>
 				<label for="range_1"></label>
 			</fieldset>

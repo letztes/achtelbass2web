@@ -24,11 +24,14 @@ class Output(object):
         self.mode_abbreviation = {'Minor':'min',
                                   'Major':'maj',
                                  }
-        self.Notes = ["C,,", "D,,", "E,,", "F,,", "G,,", "A,,", "B,,",
+        self.Notes = [
+			"C,,", "D,,", "E,,", "F,,", "G,,", "A,,", "B,,",
                       "C,", "D,", "E,", "F,", "G,", "A,", "B,",
                       "C", "D", "E", "F", "G", "A", "B",
                       "c", "d", "e", "f", "g", "a", "b",
-                      "c'", "d'", "e'", "f'", "g'", "a'", "b'"]
+                      "c'", "d'", "e'", "f'", "g'", "a'", "b'"
+                      "c''", "d''", "e''", "f''", "g''", "a''", "b''"
+	]
         
         ## Hier faengt die Definition der Praeambelelemente an.
         
