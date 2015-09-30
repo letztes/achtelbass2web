@@ -339,11 +339,11 @@
 					{% endfor %}
 				</div>
 				<div class="range_container">
-					<input type="range" name="pitch[]" min="1" max="{{ Note_Objects|length }}" value="13" step="1" id="range_0" />
+					<input type="range" name="pitch[]" min="1" max="{{ Note_Objects|length }}" value="" step="1" id="range_0" />
 				</div>
 				<label for="range_0"></label>
 				<div class="range_container">
-					<input type="range" name="pitch[]" min="1" max="{{ Note_Objects|length }}" value="17" step="1" id="range_1" />
+					<input type="range" name="pitch[]" min="1" max="{{ Note_Objects|length }}" value="" step="1" id="range_1" />
 				</div>
 				<label for="range_1"></label>
 			</fieldset>
@@ -410,7 +410,7 @@
 		});
 	}
     		
-	Array.prototype.forEach.call(configure.querySelectorAll('fieldset:not(.pitch) input'), function(el, i) {
+	Array.prototype.forEach.call(configure.querySelectorAll('fieldset input'), function(el, i) {
 		el.addEventListener('change', submit_configure);
 	});
 
