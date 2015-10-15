@@ -61,6 +61,16 @@ class Achtelbass(object):
                                 '8' : 'x8',
                                 '9' : 'x9',
                               }
+        self.Possible_Tuplets = [
+                                '2',
+                                '3',
+                                '4',
+                                '5',
+                                '6',
+                                '7',
+                                '8',
+                                '9',
+                              ]
         self.Fraction_Values = {'12/8' : 1.5,
                                 '2/2'  : 1.0,
                                 '4/4'  : 1.0,

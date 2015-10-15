@@ -260,6 +260,13 @@
                 <label for="note_values_{{ note_value }}">{{ note_value_symbols|get_key:note_value }}</label>
             {% endfor %}
         </fieldset>
+        <fieldset class="controls tuplets">
+            <h2>{{ Locales.Tuplets }} </h2>
+            {% for tuplet in Possible_Tuplets %}
+                <input type="checkbox" id="tuplet_{{ tuplet }}" name="tuplets" value="{{ tuplet }}"{% if tuplet in preselected.tuplets %} checked="checked"{% endif %} />
+                <label for="tuplets_{{ tuplet }}">{{ tuplet }}</label>
+            {% endfor %}
+        </fieldset>
         <div class="pitch_container">
             <h2>Pitch</h2>
             <fieldset class="controls min_pitch">
