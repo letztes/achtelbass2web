@@ -117,6 +117,10 @@
             font-size: 1.2em;
         }
 
+		label[for="note_values_1_2"] {
+			background: green;
+		}
+
 		.pitch_container {
             clear: left;
             float: left;
@@ -143,6 +147,18 @@
 					top: 0;
 					left: 0;
 					margin-bottom: 1em;
+				}
+
+				.pitch_container fieldset .background:before {
+					content: '.';
+					position: absolute;
+					top: 30%;
+					left: 0;
+					height: 25%;
+					width: 3em;
+					background: url('{% static "images/violin.svg" %}') bottom left rgba(0,0,0,0.2);
+
+					z-index: 5;
 				}
 
 					.pitch_container fieldset p {
@@ -387,6 +403,7 @@
     </form>
     <div id="midi"></div>
     <div id="canvas"></div>
+<img src="{% static "images/violin.svg" %}" />
 </main>
 <script src="{% static 'abcjs/bin/abcjs_basic_latest-min.js' %}" type="text/javascript"></script>
 <script type="text/javascript">
