@@ -224,12 +224,10 @@ class Achtelbass(object):
             self.Time_Signature = self.Selectable_Note_Values[-1]
             self.Time_Signature_Numerator, self.Time_Signature_Denominator = inverse_fractions[self.Time_Signature].split('/')
         
-        self.Tuplets           = self.Tuplets_Values[parameters['tuplets']]
+        self.Tuplets           = parameters['tuplets']
         self.Tuplet_Same_Pitch = parameters['tuplet_same_pitch']
 
-        if isinstance(parameters['tuplets_frequency'], basestring):
-            self.Tuplets_Frequency        = float(parameters['tuplets_frequency'])
-        elif isinstance(parameters['tuplets_frequency'], float):
+        if isinstance(parameters['tuplets_frequency'], float):
             self.Tuplets_Frequency        = parameters['tuplets_frequency']
         else:
             self.Tuplets_Frequency        = 0
