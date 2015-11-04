@@ -263,7 +263,7 @@
         <fieldset class="controls tuplets">
             <h2>{{ Locales.Tuplets }} </h2>
             {% for tuplet in Possible_Tuplets %}
-                <input type="checkbox" id="tuplet_{{ tuplet }}" name="tuplets" value="{{ tuplet }}"{% if tuplet in preselected.tuplets %} checked="checked"{% endif %} />
+                <input type="checkbox" id="tuplets_{{ tuplet }}" name="tuplets" value="{{ tuplet }}"{% if tuplet in preselected.tuplets %} checked="checked"{% endif %} />
                 <label for="tuplets_{{ tuplet }}">{{ tuplet }}</label>
             {% endfor %}
         </fieldset>
