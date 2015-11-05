@@ -47,6 +47,16 @@ def index(request):
         '1/32' : u'𝅘𝅥𝅰',
         '1/64' : u'𝅘𝅥𝅱',
     }
+
+    context.note_value_names = {
+        '1'    : 'whole',
+        '1/2'  : 'half',
+        '1/4'  : 'quarter',
+        '1/8'  : 'eigth',
+        '1/16' : 'sixteenth',
+        '1/32' : 'thirty-second',
+        '1/64' : 'sixty-fourth',
+    }
     
     context.generated_notes = achtelbass_obj.display()
     
