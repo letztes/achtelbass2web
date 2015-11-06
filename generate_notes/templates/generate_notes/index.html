@@ -366,20 +366,20 @@
         <div class="pitch_container">
             <h2>Pitch</h2>
             <fieldset class="controls pitch">
-		<div class="background">
-			{% for note_object in Note_Objects %}
-				<p class="{{ note_object.line_type }}" title="{{ note_object.name }}"></p>
-			{% endfor %}
-		</div>
-		<div class="range_container">
-			<input type="range" name="pitch_0" min="1" max="{{ Note_Objects|length }}" value="{{ note_object.pitch_0 }}" step="1" id="range_0" title="Drag the note to set the minimum pitch." />
-		</div>
-		<label for="range_0"></label>
-		<div class="range_container">
-			<input type="range" name="pitch_1" min="1" max="{{ Note_Objects|length }}" value="{{ note_object.pitch_1 }}" step="1" id="range_1" title="Drag the note to set the maximum pitch." />
-		</div>
-		<label for="range_1"></label>
-	</fieldset>
+                <div class="background">
+                    {% for note_object in Note_Objects %}
+                        <p class="{{ note_object.line_type }}" title="{{ note_object.name }}"></p>
+                    {% endfor %}
+                </div>
+                <div class="range_container">
+                    <input type="range" name="min_pitch" min="0" max="{{ Note_Objects|length|add:"-1"}}" value="{{ preselected.min_pitch }}" step="1" id="range_0" title="Drag the note to set the minimum pitch." />
+                </div>
+                <label for="range_0"></label>
+                <div class="range_container">
+                    <input type="range" name="max_pitch" min="0" max="{{ Note_Objects|length|add:"-1" }}" value="{{ preselected.max_pitch }}" step="1" id="range_1" title="Drag the note to set the maximum pitch." />
+                </div>
+                <label for="range_1"></label>
+            </fieldset>
         </div>
         <fieldset class="controls time_signature">
             <h2>{{ Locales.time_signature }}</h2>

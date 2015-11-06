@@ -22,11 +22,10 @@ class Pitches(object):
         self.Inversion = inversion
         
         self.Notes = [
-			"C,,", "D,,", "E,,", "F,,", "G,,", "A,,", "B,,",
                       "C,", "D,", "E,", "F,", "G,", "A,", "B,",
                       "C", "D", "E", "F", "G", "A", "B",
                       "c", "d", "e", "f", "g", "a", "b",
-                      "c'", "d'", "e'", "f'", "g'", "a'", "b'"
+                      "c'", "d'", "e'", "f'", "g'", "a'", "b'",
                       "c''", "d''", "e''", "f''", "g''", "a''", "b''"
 	]
 
@@ -100,4 +99,3 @@ class Pitches(object):
             _pre_previous_pitch = _current_pitch
             self.Result.append(_current_pitch)
         return self.Result
-
