@@ -134,55 +134,56 @@ class Achtelbass(object):
         
         self.Inversion = parameters['inversion']
 
-        self.Note_Objects                  = [{"note":"b'", "line_position": "online",  "line_type": "ledger_line"},
-                                            {"note":"a'", "line_position": "offline", "line_type": "ledger_line"},
-                                            {"note":"g'", "line_position": "online",  "line_type": "ledger_line"},
-                                            {"note":"f'", "line_position": "offline", "line_type": "ledger_line"},
-                                            {"note":"e'", "line_position": "online",  "line_type": "ledger_line"},
-                                            {"note":"d'", "line_position": "offline", "line_type": "ledger_line"},
-                                            {"note":"c'", "line_position": "online",  "line_type": "ledger_line"},
+		# note and name are redundant here for forward compatibility reasons
+        self.Note_Objects                  = [{"note":"b''", "name":"b''", "line_position": "offline",  "line_type": "ledger_line"},
+                                            {"note":"a''", "name":"a''", "line_position": "online", "line_type": "ledger_line"},
+                                            {"note":"g''", "name":"g''", "line_position": "offline",  "line_type": "ledger_line"},
+                                            {"note":"f''", "name":"f''", "line_position": "online", "line_type": "regular_line"},
+                                            {"note":"e''", "name":"e''", "line_position": "offline",  "line_type": "regular_line"},
+                                            {"note":"d''", "name":"d''", "line_position": "online", "line_type": "regular_line"},
+                                            {"note":"c''", "name":"c''", "line_position": "offline",  "line_type": "regular_line"},
 
-                                            {"note":"b", "line_position": "offline", "line_type": "ledger_line"},
-                                            {"note":"a", "line_position": "online",  "line_type": "ledger_line"},
-                                            {"note":"g", "line_position": "offline", "line_type": "ledger_line"},
-                                            {"note":"f", "line_position": "online",  "line_type": "regular_line"},
-                                            {"note":"e", "line_position": "offline", "line_type": "regular_line"},
-                                            {"note":"d", "line_position": "online",  "line_type": "regular_line"},
-                                            {"note":"c", "line_position": "offline", "line_type": "regular_line"},
+											{"note":"b'", "name":"b'", "line_position": "offline",  "line_type": "regular_line"},
+                                            {"note":"a'", "name":"a'", "line_position": "online", "line_type": "regular_line"},
+                                            {"note":"g'", "name":"g'", "line_position": "offline",  "line_type": "regular_line"},
+                                            {"note":"f'", "name":"f'", "line_position": "online", "line_type": "regular_line"},
+                                            {"note":"e'", "name":"e'", "line_position": "offline",  "line_type": "regular_line"},
+                                            {"note":"d'", "name":"d'", "line_position": "online", "line_type": "ledger_line"},
+                                            {"note":"c'", "name":"c'", "line_position": "offline",  "line_type": "ledger_line"},
 
-                                            {"note":"B", "line_position": "online",  "line_type": "regular_line"},
-                                            {"note":"A", "line_position": "offline", "line_type": "regular_line"},
-                                            {"note":"G", "line_position": "online",  "line_type": "regular_line"},
-                                            {"note":"F", "line_position": "offline", "line_type": "regular_line"},
-                                            {"note":"E", "line_position": "online",  "line_type": "regular_line"},
-                                            {"note":"D", "line_position": "offline", "line_type": "ledger_line"},
-                                            {"note":"C", "line_position": "online",  "line_type": "ledger_line"},
+                                            {"note":"b", "name":"b", "line_position": "online", "line_type": "ledger_line"},
+                                            {"note":"a", "name":"a", "line_position": "offline",  "line_type": "regular_line"},
+                                            {"note":"g", "name":"g", "line_position": "online", "line_type": "regular_line"},
+                                            {"note":"f", "name":"f", "line_position": "offline",  "line_type": "regular_line"},
+                                            {"note":"e", "name":"e", "line_position": "online", "line_type": "regular_line"},
+                                            {"note":"d", "name":"d", "line_position": "offline",  "line_type": "regular_line"},
+                                            {"note":"c", "name":"c", "line_position": "online", "line_type": "regular_line"},
 
-                                            {"note":"B,", "line_position": "offline", "line_type": "ledger_line"},
-                                            {"note":"A,", "line_position": "online",  "line_type": "regular_line"},
-                                            {"note":"G,", "line_position": "offline", "line_type": "regular_line"},
-                                            {"note":"F,", "line_position": "online",  "line_type": "regular_line"},
-                                            {"note":"E,", "line_position": "offline", "line_type": "regular_line"},
-                                            {"note":"D,", "line_position": "online",  "line_type": "regular_line"},
-                                            {"note":"C,", "line_position": "offline", "line_type": "regular_line"},
+                                            {"note":"B", "name":"B", "line_position": "offline",  "line_type": "regular_line"},
+                                            {"note":"A", "name":"A", "line_position": "online", "line_type": "regular_line"},
+                                            {"note":"G", "name":"G", "line_position": "offline",  "line_type": "regular_line"},
+                                            {"note":"F", "name":"F", "line_position": "online", "line_type": "ledger_line"},
+                                            {"note":"E", "name":"E", "line_position": "offline",  "line_type": "ledger_line"},
+                                            {"note":"D", "name":"D", "line_position": "online", "line_type": "ledger_line"},
+                                            {"note":"C", "name":"C", "line_position": "offline",  "line_type": "ledger_line"},
 
-                                            {"note":"B,,", "line_position": "online",  "line_type": "regular_line"},
-                                            {"note":"A,,", "line_position": "offline", "line_type": "regular_line"},
-                                            {"note":"G,,", "line_position": "online",  "line_type": "regular_line"},
-                                            {"note":"F,,", "line_position": "offline", "line_type": "ledger_line"},
-                                            {"note":"E,,", "line_position": "online",  "line_type": "ledger_line"},
-                                            {"note":"D,,", "line_position": "offline", "line_type": "ledger_line"},
-                                            {"note":"C,,", "line_position": "online",  "line_type": "ledger_line"}]
+                                            {"note":"B,", "name":"B,", "line_position": "online", "line_type": "ledger_line"},
+                                            {"note":"A,", "name":"A,", "line_position": "offline",  "line_type": "ledger_line"},
+                                            {"note":"G,", "name":"G,", "line_position": "online", "line_type": "ledger_line"},
+                                            {"note":"F,", "name":"F,", "line_position": "offline",  "line_type": "ledger_line"},
+                                            {"note":"E,", "name":"E,", "line_position": "online", "line_type": "ledger_line"},
+                                            {"note":"D,", "name":"D,", "line_position": "offline",  "line_type": "ledger_line"},
+                                            {"note":"C,", "name":"C,", "line_position": "online", "line_type": "ledger_line"}]
 
         self.Notes = [x["note"] for x in reversed(self.Note_Objects)]
-                      
-        self.Min_Pitch = parameters['min_pitch']
-        self.Max_Pitch = parameters['max_pitch']
+        
+        self.Min_Pitch = self.Notes[int(parameters['min_pitch'])]
+        self.Max_Pitch = self.Notes[int(parameters['max_pitch'])]
         
         #if max_pitch is lower than min_pitch, swap them
         if self.Notes.index(self.Min_Pitch) > self.Notes.index(self.Max_Pitch):
-            self.Min_Pitch = parameters['max_pitch']
-            self.Max_Pitch = parameters['min_pitch']
+            self.Min_Pitch = self.Notes[int(parameters['max_pitch'])]
+            self.Max_Pitch = self.Notes[int(parameters['min_pitch'])]
         
         self.Pitch_Range = self.Notes.index(self.Max_Pitch) - self.Notes.index(self.Min_Pitch)
         
@@ -611,11 +612,13 @@ Options are:
                   'bpm' : 60,
                   'tempo' : 'andante',
                  }
-    pitches_opt = ["C,,", "D,,", "E,,", "F,,", "G,,", "A,,", "B,,",
+    pitches_opt = [
                       "C,", "D,", "E,", "F,", "G,", "A,", "B,",
                       "C", "D", "E", "F", "G", "A", "B",
                       "c", "d", "e", "f", "g", "a", "b",
-                      "c'", "d'", "e'", "f'", "g'", "a'", "b'"]
+                      "c'", "d'", "e'", "f'", "g'", "a'", "b'",
+                      "c''", "d''", "e''", "f''", "g''", "a''", "b''",
+		]
     intervals_opt = ['Unison', 'Second', 'Third', 'Fourth',
                      'Fifth', 'Sixth', 'Seventh', 'Octave']
     tempo_opt = ['grave', 'largo', 'lento', 'adagio',

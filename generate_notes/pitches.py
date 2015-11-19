@@ -21,11 +21,14 @@ class Pitches(object):
         # side
         self.Inversion = inversion
         
-        self.Notes = ["C,,", "D,,", "E,,", "F,,", "G,,", "A,,", "B,,",
+        self.Notes = [
                       "C,", "D,", "E,", "F,", "G,", "A,", "B,",
                       "C", "D", "E", "F", "G", "A", "B",
                       "c", "d", "e", "f", "g", "a", "b",
-                      "c'", "d'", "e'", "f'", "g'", "a'", "b'"]
+                      "c'", "d'", "e'", "f'", "g'", "a'", "b'",
+                      "c''", "d''", "e''", "f''", "g''", "a''", "b''"
+	]
+
         _min_index = self.Notes.index(self.Min_Pitch)
         _max_index = self.Notes.index(self.Max_Pitch)
         
@@ -96,4 +99,3 @@ class Pitches(object):
             _pre_previous_pitch = _current_pitch
             self.Result.append(_current_pitch)
         return self.Result
-

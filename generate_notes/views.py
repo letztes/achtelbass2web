@@ -17,8 +17,8 @@ def index(request):
                   'chords_frequency'        : request.POST.get('chords_frequency', 0),
                   'intervals'               : request.POST.getlist('intervals', ['Second']),
                   'inversion'               : False,
-                  'min_pitch'               : request.POST.get('min_pitch', 'E,,'),
-                  'max_pitch'               : request.POST.get('max_pitch', "d"),
+                  'min_pitch'               : request.POST.get('min_pitch', 10),
+                  'max_pitch'               : request.POST.get('max_pitch', 20),
                   'rest_frequency'          : request.POST.get('rest_frequency', 0),
                   'time_signature'          : request.POST.get('time_signature','4/4'),
                   'note_values'             : request.POST.getlist('note_values', ['1', '1/2', '1/4']),
@@ -46,6 +46,16 @@ def index(request):
         '1/16' : u'𝅘𝅥𝅯',
         '1/32' : u'𝅘𝅥𝅰',
         '1/64' : u'𝅘𝅥𝅱',
+    }
+
+    context.note_value_names = {
+        '1'    : 'whole',
+        '1/2'  : 'half',
+        '1/4'  : 'quarter',
+        '1/8'  : 'eigth',
+        '1/16' : 'sixteenth',
+        '1/32' : 'thirty-second',
+        '1/64' : 'sixty-fourth',
     }
     
     context.generated_notes = achtelbass_obj.display()
