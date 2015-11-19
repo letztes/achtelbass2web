@@ -260,13 +260,14 @@
                 <label for="note_values_{{ note_value }}">{{ note_value_symbols|get_key:note_value }}</label>
             {% endfor %}
         </fieldset>
-        <fieldset class="controls tuplets">
+        {# commented out while only triplets are supported #}
+        {% if 1 == 0 %}<!--<fieldset class="controls tuplets">
             <h2>{{ Locales.Tuplets }} </h2>
             {% for tuplet in Possible_Tuplets %}
                 <input type="checkbox" id="tuplets_{{ tuplet }}" name="tuplets" value="{{ tuplet }}"{% if tuplet in preselected.tuplets %} checked="checked"{% endif %} />
                 <label for="tuplets_{{ tuplet }}">{{ tuplet }}</label>
             {% endfor %}
-        </fieldset>
+        </fieldset> -->{% endif %}
         <div class="pitch_container">
             <h2>Pitch</h2>
             <fieldset class="controls min_pitch">
@@ -314,6 +315,12 @@
             <h2>{{ Locales.Rests }}</h2>
             <input type="range" min="0" max="1" step="0.01" name="rest_frequency" id="rest_frequency" value="{{ preselected.rest_frequency }}" />
             <label for="rest_frequency">{{ preselected.rest_frequency }}%</label>
+        </fieldset>
+        <fieldset class="controls tuplets">
+            <h2>{{ Locales.Triplets }}</h2>
+            <input type="hidden" id="tuplets_3" name="tuplets" value="3"/> {# for the time being only triplets are supported #}
+            <input type="range" min="0" max="1" step="0.01" name="tuplets_frequency" id="tuplets_frequency" value="{{ preselected.tuplets_frequency }}" />
+            <label for="tuplets_frequency">{{ preselected.tuplets_frequency }}%</label>
         </fieldset>
         <fieldset class="controls tonic">
             <h2>{{ Locales.Tonic }}</h2>

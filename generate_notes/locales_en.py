@@ -91,6 +91,7 @@ locales = {
 # Tempo
             'Tempo' : 'Tempo',
 # Tuplet
+            'Triplets' : 'Triplets',
             'Tuplets' : 'Tuplets',
             'Same pitch in tuplet' : 'Same pitch in tuplet',
             'None' : 'None',

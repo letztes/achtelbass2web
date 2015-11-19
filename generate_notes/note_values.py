@@ -28,12 +28,17 @@ class NoteValues(object):
             chosen_note_value = random.choice(selectable_note_values_in_this_bar)
             abc_note_value = self.ABC_Note_Values[chosen_note_value]
             if self.Tuplets != 0:
-				if random.uniform(0, 1) < float(self.Tuplets_Frequency):
-					if chosen_note_value > 1.0/32:# the tuplet note value will be smaller than the note that is broken into tuplets
-						abc_note_value = int(self.ABC_Note_Values[chosen_note_value]) * 2 # half note becomes quadruplet
-						tuplet = random.choice(self.Tuplets)
-						abc_note_value = '('+str(tuplet)+str(abc_note_value)*int(tuplet)
-            self.Result.append(abc_note_value)
+                if random.uniform(0, 1) < float(self.Tuplets_Frequency):
+                    if chosen_note_value > 1.0/32:# the tuplet note value will be smaller than the note that is broken into tuplets
+                        abc_note_value = int(self.ABC_Note_Values[chosen_note_value]) * 2 # half note becomes quadruplets
+                        tuplet = random.choice(self.Tuplets)
+                        self.Result.append('('+str(tuplet))
+                        for i in range(int(tuplet)):
+                            self.Result.append(str(abc_note_value))
+
+                        remaining_bar_length -= chosen_note_value
+                        continue
+            self.Result.append(str(abc_note_value))
             remaining_bar_length -= chosen_note_value
         self.Result.append(" | ")
 

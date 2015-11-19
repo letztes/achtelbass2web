@@ -227,7 +227,9 @@ class Achtelbass(object):
         self.Tuplets           = parameters['tuplets']
         self.Tuplet_Same_Pitch = parameters['tuplet_same_pitch']
 
-        if isinstance(parameters['tuplets_frequency'], float):
+        if isinstance(parameters['tuplets_frequency'], basestring):
+            self.Tuplets_Frequency        = float(parameters['tuplets_frequency'])
+        elif isinstance(parameters['tuplets_frequency'], float):
             self.Tuplets_Frequency        = parameters['tuplets_frequency']
         else:
             self.Tuplets_Frequency        = 0
@@ -474,8 +476,9 @@ class Achtelbass(object):
         for i in range(len(note_values)):
             if note_values[i] == " | ":
                 note_string += " | "
+            elif isinstance(note_values[i], str) and note_values[i][0] == '(':
+                note_string += note_values[i] + ' '
             else:
-                    
                 if random.uniform(0, 1) < self.Rest_Frequency:
                     note_string += 'z/' + note_values[i] + ' '
                 else:
