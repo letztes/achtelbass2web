@@ -137,19 +137,47 @@
 		}
 
             .pitch_container fieldset:first-of-type {
-				padding-left: 0.7em;
+				position: relative;
+			}
+
+            .pitch_container fieldset:first-of-type:before {
+				content: '.';
+				color: #fff;
+				opacity: 0.4;
+				z-index: 5;
+				position: absolute;
+				top: 1.3em;
+				left: 0.2em;
+				height: 7.4em;
+				width: 3em;
+				background: url('{% static "images/violin.svg" %}') bottom left no-repeat;
+				background-size: auto 100%;
+			}
+
+            .pitch_container fieldset:first-of-type:after {
+				content: '.';
+				color: #fff;
+				opacity: 0.4;
+				z-index: 5;
+				position: absolute;
+				bottom: 8.4em;
+				left: 0.2em;
+				height: 2.6em;
+				width: 3em;
+				background: url('{% static "images/bass.svg" %}') bottom left no-repeat;
+				background-size: auto 100%;
 			}
 
             .pitch_container fieldset:last-of-type {
-				padding-right: 0.7em;
+				padding-right: 1em;
 			}
 
 				.pitch_container fieldset:first-of-type p {
-					padding-left: 2em;
+					padding-left: 9em;
 				}
 
 				.pitch_container fieldset:last-of-type p {
-					padding-right: 2em;
+					padding-right: 4em;
 				}
 
             .pitch_container p {
@@ -200,12 +228,20 @@
                 box-shadow: none;
                 position: absolute;
                 top: 0.15em;
-                left: 1em;
+                left: 7em;
                 border-radius: 2em;
                 transition: background-color 0.5s;
                 z-index: 2;
 				overflow: visible;
             }
+
+            .pitch_container fieldset.controls:last-of-type input[type="radio"] + label {
+				left: 1em;
+			}
+
+            .pitch_container .controls input[type="radio"] + label:hover {
+				background: silver;
+			}
 
             .pitch_container .controls input[type="radio"]:checked + label {
                 background: #111;
