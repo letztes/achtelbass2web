@@ -125,205 +125,101 @@
             clear: left;
             float: left;
             padding: 1em;
-			width: 12em;
-			height: 20.5em;
-			position: relative;	
 			overflow: hidden;
 		}
 
 		.pitch_container fieldset {
+			float: left;
 			color: #111;
 			margin: 0;
-			padding: 0 0 1em 0;
-			height: 28.5em;
-			position: relative;
-			background: #0ff;
-		}
-
-				.pitch_container fieldset .background {
-					height: 17.125em;
-					display: block;
-					position: absolute;
-					top: 0;
-					left: 0;
-					margin-bottom: 1em;
-				}
-
-				.pitch_container fieldset .background:before {
-					content: '.';
-					position: absolute;
-					top: 0.1em;
-					left: 0.2em;
-					height: 7.4em;
-					width: 3em;
-					background: url('{% static "images/violin.svg" %}') bottom left no-repeat;
-					background-size: auto 100%;
-
-					z-index: 5;
-					opacity: 0.4;
-				}
-
-				.pitch_container fieldset .background:after {
-					content: '.';
-					position: absolute;
-					bottom: 6.6em;
-					left: 0.2em;
-					height: 2.6em;
-					width: 3em;
-					background: url('{% static "images/bass.svg" %}') bottom left no-repeat;
-					background-size: auto 100%;
-
-					z-index: 5;
-					opacity: 0.4;
-				}
-
-					.pitch_container fieldset p {
-						display: block;
-						width: 8em;
-						margin: 0;
-						padding: 0;
-						box-sizing: border-box;
-						cursor: help;
-						height: 2.941176470588%;
-						background: #fff;
-						position: relative;
-					}
-
-						.pitch_container fieldset p:nth-of-type(even):before {
-							content: '.';
-							color: rgba(255,255,255,0);
-							height: 50%;
-							width: 100%;
-							border-bottom: 1px solid black;
-							display: block;
-						}
-
-						.pitch_container fieldset p:nth-of-type(7n):after {
-							content: attr(title);
-							background: #000;
-							color: #fff;
-							font-size: 0.9em;
-							padding: 0 0.25em;
-							border-radius: 0.5em 0 0 0.5em;
-							position: absolute;
-							right: 0;
-							top: -0.25em;
-							z-index: 1;
-							opacity: 0.4;
-						}
-
-						.pitch_container fieldset p.ledger_line:before {
-							border-bottom-color: silver;
-						}
-
-            .pitch_container .range_container {
-				transform: rotate(-90deg);
-				float: left;
-				position: absolute;
-				top: 7.25em;
-				left: -6.5em;
-            }
-
-            .pitch_container .range_container:last-of-type {
-				left: -4em;
-			}
-
-		.pitch_container label {
-			position: absolute;
-			left: 0;
-			bottom: 0;
+			padding: 0;
 			background: #fff;
 		}
 
-		.pitch_container input[type="range"] {
-			-webkit-appearance: none;
-			width: 21.225em;
-			height: 1em;
-			outline-width: 0;
-			display: block;
-			background: none;
-			cursor: pointer;
-			margin-top: 2em;
-			margin-left: 0;
-		}
+            .pitch_container fieldset:first-of-type {
+				padding-left: 0.7em;
+			}
 
-		.pitch_container input[type="range"]:focus {
-			outline-width: 0;
-		}
+            .pitch_container fieldset:last-of-type {
+				padding-right: 0.7em;
+			}
 
-		.pitch_container input[type=range]:-moz-focusring{
-			outline-width: 0;
-		}
+				.pitch_container fieldset:first-of-type p {
+					padding-left: 2em;
+				}
 
-		.pitch_container input[type=range]::-webkit-slider-runnable-track {
-			-webkit-appearance: none;
-			background: none;
-			height: 1px;
-		}
+				.pitch_container fieldset:last-of-type p {
+					padding-right: 2em;
+				}
 
-		.pitch_container input[type=range]::-moz-range-track {
-			background: none;
-			width: 17.125em;
-			margin-left: 0.5em;
-			height: 1px;
-		}
+            .pitch_container p {
+                margin: 0;
+                font-size: 9px;
+                height: 1em;
+                position: relative;
+                overflow: visible;
+            }
 
-		.pitch_container input[type=range]::-ms-track,
-		.pitch_container input[type=range]::-ms-fill-lower,
-		.pitch_container input[type=range]::-ms-fill-upper {
-			color: transparent;
-			background: none;
-			border: none;
-			width: 17.125em;
-			height: 1px;
-		}
+            .pitch_container p.regular_line:nth-of-type(even) {
+                border-bottom: 1px solid #111;
+             }
 
-		.pitch_container input[type=range]::-webkit-slider-thumb {
-			-webkit-appearance: none;
-			background: #000;
-			width: 0.7em;
-			height: 0.7em;
-			border-radius: 0.7em;
-			opacity: 1;
-			margin-top: -0.25em;
-		}
+            .pitch_container p.ledger_line:nth-of-type(even) {
+                border-bottom: 1px solid #ccc;
+             }
 
-		.pitch_container input[type=range]::-moz-range-thumb {
-			background: #000;
-			width: 0.7em;
-			height: 0.7em;
-			border-radius: 0.7em;
-			opacity: 1;
-			border: none;
-		}
+            .pitch_container p:first-of-type {
+				border-bottom: none;
+			}
 
-		.pitch_container input[type=range]::-ms-thumb {
-			background: #000;
-			width: 0.7em;
-			height: 0.7em;
-			border-radius: 0.7em;
-			opacity: 1;
-			border: none;
-		}
+			.pitch_container fieldset:last-of-type p.regular_line {
+				border-right: 1px solid #111;
+			}
 
-		.pitch_container input[type=range]::-ms-tooltip {
-			display: none;
-		}
+			.pitch_container fieldset:last-of-type p.ledger_line + p.regular_line {
+				border-right: none;
+			}
 
-		/* Chrome/ Opera */
-		input[type='range']:not(*:root) {
-			overflow: hidden;
-			width: 21.25em;
-			margin-left: -0.45em;
-		}
+            .pitch_container .controls input[type="radio"] {
+                font-size: 9px;
+                display: inline-block;
+                margin: 0;
+                height: 1em;
+                opacity: 0;
+                z-index: 0;
+            }
 
-		/* IE */
-		_:-ms-input-placeholder, :root input[type='range'] {
-			width: 17.8em;
-			margin-left: -0.3em;
-			padding: 0;
-		}
+            .pitch_container .controls input[type="radio"] + label {
+                background: none;
+                padding: 0;
+                line-height: 2em;
+                width: 1.7em;
+                height: 1.7em;
+                text-shadow: none;
+                margin: 0;
+                box-shadow: none;
+                position: absolute;
+                top: 0.15em;
+                left: 1em;
+                border-radius: 2em;
+                transition: background-color 0.5s;
+                z-index: 2;
+				overflow: visible;
+            }
 
+            .pitch_container .controls input[type="radio"]:checked + label {
+                background: #111;
+            }
+
+			.pitch_container p.ledger_line:nth-of-type(odd) input[type="radio"]:checked + label:before {
+				content: '.';
+				border-top: 2px solid #111;
+				width: 2.3em;
+				margin-left: -0.3em;
+				text-align: center;
+				display: block;
+				margin-top: 0.8em;
+			}
 
         label[for="chords_frequency"],
         label[for="rest_frequency"] {
@@ -371,24 +267,28 @@
                 <label for="tuplets_{{ tuplet }}">{{ tuplet }}</label>
             {% endfor %}
         </fieldset> -->{% endif %}
-        <div class="pitch_container">
+
+		<div class="pitch_container">
             <h2>Pitch</h2>
-            <fieldset class="controls pitch">
-                <div class="background">
-                    {% for note_object in Note_Objects %}
-                        <p class="{{ note_object.line_type }}" title="{{ note_object.name }}"></p>
-                    {% endfor %}
-                </div>
-                <div class="range_container">
-                    <input type="range" name="min_pitch" min="0" max="{{ Note_Objects|length|add:"-1"}}" value="{{ preselected.min_pitch }}" step="1" id="range_0" title="Drag the note to set the minimum pitch." />
-                </div>
-                <label for="range_0"></label>
-                <div class="range_container">
-                    <input type="range" name="max_pitch" min="0" max="{{ Note_Objects|length|add:"-1" }}" value="{{ preselected.max_pitch }}" step="1" id="range_1" title="Drag the note to set the maximum pitch." />
-                </div>
-                <label for="range_1"></label>
+            <fieldset class="controls min_pitch">
+                {% for note_object in Note_Objects %}
+                    <p class="{{ note_object.line_type }}">
+                        <input type="radio" id="min_pitch_{{ note_object.note }}" name="min_pitch" value="{{ note_object.note }}"{% ifequal note_object.note preselected.min_pitch %} checked="checked"{% endifequal %} />
+                        <label title="{{ note_object.note }}" for="min_pitch_{{ note_object.note }}"></label>
+                    </p>
+                {% endfor %}
+            </fieldset>
+            <fieldset class="controls max_pitch">
+                {% for note_object in Note_Objects %}
+                    <p class="{{ note_object.line_type }}">
+                        <input type="radio" id="max_pitch_{{ note_object.note }}" name="max_pitch" value="{{ note_object.note }}"{% ifequal note_object.note preselected.max_pitch %} checked="checked"{% endifequal %} />
+                        <label title="{{ note_object.note }}" for="max_pitch_{{ note_object.note }}"></label>
+                    </p>
+                {% endfor %}
             </fieldset>
         </div>
+
+
         <fieldset class="controls time_signature">
             <h2>{{ Locales.time_signature }}</h2>
             {% for time_signature in Possible_Time_Signatures %}
