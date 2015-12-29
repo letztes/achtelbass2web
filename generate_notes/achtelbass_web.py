@@ -178,13 +178,13 @@ class Achtelbass(object):
 
         self.Notes = [x["note"] for x in reversed(self.Note_Objects)]
         
-        self.Min_Pitch = self.Notes[int(parameters['min_pitch'])]
-        self.Max_Pitch = self.Notes[int(parameters['max_pitch'])]
+        self.Min_Pitch = parameters['min_pitch']
+        self.Max_Pitch = parameters['max_pitch']
         
         #if max_pitch is lower than min_pitch, swap them
         if self.Notes.index(self.Min_Pitch) > self.Notes.index(self.Max_Pitch):
-            self.Min_Pitch = self.Notes[int(parameters['max_pitch'])]
-            self.Max_Pitch = self.Notes[int(parameters['min_pitch'])]
+            self.Min_Pitch = parameters['max_pitch']
+            self.Max_Pitch = parameters['min_pitch']
         
         self.Pitch_Range = self.Notes.index(self.Max_Pitch) - self.Notes.index(self.Min_Pitch)
         
