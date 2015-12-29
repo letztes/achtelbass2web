@@ -26,3 +26,7 @@ def get_range( value ):
 @register.filter
 def get_key(value, arg):
     return value.get(arg, '')
+
+@register.filter
+def get_note_file_location(value, arg):
+    return "images/Music-" + str(value.get(arg, '')) + "note.svg"

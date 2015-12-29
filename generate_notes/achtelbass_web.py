@@ -97,14 +97,15 @@ class Achtelbass(object):
                                 'Octave'  : 7,
                                }
         self.Possible_Intervals   = {v: k for k, v in self.Interval_Values.items()}
-        self.Possible_Note_Values = [
-                                '1',
-                                '1/2',
-                                '1/4',
-                                '1/8',
-                                '1/16',
-                                '1/32',
-                               ]
+        self.Note_Names = {
+                                '1'    : 'whole',
+                                '1/2'  : 'half',
+                                '1/4'  : 'quarter',
+                                '1/8'  : 'eight',
+                                '1/16' : 'sixteenth',
+                                '1/32' : 'thirtysecond',
+                               }
+        self.Possible_Note_Values = self.Note_Names.keys()
         self.Possible_Time_Signatures = [
                                 '2/2',
                                 '3/4',
