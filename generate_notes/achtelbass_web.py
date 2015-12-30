@@ -101,9 +101,9 @@ class Achtelbass(object):
                                 '1'    : 'whole',
                                 '1/2'  : 'half',
                                 '1/4'  : 'quarter',
-                                '1/8'  : 'eight',
+                                '1/8'  : 'eighth',
                                 '1/16' : 'sixteenth',
-                                '1/32' : 'thirtysecond',
+                                '1/32' : 'thirty-second',
                                }
         self.Possible_Note_Values = self.Note_Names.keys()
         self.Possible_Time_Signatures = [
