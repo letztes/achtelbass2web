@@ -136,25 +136,9 @@ class Achtelbass(object):
         self.Inversion = parameters['inversion']
 
 		# note and name are redundant here for forward compatibility reasons
-        self.Note_Objects                  = [{"note":"b''", "name":"b''", "line_position": "offline",  "line_type": "ledger_line"},
-                                            {"note":"a''", "name":"a''", "line_position": "online", "line_type": "ledger_line"},
-                                            {"note":"g''", "name":"g''", "line_position": "offline",  "line_type": "ledger_line"},
-                                            {"note":"f''", "name":"f''", "line_position": "online", "line_type": "regular_line"},
-                                            {"note":"e''", "name":"e''", "line_position": "offline",  "line_type": "regular_line"},
-                                            {"note":"d''", "name":"d''", "line_position": "online", "line_type": "regular_line"},
-                                            {"note":"c''", "name":"c''", "line_position": "offline",  "line_type": "regular_line"},
-
-											{"note":"b'", "name":"b'", "line_position": "offline",  "line_type": "regular_line"},
-                                            {"note":"a'", "name":"a'", "line_position": "online", "line_type": "regular_line"},
-                                            {"note":"g'", "name":"g'", "line_position": "offline",  "line_type": "regular_line"},
-                                            {"note":"f'", "name":"f'", "line_position": "online", "line_type": "regular_line"},
-                                            {"note":"e'", "name":"e'", "line_position": "offline",  "line_type": "regular_line"},
-                                            {"note":"d'", "name":"d'", "line_position": "online", "line_type": "ledger_line"},
-                                            {"note":"c'", "name":"c'", "line_position": "offline",  "line_type": "ledger_line"},
-
-                                            {"note":"b", "name":"b", "line_position": "online", "line_type": "ledger_line"},
-                                            {"note":"a", "name":"a", "line_position": "offline",  "line_type": "regular_line"},
-                                            {"note":"g", "name":"g", "line_position": "online", "line_type": "regular_line"},
+        self.Note_Objects                  = [{"note":"b", "name":"b", "line_position": "online", "line_type": "ledger_line"},
+                                            {"note":"a", "name":"a", "line_position": "offline",  "line_type": "ledger_line"},
+                                            {"note":"g", "name":"g", "line_position": "online", "line_type": "ledger_line"},
                                             {"note":"f", "name":"f", "line_position": "offline",  "line_type": "regular_line"},
                                             {"note":"e", "name":"e", "line_position": "online", "line_type": "regular_line"},
                                             {"note":"d", "name":"d", "line_position": "offline",  "line_type": "regular_line"},
@@ -163,18 +147,34 @@ class Achtelbass(object):
                                             {"note":"B", "name":"B", "line_position": "offline",  "line_type": "regular_line"},
                                             {"note":"A", "name":"A", "line_position": "online", "line_type": "regular_line"},
                                             {"note":"G", "name":"G", "line_position": "offline",  "line_type": "regular_line"},
-                                            {"note":"F", "name":"F", "line_position": "online", "line_type": "ledger_line"},
-                                            {"note":"E", "name":"E", "line_position": "offline",  "line_type": "ledger_line"},
+                                            {"note":"F", "name":"F", "line_position": "online", "line_type": "regular_line"},
+                                            {"note":"E", "name":"E", "line_position": "offline",  "line_type": "regular_line"},
                                             {"note":"D", "name":"D", "line_position": "online", "line_type": "ledger_line"},
                                             {"note":"C", "name":"C", "line_position": "offline",  "line_type": "ledger_line"},
 
                                             {"note":"B,", "name":"B,", "line_position": "online", "line_type": "ledger_line"},
-                                            {"note":"A,", "name":"A,", "line_position": "offline",  "line_type": "ledger_line"},
-                                            {"note":"G,", "name":"G,", "line_position": "online", "line_type": "ledger_line"},
-                                            {"note":"F,", "name":"F,", "line_position": "offline",  "line_type": "ledger_line"},
-                                            {"note":"E,", "name":"E,", "line_position": "online", "line_type": "ledger_line"},
-                                            {"note":"D,", "name":"D,", "line_position": "offline",  "line_type": "ledger_line"},
-                                            {"note":"C,", "name":"C,", "line_position": "online", "line_type": "ledger_line"}]
+                                            {"note":"A,", "name":"A,", "line_position": "offline",  "line_type": "regular_line"},
+                                            {"note":"G,", "name":"G,", "line_position": "online", "line_type": "regular_line"},
+                                            {"note":"F,", "name":"F,", "line_position": "offline",  "line_type": "regular_line"},
+                                            {"note":"E,", "name":"E,", "line_position": "online", "line_type": "regular_line"},
+                                            {"note":"D,", "name":"D,", "line_position": "offline",  "line_type": "regular_line"},
+                                            {"note":"C,", "name":"C,", "line_position": "online", "line_type": "regular_line"},
+                                            
+                                            {"note":"B,,", "name":"B,,", "line_position": "offline",  "line_type": "regular_line"},
+                                            {"note":"A,,", "name":"A,,", "line_position": "online", "line_type": "regular_line"},
+                                            {"note":"G,,", "name":"G,,", "line_position": "offline",  "line_type": "regular_line"},
+                                            {"note":"F,,", "name":"F,,", "line_position": "online", "line_type": "ledger_line"},
+                                            {"note":"E,,", "name":"E,,", "line_position": "offline",  "line_type": "ledger_line"},
+                                            {"note":"D,,", "name":"D,,", "line_position": "online", "line_type": "ledger_line"},
+                                            {"note":"C,,", "name":"C,,", "line_position": "offline",  "line_type": "ledger_line"},
+                                            
+                                            {"note":"B,,,", "name":"B,,,", "line_position": "online",  "line_type": "ledger_line"},
+                                            {"note":"A,,,", "name":"A,,,", "line_position": "offline", "line_type": "ledger_line"},
+                                            {"note":"G,,,", "name":"G,,,", "line_position": "online",  "line_type": "ledger_line"},
+                                            {"note":"F,,,", "name":"F,,,", "line_position": "offline", "line_type": "ledger_line"},
+                                            {"note":"E,,,", "name":"E,,,", "line_position": "online",  "line_type": "ledger_line"},
+                                            {"note":"D,,,", "name":"D,,,", "line_position": "offline", "line_type": "ledger_line"},
+                                            {"note":"C,,,", "name":"C,,,", "line_position": "online",  "line_type": "ledger_line"}]
 
         self.Notes = [x["note"] for x in reversed(self.Note_Objects)]
         

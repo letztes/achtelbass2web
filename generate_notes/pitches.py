@@ -22,6 +22,8 @@ class Pitches(object):
         self.Inversion = inversion
         
         self.Notes = [
+                      "C,,,", "D,,,", "E,,,", "F,,,", "G,,,", "A,,,", "B,,,",
+                      "C,,", "D,,", "E,,", "F,,", "G,,", "A,,", "B,,",
                       "C,", "D,", "E,", "F,", "G,", "A,", "B,",
                       "C", "D", "E", "F", "G", "A", "B",
                       "c", "d", "e", "f", "g", "a", "b",
