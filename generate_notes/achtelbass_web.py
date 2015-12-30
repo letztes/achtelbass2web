@@ -105,7 +105,16 @@ class Achtelbass(object):
                                 '1/16' : 'sixteenth',
                                 '1/32' : 'thirty-second',
                                }
-        self.Possible_Note_Values = self.Note_Names.keys()
+                               
+        # seems redundant to self.Note_Names, but the sorting is important
+        self.Possible_Note_Values = [
+                                '1',
+                                '1/2',
+                                '1/4',
+                                '1/8',
+                                '1/16',
+                                '1/32',
+        ]
         self.Possible_Time_Signatures = [
                                 '2/2',
                                 '3/4',
@@ -168,13 +177,7 @@ class Achtelbass(object):
                                             {"note":"D,,", "name":"D,,", "line_position": "online", "line_type": "ledger_line"},
                                             {"note":"C,,", "name":"C,,", "line_position": "offline",  "line_type": "ledger_line"},
                                             
-                                            {"note":"B,,,", "name":"B,,,", "line_position": "online",  "line_type": "ledger_line"},
-                                            {"note":"A,,,", "name":"A,,,", "line_position": "offline", "line_type": "ledger_line"},
-                                            {"note":"G,,,", "name":"G,,,", "line_position": "online",  "line_type": "ledger_line"},
-                                            {"note":"F,,,", "name":"F,,,", "line_position": "offline", "line_type": "ledger_line"},
-                                            {"note":"E,,,", "name":"E,,,", "line_position": "online",  "line_type": "ledger_line"},
-                                            {"note":"D,,,", "name":"D,,,", "line_position": "offline", "line_type": "ledger_line"},
-                                            {"note":"C,,,", "name":"C,,,", "line_position": "online",  "line_type": "ledger_line"}]
+                                            {"note":"B,,,", "name":"B,,,", "line_position": "online",  "line_type": "ledger_line"}]
 
         self.Notes = [x["note"] for x in reversed(self.Note_Objects)]
         
