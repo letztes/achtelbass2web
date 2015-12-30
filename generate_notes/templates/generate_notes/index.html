@@ -122,9 +122,15 @@
 		}
 
 		.note_values label {
-			background-size: auto 1.2em;
-			background-position: center center;
-			background-repeat: no-repeat;
+            padding: 0 !important;
+            height: 2em;
+            width: 2em;
+		}
+        
+        .note_values label img {
+            width: 60%;
+            height: 60%;
+            margin: 20%;
 		}
 
 		.pitch_container {
@@ -299,7 +305,9 @@
             <h2>{{ Locales.note_values }} {{ note_values_symbol_entities.1 }} </h2>
             {% for note_value in Possible_Note_Values %}
                 <input type="checkbox" id="{{ note_value_names|get_key:note_value }}" name="note_values" value="{{ note_value }}"{% if note_value in preselected.note_values %} checked="checked"{% endif %} />
-                <label for="{{ note_value_names|get_key:note_value }}" style="background-image: url('{% static note_value_names|get_note_file_location:note_value  %}');"></label>
+                <label for="{{ note_value_names|get_key:note_value }}">
+                <img src="{% static note_value_names|get_note_file_location:note_value  %}">
+                </label>
             {% endfor %}
         </fieldset>
         {# commented out while only triplets are supported #}
