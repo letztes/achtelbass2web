@@ -181,7 +181,7 @@
 			}
 
             .pitch_container fieldset:last-of-type {
-				padding-right: 1em;
+				padding-right: 1px;
 			}
 
 				.pitch_container fieldset:first-of-type p {
@@ -199,6 +199,29 @@
                 position: relative;
                 overflow: visible;
             }
+
+            .pitch_container p:first-child {
+				padding: 0 0.5em;
+				text-align: right;
+			}
+
+			.pitch_container p.max_pitch,
+            .pitch_container p.max_pitch ~ p {
+				background: #ad9968;
+			}
+
+            .pitch_container p.max_pitch ~ p.min_pitch ~ p {
+				background: #fff;
+			}
+
+			.pitch_container p.min_pitch,
+            .pitch_container p.min_pitch ~ p {
+				background: #ad9968;
+			}
+
+            .pitch_container p.min_pitch ~ p.max_pitch ~ p {
+				background: #fff;
+			}
 
             .pitch_container p.regular_line:nth-of-type(even) {
                 border-bottom: 1px solid #111;
@@ -252,7 +275,7 @@
 			}
 
             .pitch_container .controls input[type="radio"] + label:hover {
-				background: silver;
+				background: #888;
 			}
 
             .pitch_container .controls input[type="radio"]:checked + label {
@@ -323,7 +346,7 @@
             <h2>Pitch</h2>
             <fieldset class="controls min_pitch">
                 {% for note_object in Note_Objects %}
-                    <p class="{{ note_object.line_type }}">
+                    <p class="{{ note_object.line_type }}{% ifequal note_object.note preselected.min_pitch %} min_pitch{% endifequal %}{% ifequal note_object.note preselected.max_pitch %} max_pitch{% endifequal %}">
                         <input type="radio" id="min_pitch_{{ note_object.note }}" name="min_pitch" value="{{ note_object.note }}"{% ifequal note_object.note preselected.min_pitch %} checked="checked"{% endifequal %} />
                         <label title="{{ note_object.note }}" for="min_pitch_{{ note_object.note }}"></label>
                     </p>
@@ -331,7 +354,7 @@
             </fieldset>
             <fieldset class="controls max_pitch">
                 {% for note_object in Note_Objects %}
-                    <p class="{{ note_object.line_type }}">
+                    <p class="{{ note_object.line_type }}{% ifequal note_object.note preselected.min_pitch %} min_pitch{% endifequal %}{% ifequal note_object.note preselected.max_pitch %} max_pitch{% endifequal %}">
                         <input type="radio" id="max_pitch_{{ note_object.note }}" name="max_pitch" value="{{ note_object.note }}"{% ifequal note_object.note preselected.max_pitch %} checked="checked"{% endifequal %} />
                         <label title="{{ note_object.note }}" for="max_pitch_{{ note_object.note }}"></label>
                     </p>
@@ -359,22 +382,24 @@
             <input type="checkbox" id="grand_staff_{{ grand_staff }}" name="grand_staff" value="1"{% if preselected.grand_staff %} checked="checked"{% endif %} />
             <label for="grand_staff_{{ grand_staff }}">Grand Staff</label>
         </fieldset>
-        <fieldset class="controls chords">
-            <h2>{{ Locales.Chords }}</h2>
-            <input type="range" min="0" max="1" step="0.01" name="chords_frequency" id="chords_frequency" value="{{ preselected.chords_frequency }}" />
-            <label for="chords_frequency">{{ preselected.chords_frequency }}%</label>
-        </fieldset>
-        <fieldset class="controls rests">
-            <h2>{{ Locales.Rests }}</h2>
-            <input type="range" min="0" max="1" step="0.01" name="rest_frequency" id="rest_frequency" value="{{ preselected.rest_frequency }}" />
-            <label for="rest_frequency">{{ preselected.rest_frequency }}%</label>
-        </fieldset>
-        <fieldset class="controls tuplets">
-            <h2>{{ Locales.Triplets }}</h2>
-            <input type="hidden" id="tuplets_3" name="tuplets" value="3"/> {# for the time being only triplets are supported #}
-            <input type="range" min="0" max="1" step="0.01" name="tuplets_frequency" id="tuplets_frequency" value="{{ preselected.tuplets_frequency }}" />
-            <label for="tuplets_frequency">{{ preselected.tuplets_frequency }}%</label>
-        </fieldset>
+		<div style="float: left;">
+			<fieldset class="controls chords">
+				<h2>{{ Locales.Chords }}</h2>
+				<input type="range" min="0" max="1" step="0.01" name="chords_frequency" id="chords_frequency" value="{{ preselected.chords_frequency }}" />
+				<label for="chords_frequency">{{ preselected.chords_frequency }}%</label>
+			</fieldset>
+			<fieldset class="controls rests">
+				<h2>{{ Locales.Rests }}</h2>
+				<input type="range" min="0" max="1" step="0.01" name="rest_frequency" id="rest_frequency" value="{{ preselected.rest_frequency }}" />
+				<label for="rest_frequency">{{ preselected.rest_frequency }}%</label>
+			</fieldset>
+			<fieldset class="controls tuplets">
+				<h2>{{ Locales.Triplets }}</h2>
+				<input type="hidden" id="tuplets_3" name="tuplets" value="3"/> {# for the time being only triplets are supported #}
+				<input type="range" min="0" max="1" step="0.01" name="tuplets_frequency" id="tuplets_frequency" value="{{ preselected.tuplets_frequency }}" />
+				<label for="tuplets_frequency">{{ preselected.tuplets_frequency }}%</label>
+			</fieldset>
+		</div>
         <fieldset class="controls tonic">
             <h2>{{ Locales.Tonic }}</h2>
             {% for tonic in Tonics %}
@@ -398,7 +423,7 @@
     ABCJS.renderAbc("canvas", document.getElementById("abc").value);
     //ABCJS.renderMidi("midi", document.getElementById("abc").value);
 
-	if (document.querySelectorAll('fieldset:not(.pitch) input[type="range"]').length) {
+	if (document.querySelectorAll('fieldset input[type="range"]').length) {
 		Array.prototype.forEach.call(document.querySelectorAll('fieldset:not(.pitch) input[type="range"]'), function(el, i) {
 			if (typeof(el.nextElementSibling) !== "undefined") {
 				el.nextElementSibling.textContent = parseInt(el.value * 100) + '%';
