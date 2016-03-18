@@ -370,69 +370,67 @@ class Achtelbass(object):
             self.Note_String += note_string_left_hand  + "\n"
         else:
             
-            range_of_tones = self.Notes.index(self.Max_Pitch) - self.Notes.index(self.Min_Pitch)
-            # Left hand gets the lower 2/3
-            min_pitch_left_hand = self.Min_Pitch
-            max_pitch_left_hand = self.Notes[self.Notes.index(self.Max_Pitch) - int(range_of_tones/3)]
+            min_pitch = self.Min_Pitch
+            max_pitch = self.Max_Pitch
             
-            note_string_left_hand  = '[V:B] '
+            note_string  = '[V:B] '
             
-            clef_left_hand  = 'treble'
+            clef  = 'treble'
             
-            self.Clef_Left_Hand = clef_left_hand
+            self.Clef = clef
             
-            selectable_pitches_left_hand  = self.Notes[self.Notes.index(min_pitch_left_hand):self.Notes.index(max_pitch_left_hand)+1]
+            selectable_pitches  = self.Notes[self.Notes.index(min_pitch):self.Notes.index(max_pitch)+1]
 
             # Caveat, can be empty if the pitch range does not include the tonic
             # E.g. for Cmajor in F,,-G,, there is no C between F,, and G,,
-            tonics_left_hand  = [note for note in selectable_pitches_left_hand  if note[0].lower() == self.Tonic[0].lower()]
+            tonics  = [note for note in selectable_pitches  if note[0].lower() == self.Tonic[0].lower()]
             
-            previous_pitch_left_hand  = min_pitch_left_hand
-            if tonics_left_hand:
-                previous_pitch_left_hand  = tonics_left_hand[0]
+            previous_pitch = min_pitch
+            if tonics:
+                previous_pitch  = tonics[0]
             
             first_bar = True
             
             # One bar after another
             for i in range(self.Amount_Of_Bars):
-                note_values_left_hand = self.get_note_values(1)# one bar
-                pitches_left_hand     = self.get_pitches(current_tonic  = '',
-                                                min_pitch      = min_pitch_left_hand,
-                                                max_pitch      = max_pitch_left_hand,
-                                                note_values    = note_values_left_hand,
-                                                first_note     = previous_pitch_left_hand if (first_bar) else False,
-                                                previous_pitch = previous_pitch_left_hand)
+                note_values = self.get_note_values(1)# one bar
+                pitches     = self.get_pitches(current_tonic  = '',
+                                                min_pitch      = min_pitch,
+                                                max_pitch      = max_pitch,
+                                                note_values    = note_values,
+                                                first_note     = previous_pitch if (first_bar) else False,
+                                                previous_pitch = previous_pitch)
                 
-                previous_pitch_left_hand = pitches_left_hand[-1]
+                previous_pitch = pitches[-1]
                 
-                if i == 0 and self.Notes.index(pitches_left_hand[0]) < self.Notes.index('C'):
-                    clef_left_hand = 'bass'
-                    self.Clef_Left_Hand = clef_left_hand
+                if i == 0 and self.Notes.index(pitches[0]) < self.Notes.index('C'):
+                    clef = 'bass'
+                    self.Clef = clef
                 
-                bar_left_hand, clef_left_hand = self.glue_together(note_values_left_hand, pitches_left_hand, clef_left_hand)
+                bar, clef = self.glue_together(note_values, pitches, clef)
                 
-                note_string_left_hand  += bar_left_hand
+                note_string  += bar
 
                 # Line break after 20 notes
-                if (note_string_left_hand.count('/') > 20 or note_string_left_hand.count('/') > 20):
+                if (note_string.count('/') > 20 or note_string.count('/') > 20):
                     
                     # But not if it is the last iteration
                     if i < self.Amount_Of_Bars-1:
-                        self.Note_String += note_string_left_hand  + "\n"
+                        self.Note_String += note_string  + "\n"
 
-                        note_string_left_hand = "[V:B "
+                        note_string = "[V:B "
                         
-                        if clef_left_hand == 'bass':
-                            note_string_left_hand += 'K:clef=bass] '
-                        if clef_left_hand == 'treble':
-                            note_string_left_hand += 'K:clef=treble] '
+                        if clef == 'bass':
+                            note_string += 'K:clef=bass] '
+                        if clef == 'treble':
+                            note_string += 'K:clef=treble] '
                         
-                        note_string_left_hand += "] "
+                        note_string += "] "
                         
                 first_bar = False
                     
                     
-            self.Note_String += note_string_left_hand  + "\n"
+            self.Note_String += note_string  + "\n"
 
         self.display()
         return

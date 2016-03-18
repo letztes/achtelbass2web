@@ -82,7 +82,12 @@ class Pitches(object):
         self.Result.append(_current_pitch)
         for i in range(self.Amount-1):# -1 weil der erste Ton=Tonika feststeht
             direction = random.choice(['up', 'down'])
-            _current_interval = random.choice(self.Intervals)
+            
+            # must choose only intervals that fit at least in one direction: up or down.
+            # E.g. min_pitch=C, max_pitch=c, current_pitch=F, intervals=[1,2,3,4,5,6]
+            # would result in a problem if interval 5 or 6 get chosen
+            _eligible_intervals = [interval for interval in self.Intervals if self.Selectable_Pitches.index(_current_pitch) + self.Interval_Values[interval] <= len(self.Selectable_Pitches) - 1 or self.Selectable_Pitches.index(_current_pitch) - self.Interval_Values[interval] >= 0]
+            _current_interval = random.choice(_eligible_intervals)
             _step = self.Interval_Values[_current_interval]
             if self.Inversion == True:
                 if (direction == 'up' and self.Selectable_Pitches.index(_current_pitch) + _step >= self.Selectable_Pitches.index(self.Selectable_Pitches[-1])) or (direction == 'down' and self.Selectable_Pitches.index(_current_pitch) - _step < 0):
