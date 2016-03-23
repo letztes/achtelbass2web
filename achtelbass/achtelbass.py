@@ -16,8 +16,7 @@ import pitches
 import output
 
 # Version of the program
-version = '0.1'
-
+version = '0.2'
     
 class Achtelbass(object):
     """The central class of the package
