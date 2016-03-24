@@ -95,7 +95,17 @@ class Achtelbass(object):
                                 'Seventh' : 6,
                                 'Octave'  : 7,
                                }
-        self.Possible_Intervals   = {v: k for k, v in self.Interval_Values.items()}
+        #self.Possible_Intervals   = {v: k for k, v in self.Interval_Values.items()}# works only with python >= 2.7.x
+        self.Possible_Intervals = {# this is the version for python < 2.7
+                                  0  : 'Unison',
+                                  1  : 'Second',
+                                  2  : 'Third',
+                                  3  : 'Fourth',
+                                  4  : 'Fifth',
+                                  5  : 'Sixth',
+                                  6  : 'Seventh',
+                                  7  : 'Octave',
+                               }
         self.Note_Names = {
                                 '1'    : 'whole',
                                 '1/2'  : 'half',
