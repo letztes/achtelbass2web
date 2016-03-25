@@ -4,7 +4,8 @@
 print "content-type:text/html\n\n"
 
 import cgi
-import cgitb; cgitb.enable()  # for troubleshooting
+import cgitb
+#cgitb.enable()  # for troubleshooting
 from jinja2 import Template, Environment, PackageLoader
 
 from achtelbass import achtelbass
@@ -16,8 +17,6 @@ template = env.get_template('index.html')
 context  = {}
 
 form = cgi.FieldStorage()
-
-#print form.getvalue("foo", "affe");
 
 def index():
 
