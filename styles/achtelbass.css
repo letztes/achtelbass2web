@@ -301,3 +301,8 @@ label[for="rest_frequency"] {
     content: "contact";
     display: inline;
 }
+
+.wood {
+	background: #402107 url("/images/bg_texture___wood_by_nortago.jpg") repeat scroll left top;
+	color: #f2ecdc;
+}
