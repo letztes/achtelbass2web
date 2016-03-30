@@ -36,10 +36,10 @@ form h2 {
 }
 
 .controls {
-		float: left;
-		border: 0;
-		padding: 1em;
-	}
+	float: left;
+	border: 0;
+	padding: 1em;
+}
 
 @media (min-width: 1200px) {
 	form {
@@ -142,153 +142,162 @@ label[for="note_values_1_2"] {
 	background: #fff;
 }
 
-	.pitch_container fieldset:first-of-type {
-		position: relative;
+.pitch_container fieldset:first-of-type {
+	position: relative;
+}
+
+.pitch_container fieldset:first-of-type:before {
+	content: '.';
+	color: #fff;
+	opacity: 0.4;
+	z-index: 5;
+	position: absolute;
+	top: 1.3em;
+	left: 0.2em;
+	height: 7.4em;
+	width: 3em;
+	background: url('/images/violin.svg') bottom left no-repeat;
+	background-size: auto 100%;
+}
+
+.pitch_container fieldset:first-of-type:after {
+	content: '.';
+	color: #fff;
+	opacity: 0.4;
+	z-index: 5;
+	position: absolute;
+	bottom: 4.8em;
+	left: 0.2em;
+	height: 2.6em;
+	width: 3em;
+	background: url('/images/bass.svg') bottom left no-repeat;
+	background-size: auto 100%;
+}
+
+.pitch_container fieldset:last-of-type {
+	padding-right: 1px;
+}
+
+	.pitch_container fieldset:first-of-type p {
+		padding-left: 9em;
 	}
 
-	.pitch_container fieldset:first-of-type:before {
-		content: '.';
-		color: #fff;
-		opacity: 0.4;
-		z-index: 5;
-		position: absolute;
-		top: 1.3em;
-		left: 0.2em;
-		height: 7.4em;
-		width: 3em;
-		background: url('/images/violin.svg') bottom left no-repeat;
-		background-size: auto 100%;
+	.pitch_container fieldset:last-of-type p {
+		padding-right: 4em;
 	}
 
-	.pitch_container fieldset:first-of-type:after {
-		content: '.';
-		color: #fff;
-		opacity: 0.4;
-		z-index: 5;
-		position: absolute;
-		bottom: 4.8em;
-		left: 0.2em;
-		height: 2.6em;
-		width: 3em;
-		background: url('/images/bass.svg') bottom left no-repeat;
-		background-size: auto 100%;
-	}
+.pitch_container p {
+	margin: 0;
+	font-size: 9px;
+	height: 1em;
+	position: relative;
+	overflow: visible;
+}
 
-	.pitch_container fieldset:last-of-type {
-		padding-right: 1px;
-	}
+.pitch_container p:first-child {
+	padding: 0 0.5em;
+	text-align: right;
+}
 
-		.pitch_container fieldset:first-of-type p {
-			padding-left: 9em;
-		}
+.pitch_container p.max_pitch,
+.pitch_container p.max_pitch ~ p {
+	background: #ad9968;
+}
 
-		.pitch_container fieldset:last-of-type p {
-			padding-right: 4em;
-		}
+.pitch_container p.max_pitch ~ p.min_pitch + p ~ p {
+	background: #fff;
+}
 
-	.pitch_container p {
-		margin: 0;
-		font-size: 9px;
-		height: 1em;
-		position: relative;
-		overflow: visible;
-	}
+.pitch_container p.min_pitch,
+.pitch_container p.min_pitch ~ p {
+	background: #ad9968;
+}
 
-	.pitch_container p:first-child {
-		padding: 0 0.5em;
-		text-align: right;
-	}
+.pitch_container p.min_pitch ~ p.max_pitch + p ~ p {
+	background: #fff;
+}
 
-	.pitch_container p.max_pitch,
-	.pitch_container p.max_pitch ~ p {
-		background: #ad9968;
-	}
+.pitch_container p.regular_line:nth-of-type(even) {
+	border-bottom: 1px solid #111;
+ }
 
-	.pitch_container p.max_pitch ~ p.min_pitch + p ~ p {
-		background: #fff;
-	}
+.pitch_container p.ledger_line:nth-of-type(even) {
+	border-bottom: 1px solid #ccc;
+ }
 
-	.pitch_container p.min_pitch,
-	.pitch_container p.min_pitch ~ p {
-		background: #ad9968;
-	}
+.pitch_container p:first-of-type {
+	border-bottom: none;
+}
 
-	.pitch_container p.min_pitch ~ p.max_pitch + p ~ p {
-		background: #fff;
-	}
+.pitch_container fieldset:last-of-type p.regular_line {
+	border-right: 1px solid #111;
+}
 
-	.pitch_container p.regular_line:nth-of-type(even) {
-		border-bottom: 1px solid #111;
-	 }
+.pitch_container fieldset:last-of-type p.ledger_line + p.regular_line {
+	border-right: none;
+}
 
-	.pitch_container p.ledger_line:nth-of-type(even) {
-		border-bottom: 1px solid #ccc;
-	 }
+.pitch_container .controls input[type="radio"] {
+	font-size: 9px;
+	display: inline-block;
+	margin: 0;
+	height: 1em;
+	opacity: 0;
+	z-index: 0;
+}
 
-	.pitch_container p:first-of-type {
-		border-bottom: none;
-	}
+.pitch_container .controls input[type="radio"] + label {
+	background: none;
+	padding: 0;
+	line-height: 2em;
+	width: 1.7em;
+	height: 1.7em;
+	text-shadow: none;
+	margin: 0;
+	box-shadow: none;
+	position: absolute;
+	top: 0.15em;
+	left: 7em;
+	border-radius: 2em;
+	transition: background-color 0.5s;
+	z-index: 2;
+	overflow: visible;
+}
 
-	.pitch_container fieldset:last-of-type p.regular_line {
-		border-right: 1px solid #111;
-	}
+.pitch_container fieldset.controls:last-of-type input[type="radio"] + label {
+	left: 1em;
+}
 
-	.pitch_container fieldset:last-of-type p.ledger_line + p.regular_line {
-		border-right: none;
-	}
+.pitch_container .controls input[type="radio"] + label:hover {
+	background: #888;
+}
 
-	.pitch_container .controls input[type="radio"] {
-		font-size: 9px;
-		display: inline-block;
-		margin: 0;
-		height: 1em;
-		opacity: 0;
-		z-index: 0;
-	}
+.pitch_container .controls input[type="radio"]:checked + label {
+	background: #111;
+}
 
-	.pitch_container .controls input[type="radio"] + label {
-		background: none;
-		padding: 0;
-		line-height: 2em;
-		width: 1.7em;
-		height: 1.7em;
-		text-shadow: none;
-		margin: 0;
-		box-shadow: none;
-		position: absolute;
-		top: 0.15em;
-		left: 7em;
-		border-radius: 2em;
-		transition: background-color 0.5s;
-		z-index: 2;
-		overflow: visible;
-	}
-
-	.pitch_container fieldset.controls:last-of-type input[type="radio"] + label {
-		left: 1em;
-	}
-
-	.pitch_container .controls input[type="radio"] + label:hover {
-		background: #888;
-	}
-
-	.pitch_container .controls input[type="radio"]:checked + label {
-		background: #111;
-	}
-
-	.pitch_container p.ledger_line:nth-of-type(odd) input[type="radio"]:checked + label:before {
-		content: '.';
-		border-top: 2px solid #111;
-		width: 2.3em;
-		margin-left: -0.3em;
-		text-align: center;
-		display: block;
-		margin-top: 0.8em;
-	}
+.pitch_container p.ledger_line:nth-of-type(odd) input[type="radio"]:checked + label:before {
+	content: '.';
+	border-top: 2px solid #111;
+	width: 2.3em;
+	margin-left: -0.3em;
+	text-align: center;
+	display: block;
+	margin-top: 0.8em;
+}
 
 label[for="chords_frequency"],
 label[for="rest_frequency"] {
 	min-width: 3em;
 	display: inline-block;
 	text-align: right;
+}
+
+#imprint .contact span {
+    display: none;
+}
+
+#imprint .contact::after {
+    content: "contact";
+    display: inline;
 }
