@@ -17,7 +17,7 @@ main {
 	display: none;
 }
 
-form {
+#configure {
 	overflow: hidden;
 	background: url('/images/bg_texture___wood_by_nortago.jpg') top left #402107;
 	box-shadow: -5px -5px 5px #210 inset;
@@ -305,4 +305,35 @@ label[for="rest_frequency"] {
 .wood {
 	background: #402107 url("/images/bg_texture___wood_by_nortago.jpg") repeat scroll left top;
 	color: #f2ecdc;
+}
+
+.navigation {
+	float:right;
+	padding: 1em;
+}
+
+#imprint {
+	font-size: x-large;
+	padding: 1em;
+}
+
+.footer {
+	padding: 1em;
+}
+
+.site-footer-links {
+	vertical-align: center;
+}
+
+.site-footer-links > li {
+	display: inline-block;
+}
+
+.site-footer-links > li > a {
+	text-decoration: none;
+	padding: 1em;
+}
+
+.right {
+	float: right !important;
 }

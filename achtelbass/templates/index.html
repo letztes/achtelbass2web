@@ -9,6 +9,7 @@
     <!--http://nortago.deviantart.com/art/Bg-Texture-wood-38841113 Wood-Background by nortago, thanks a lot!-->
 </head>
 <body>
+	<div class="body">
 {{ debugging_info }}
 <!--applet id="MIDIPlugin" code="MIDIPlugin.class" name="MIDIPlugin" archive="http://dl.dropbox.com/u/223827/abcjs/MIDIPlugin.jar" height="1" width="1"></applet-->
 
@@ -114,6 +115,7 @@
             {% endfor %}
         </fieldset>
     </form>
+	
     <div id="midi"></div>
     <div id="canvas"></div>
 </main>
@@ -145,5 +147,7 @@
 	});
 
 	</script>
+	</div>
+	{% include 'footer.html' %}
 </body>
 </html>
