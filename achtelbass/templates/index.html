@@ -24,6 +24,13 @@
 
 <main>
     <form id="configure" action="." method="post">
+        <fieldset class="controls tonic">
+            <h2>{{ Locales.Tonic }}</h2>
+            {% for tonic in Tonics %}
+                <input type="radio" id="tonic_{{ tonic }}" name="tonic" value="{{ tonic }}"{% if tonic == preselected.tonic %} checked="checked"{% endif %} />
+                <label for="tonic_{{ tonic }}">{{ tonic }}</label>
+            {% endfor %}
+        </fieldset>
         <fieldset class="controls intervals">
             <h2>{{ Locales.Intervals }}</h2>
             {% for interval_index, interval_name in Possible_Intervals.iteritems() %}
@@ -107,13 +114,6 @@
 				<label for="tuplets_frequency">{{ preselected.tuplets_frequency }}%</label>
 			</fieldset>
 		</div>
-        <fieldset class="controls tonic">
-            <h2>{{ Locales.Tonic }}</h2>
-            {% for tonic in Tonics %}
-                <input type="radio" id="tonic_{{ tonic }}" name="tonic" value="{{ tonic }}"{% if tonic == preselected.tonic %} checked="checked"{% endif %} />
-                <label for="tonic_{{ tonic }}">{{ tonic }}</label>
-            {% endfor %}
-        </fieldset>
     </form>
 	
     <div id="midi"></div>
