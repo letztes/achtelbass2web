@@ -293,11 +293,11 @@ label[for="rest_frequency"] {
 	text-align: right;
 }
 
-#imprint .contact span {
+.contact span {
     display: none;
 }
 
-#imprint .contact::after {
+.contact::after {
     content: "contact";
     display: inline;
 }
@@ -305,15 +305,12 @@ label[for="rest_frequency"] {
 .wood {
 	background: #402107 url("/images/bg_texture___wood_by_nortago.jpg") repeat scroll left top;
 	color: #f2ecdc;
+	font-size: x-large;
+	padding: 1em;
 }
 
 .navigation {
 	float:right;
-	padding: 1em;
-}
-
-#imprint {
-	font-size: x-large;
 	padding: 1em;
 }
 
