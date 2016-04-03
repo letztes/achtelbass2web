@@ -337,3 +337,7 @@ label[for="rest_frequency"] {
 .right {
 	float: right !important;
 }
+
+.about {
+	display: none;
+}
