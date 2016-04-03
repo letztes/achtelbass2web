@@ -42,7 +42,7 @@ form h2 {
 }
 
 @media (min-width: 1200px) {
-	form {
+	#configure {
 		float: left;
 		width: 300px;
 	}
@@ -53,25 +53,25 @@ form h2 {
 }
 
 @media (min-width: 1300px) {
-	form {
+	#configure {
 		width: 400px;
 	}
 }
 
 @media (min-width: 1500px) {
-	form {
+	#configure {
 		width: 600px;
 	}
 }
 
 @media (min-width: 1700px) {
-	form {
+	#configure {
 		width: 800px;
 	}
 }
 
 @media (min-width: 1900px) {
-	form {
+	#configure {
 		width: 1000px;
 	}
 }
