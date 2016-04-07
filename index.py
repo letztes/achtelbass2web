@@ -60,6 +60,19 @@ def index():
     context['note_value_names'] =  achtelbass_obj.Note_Names
     
     context['generated_notes'] = achtelbass_obj.display()
+    
+    # Tonic is always set when the form is submitted
+    if form.getvalue('tonic'):
+		# The for was submitted.
+		# Show result notes, but hide the controls.
+		context['controls_display_style'] = 'none'
+		context['controls_button_text'] = 'Show controls'
+    else:
+		# The form was not submitted. The site is loaded initially.
+		# Show controls and notes for default configuration.
+		context['controls_display_style'] = 'block'
+		context['controls_button_text'] = 'Hide controls'
+    
 
     print template.render(context)
 

@@ -1,9 +1,9 @@
 $(document).ready(function() {
-    $("#hide_form_button").toggle(function() {
-        $(this).text('Show Content');
-    }, function() {
-        $(this).text('Hide Content');
-    }).click(function(){
-        $("#configure").animate({width: 'toggle'}, "slow");
+    $("#hide_form_button").click(function() {
+        $('#configure').toggle('slow');
+		$(this).text(function(i, text){
+			return text === "Show controls" ? "Hide controls" : "Show controls";
+		})
     });
 });
+
