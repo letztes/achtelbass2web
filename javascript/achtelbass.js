@@ -1,15 +1,16 @@
 document.addEventListener("DOMContentLoaded", function(event) {
 	document.querySelector('.body').onchange = function(evt) {
-		console.log(evt.target);
-		console.log(evt.target.name);
-		console.log(evt.target.value);
+		
+		// do not set cookies if user has not enabled cookies
+		if (getCookie("enable_cookies") == "") {
+			return "";
+		}
 		
 		// range elements have not the property checked and must not be 
 		// deleted from cookie but instead set to 0 if deactivated
 		// radio buttons must have some value and are not deleted either
 		if (evt.target.type == 'range' || evt.target.type == 'radio') {
 			setCookie(evt.target.name, evt.target.value);
-			console.log('yes');
 		}
 		// all other elements are checkboxes and
 		// are deleted from cookie if deactivated
@@ -26,7 +27,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
 					list_of_values.push(list_of_checkbox_nodes[i].value);
 				}
 			}
-			setCookie(checkbox_name, list_of_values.join());
+			if (list_of_values.length > 0) {
+				setCookie(checkbox_name, list_of_values.join('###'));
+			}
 		}
 	};
 	
@@ -37,18 +40,24 @@ document.addEventListener("DOMContentLoaded", function(event) {
 			document.getElementById('hide_form_button').innerHTML = (document.getElementById('hide_form_button').innerHTML == "Show controls") ? "Hide controls" : "Show controls";
 		};
 	}
-    if (document.getElementById("enable_cookies") !== null) {
-		document.getElementById("enable_cookies").click(function() {
-			// if checked
-			setCookie('allowCookies', 'True');
-			// else
-			// deleteCookie('allowCookies');
-		});
+	
+	// this is handled separately because all other ui elements set
+	// cookie only if this one was enabled
+	if (document.getElementById("enable_cookies") !== null) {
+		document.querySelector('#enable_cookies').onchange = function(evt) {
+			if (evt.target.checked) {
+				setCookie('enable_cookies', 'on');
+			}
+			else {
+				deleteAllCookies();
+			}
+		}
 	}
 });
 
 function deleteCookie(cname) {
     document.cookie = cname + "=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/";
+    return;
 }
 
 function setCookie(cname, cvalue) {
@@ -56,6 +65,7 @@ function setCookie(cname, cvalue) {
     d.setTime(d.getTime() + (1000 * 24 * 60 * 60 * 1000)); // 3 years or so
     var expires = "expires="+d.toUTCString();
     document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    return;
 }
 
 function getCookie(cname) {
@@ -72,3 +82,19 @@ function getCookie(cname) {
     }
     return "";
 }
+
+
+
+function deleteAllCookies() {
+    var cookies = document.cookie.split(";");
+
+    for (var i = 0; i < cookies.length; i++) {
+        var cookie = cookies[i];
+        var eqPos = cookie.indexOf("=");
+        var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
+    }
+    return;
+}
+
+
