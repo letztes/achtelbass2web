@@ -82,15 +82,15 @@ def index():
     
     context['generated_notes'] = achtelbass_obj.display()
     
+    # If cookie for hiding controls is set and form was submitted
     # Tonic is always set when the form is submitted
-    if form.getvalue('tonic'):
-		# The for was submitted.
+    if form.getvalue('tonic') and 'hide_controls_after_submit' in parameters:
+		# The form was submitted.
 		# Show result notes, but hide the controls.
 		context['controls_display_style'] = 'none'
 		context['controls_button_text'] = 'Show controls'
     else:
-		# The form was not submitted. The site is loaded initially.
-		# Show controls and notes for default configuration.
+		# Show controls and notes.
 		context['controls_display_style'] = 'block'
 		context['controls_button_text'] = 'Hide controls'
     

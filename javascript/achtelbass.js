@@ -34,25 +34,80 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	};
 	
 	// Toggle visibility of all UI elements like buttons, checkboxes etc.
+	// only if the main page is displayed
     if (document.getElementById("hide_form_button") !== null) {
-		document.getElementById('hide_form_button').onclick=function(){
-			document.getElementById('configure').style.display = (document.getElementById('configure').style.display == 'none') ? 'block' : 'none';
-			document.getElementById('hide_form_button').innerHTML = (document.getElementById('hide_form_button').innerHTML == "Show controls") ? "Hide controls" : "Show controls";
-		};
+		
+		// only if the cookie for hiding controls is set
+		if (getCookie("hide_controls_after_submit") == "on") {
+			
+			document.getElementById('hide_form_button').onclick=function(){
+				document.getElementById('configure').style.display = (document.getElementById('configure').style.display == 'none') ? 'block' : 'none';
+				document.getElementById('hide_form_button').innerHTML = (document.getElementById('hide_form_button').innerHTML == "Show controls") ? "Hide controls" : "Show controls";
+			};
+		}
 	}
 	
 	// this is handled separately because all other ui elements set
 	// cookie only if this one was enabled
 	if (document.getElementById("enable_cookies") !== null) {
 		document.querySelector('#enable_cookies').onchange = function(evt) {
+			
+			var configuration_elements = document.getElementsByClassName('configuration');
 			if (evt.target.checked) {
 				setCookie('enable_cookies', 'on');
+				
+				//Enable the other configuration setting elements
+				for (var i = 0; i < configuration_elements.length; i++) {
+					configuration_elements[i].disabled = false;
+				}
 			}
 			else {
 				deleteAllCookies();
+				
+				// Uncheck and disable all other configuration settings
+				for (var i = 0; i < configuration_elements.length; i++) {
+					
+					// Don't want to disable the switch for enabling...
+					if (configuration_elements[i].name == 'enable_cookies') {
+						continue;
+					}
+						
+					configuration_elements[i].disabled = "disabled";
+					if (configuration_elements[i].type == 'checkbox') {
+						configuration_elements[i].checked = false;
+					}
+				}
 			}
 		}
 	}
+	
+	// Prefill the UI elements in the configure site onload from cookie
+	if (document.getElementById("enable_cookies") !== null) {
+		var configuration_elements = document.getElementsByClassName('configuration');
+		if (getCookie("enable_cookies") == "on") {
+			
+			for (var i = 0; i < configuration_elements.length; i++) {
+				if (configuration_elements[i].type == 'checkbox') {
+					if (getCookie(configuration_elements[i].name) == "on") {
+						configuration_elements[i].checked = true;
+					}
+				}
+			}
+		}
+		else {
+			// Disable onload all configuration settings but for enabling
+			for (var i = 0; i < configuration_elements.length; i++) {
+				
+				// Don't want to disable the switch for enabling...
+				if (configuration_elements[i].name == 'enable_cookies') {
+					continue;
+				}
+					
+				configuration_elements[i].disabled = "disabled";
+			}
+		}
+	}
+	
 });
 
 function deleteCookie(cname) {
