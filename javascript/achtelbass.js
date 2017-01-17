@@ -36,15 +36,11 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	// Toggle visibility of all UI elements like buttons, checkboxes etc.
 	// only if the main page is displayed
     if (document.getElementById("hide_form_button") !== null) {
-		
-		// only if the cookie for hiding controls is set
-		if (getCookie("hide_controls_after_submit") == "on") {
 			
-			document.getElementById('hide_form_button').onclick=function(){
-				document.getElementById('configure').style.display = (document.getElementById('configure').style.display == 'none') ? 'block' : 'none';
-				document.getElementById('hide_form_button').innerHTML = (document.getElementById('hide_form_button').innerHTML == "Show controls") ? "Hide controls" : "Show controls";
-			};
-		}
+		document.getElementById('hide_form_button').onclick=function(){
+			document.getElementById('configure').style.display = (document.getElementById('configure').style.display == 'none') ? 'block' : 'none';
+			document.getElementById('hide_form_button').innerHTML = (document.getElementById('hide_form_button').innerHTML == "Show controls") ? "Hide controls" : "Show controls";
+		};
 	}
 	
 	// this is handled separately because all other ui elements set
