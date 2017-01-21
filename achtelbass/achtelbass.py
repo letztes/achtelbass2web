@@ -83,7 +83,7 @@ class Achtelbass(object):
                                 '1/32' : 0.03125,
                                }
         self.Diatonic_Notes          = 'C D E F G A B C'.split()
-        self.Tonics                  = ['C', 'G', 'D', 'A', 'E', 'B', 'F#', 'Gb', 'Db', 'Ab', 'Eb', 'Bb', 'F']
+        self.Tonics                  = ['C', 'G', 'D', 'A', 'E', 'B', 'F#', 'Gb', 'C#', 'Db', 'G#', 'Ab', 'D#', 'Eb', 'Bb', 'F']
         self.Modes                   = ['Major', 'Minor']
         self.Interval_Values = {
                                 'Unison'  : 0,
@@ -652,12 +652,12 @@ Options are:
     for opt, arg in opts:
         if opt in ('-t', '--tonic'):
             if arg in ('C', 'G', 'D', 'A', 'E', 'B', 'F#',
-                       'Gb', 'Db', 'Ab', 'Eb', 'Bb', 'F'):
+                       'Gb', 'C#', 'Db', 'G#', 'Ab', 'D#', 'Eb', 'Bb', 'F'):
                 parameters['tonic'] = arg
             else:
                 print arg, 'is not a valid value for tonic.'
                 print 'Tonic must be one of', 'C', 'G', 'D', 'A', 'E',\
-                        'B', 'F#', 'Gb', 'Db', 'Ab', 'Eb', 'Bb', 'F'
+                        'B', 'F#', 'Gb', 'C#', 'Db', 'G#', 'Ab', 'D#', 'Eb', 'Bb', 'F'
                 exit()
 
     for opt, arg in opts:
