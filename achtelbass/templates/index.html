@@ -123,15 +123,10 @@
 
 			<script src="/javascript/achtelbass.js" type="text/javascript"></script>
 			<script type="text/javascript">
-				var configure 	= document.getElementById('configure');
-
-				var submit_configure = function() {
-					configure.submit();
-				}
 
 				ABCJS.renderAbc("canvas", document.getElementById("abc").value);
 				//ABCJS.renderMidi("midi", document.getElementById("abc").value);
-
+				
 				if (document.querySelectorAll('fieldset input[type="range"]').length) {
 					Array.prototype.forEach.call(document.querySelectorAll('fieldset:not(.pitch) input[type="range"]'), function(el, i) {
 						if (typeof(el.nextElementSibling) !== "undefined") {
@@ -142,10 +137,6 @@
 						}
 					});
 				}
-						
-				Array.prototype.forEach.call(configure.querySelectorAll('fieldset input'), function(el, i) {
-					el.addEventListener('change', submit_configure);
-				});
 
 			</script>
 		</div>

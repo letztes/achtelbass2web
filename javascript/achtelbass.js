@@ -1,10 +1,24 @@
 document.addEventListener("DOMContentLoaded", function(event) {
+	
+
+	var submit_configure = function() {
+		if (document.getElementById("configure") !== null) {
+			var configure = document.getElementById('configure');
+			configure.submit();
+		}
+
+		return;
+	} 
+	
 	document.querySelector('.body').onchange = function(evt) {
 		
 		// do not set cookies if user has not enabled cookies
 		if (getCookie("enable_cookies") == "") {
+			submit_configure();
 			return "";
 		}
+		
+		// Store parameters onchange to cookie
 		
 		// range elements have not the property checked and must not be 
 		// deleted from cookie but instead set to 0 if deactivated
@@ -31,6 +45,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
 				setCookie(checkbox_name, list_of_values.join('###'));
 			}
 		}
+
+		submit_configure();
 	};
 	
 	// Toggle visibility of all UI elements like buttons, checkboxes etc.
