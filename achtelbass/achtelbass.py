@@ -494,6 +494,16 @@ class Achtelbass(object):
                 if random.uniform(0, 1) < self.Rest_Frequency:
                     note_string += 'z/' + note_values[i] + ' '
                 else:
+                    # Nothing bad would happen if i were 0, except that
+                    # in the beginning of the piece the clef changes and
+                    # there were two clefs or so.
+                    if i > 0:
+                    	if previous_clef == 'bass' and self.Notes.index(pitches[i]) > self.Notes.index('E'):
+                    	    note_string += ' [K:clef=treble] '
+                    	    previous_clef = 'treble'
+                    	if previous_clef == 'treble' and self.Notes.index(pitches[i]) < self.Notes.index('A,'):
+                    	    note_string += ' [K:clef=bass] '
+                    	    previous_clef = 'bass'
                 
                     # If the user requested chords
                     if self.Chords_Frequency > 0:
@@ -513,14 +523,6 @@ class Achtelbass(object):
                             note_string += pitches[i] + '/' + note_values[i] + ' '
                     else:
                         note_string += pitches[i] + '/' + note_values[i] + ' '
-                    
-                
-                if previous_clef == 'bass' and self.Notes.index(pitches[i]) > self.Notes.index('E'):
-                    note_string += ' [K:clef=treble] '
-                    previous_clef = 'treble'
-                if previous_clef == 'treble' and self.Notes.index(pitches[i]) < self.Notes.index('A,'):
-                    note_string += ' [K:clef=bass] '
-                    previous_clef = 'bass'
 
         return note_string, previous_clef
 
