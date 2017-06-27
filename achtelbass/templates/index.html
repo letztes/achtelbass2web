@@ -125,7 +125,7 @@
 			<script type="text/javascript">
 
 				ABCJS.renderAbc("canvas", document.getElementById("abc").value);
-				//ABCJS.renderMidi("midi", document.getElementById("abc").value);
+				ABCJS.renderMidi("midi", document.getElementById("abc").value);
 				
 				if (document.querySelectorAll('fieldset input[type="range"]').length) {
 					Array.prototype.forEach.call(document.querySelectorAll('fieldset:not(.pitch) input[type="range"]'), function(el, i) {
