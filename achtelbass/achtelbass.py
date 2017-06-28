@@ -386,8 +386,6 @@ class Achtelbass(object):
 			
 			clef  = 'treble'
 			
-			self.Clef = clef
-			
 			selectable_pitches  = self.Notes[self.Notes.index(min_pitch):self.Notes.index(max_pitch)+1]
 
 			# Caveat, can be empty if the pitch range does not include the tonic
@@ -414,7 +412,7 @@ class Achtelbass(object):
 				
 				if i == 0 and self.Notes.index(pitches[0]) < self.Notes.index('C'):
 					clef = 'bass'
-					self.Clef = clef
+					self.Clef_Left_Hand = clef
 				
 				bar, clef = self.glue_together(note_values, pitches, clef)
 				
