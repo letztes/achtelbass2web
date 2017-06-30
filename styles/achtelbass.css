@@ -84,7 +84,7 @@ display: none;
 .controls input[type="checkbox"] + label,
 .controls input[type="radio"] + label,
 .controls input[type="submit"],
-#hide_form_button {
+.control_buttons {
 	line-height: 2em;
 	padding: 0 0.5em;
 	border-radius: 0.5em;
@@ -340,7 +340,7 @@ label[for="rest_frequency"] {
 	display: none;
 }
 
-#hide_form_button {
+.control_buttons {
 	margin:1em;
 	color: #888;
 	background-color: #fff;
