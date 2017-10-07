@@ -5,7 +5,7 @@ print "content-type:text/html\n\n"
 
 import cgi
 import cgitb
-#cgitb.enable()  # for troubleshooting
+cgitb.enable()  # for troubleshooting
 
 import os
 
