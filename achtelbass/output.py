@@ -32,6 +32,175 @@ class Output(object):
 					  "c'", "d'", "e'", "f'", "g'", "a'", "b'"
 					  "c''", "d''", "e''", "f''", "g''", "a''", "b''"
 	]
+		# mode: tonic : notes with accidentals if any
+		self.Title_Accidentals = {
+			"Major" : {
+				"C" : {},
+				"G" : {"f" : "#"},
+				"D" : {
+					"f" : "#",
+					"c" : "#"
+				},
+				"A" : {
+					"f" : "#",
+					"c" : "#",
+					"g" : "#"
+				},
+				"E" : {
+					"f" : "#",
+					"c" : "#",
+					"g" : "#",
+					"d" : "#"
+				},
+				"B" : {
+					"f" : "#",
+					"c" : "#",
+					"g" : "#",
+					"d" : "#",
+					"a" : "#"
+				},
+				"F#" : {
+					"f" : "#",
+					"c" : "#",
+					"g" : "#",
+					"d" : "#",
+					"a" : "#",
+					"e" : "#"
+				},
+				"C#" : {
+					"f" : "#",
+					"c" : "#",
+					"g" : "#",
+					"d" : "#",
+					"a" : "#",
+					"e" : "#",
+					"b" : "#"
+				},
+				"Cb" : {
+					"b" : "b",
+					"e" : "b",
+					"a" : "b",
+					"d" : "b",
+					"g" : "b",
+					"c" : "b",
+					"f" : "b"
+				},
+				"Gb" : {
+					"b" : "b",
+					"e" : "b",
+					"a" : "b",
+					"d" : "b",
+					"g" : "b",
+					"c" : "b"
+				},
+				"Db" : {
+					"b" : "b",
+					"e" : "b",
+					"a" : "b",
+					"d" : "b",
+					"g" : "b"
+				},
+				"Ab" : {
+					"b" : "b",
+					"e" : "b",
+					"a" : "b",
+					"d" : "b"
+				},
+				"Eb" : {
+					"b" : "b",
+					"e" : "b",
+					"a" : "b"
+				},
+				"B" : {
+					"b" : "b",
+					"e" : "b",
+				},
+				"F" : {"b" : "b"}
+			},
+			"Minor" : {
+				"A" : {},
+				"E" : {"f" : "#"},
+				"B" : {
+					"f" : "#",
+					"c" : "#"
+				},
+				"F#" : {
+					"f" : "#",
+					"c" : "#",
+					"g" : "#"
+				},
+				"C#" : {
+					"f" : "#",
+					"c" : "#",
+					"g" : "#",
+					"d" : "#"
+				},
+				"G#" : {
+					"f" : "#",
+					"c" : "#",
+					"g" : "#",
+					"d" : "#",
+					"a" : "#"
+				},
+				"D#" : {
+					"f" : "#",
+					"c" : "#",
+					"g" : "#",
+					"d" : "#",
+					"a" : "#",
+					"e" : "#"
+				},
+				"A#" : {
+					"f" : "#",
+					"c" : "#",
+					"g" : "#",
+					"d" : "#",
+					"a" : "#",
+					"e" : "#",
+					"b" : "#"
+				},
+				"Ab" : {
+					"b" : "b",
+					"e" : "b",
+					"a" : "b",
+					"d" : "b",
+					"g" : "b",
+					"c" : "b",
+					"f" : "b"
+				},
+				"Eb" : {
+					"b" : "b",
+					"e" : "b",
+					"a" : "b",
+					"d" : "b",
+					"g" : "b",
+					"c" : "b"
+				},
+				"B" : {
+					"b" : "b",
+					"e" : "b",
+					"a" : "b",
+					"d" : "b",
+					"g" : "b"
+				},
+				"F" : {
+					"b" : "b",
+					"e" : "b",
+					"a" : "b",
+					"d" : "b"
+				},
+				"C" : {
+					"b" : "b",
+					"e" : "b",
+					"a" : "b"
+				},
+				"G" : {
+					"b" : "b",
+					"e" : "b",
+				},
+				"D" : {"b" : "b"}
+			},
+		}
 		
 		## Hier faengt die Definition der Praeambelelemente an.
 		
@@ -52,9 +221,27 @@ class Output(object):
 		intervals_string = ''
 		for interval in self.Intervals:
 			intervals_string += self.Locales[interval] + ', '
-		intervals_string = re.sub(r', $', r' in ', intervals_string)
+		intervals_string = re.sub(', $', ' in ', intervals_string)
 		intervals_string = re.sub(r'(.+),(.+?)$', r'\g<1> '+locales['and']+' \g<2>', intervals_string)
-		self.Title = intervals_string + self.Min_Pitch + ' - ' + self.Max_Pitch # usw.
+
+		# min pitch defaults to value from form
+		min_pitch_corrected = self.Min_Pitch
+		min_pitch_letter = re.findall(r"[A-G]", self.Min_Pitch, re.IGNORECASE)[0]
+		# only if there exists an accidental for that letter, add it
+		if min_pitch_letter.lower() in self.Title_Accidentals[self.Mode][self.Tonic]:
+			# self.Title_Accidentals = mode: tonic : notes with accidentals if any
+			min_pitch_corrected = min_pitch_letter + self.Title_Accidentals[self.Mode][self.Tonic][min_pitch_letter.lower()]
+			min_pitch_corrected = re.sub(r"[A-Ga-g]", min_pitch_corrected, self.Min_Pitch)
+		
+		max_pitch_corrected = self.Max_Pitch
+		max_pitch_letter = re.findall(r"[A-G]", self.Max_Pitch, re.IGNORECASE)[0]
+		if max_pitch_letter.lower() in self.Title_Accidentals[self.Mode][self.Tonic]:
+			max_pitch_corrected = max_pitch_letter + self.Title_Accidentals[self.Mode][self.Tonic][max_pitch_letter.lower()]
+			max_pitch_corrected = re.sub(r"[A-Ga-g]", max_pitch_corrected, self.Max_Pitch)
+		
+		
+		
+		self.Title = intervals_string + min_pitch_corrected + ' - ' + max_pitch_corrected # usw.
 	
 	def print_out(self):
 	   
