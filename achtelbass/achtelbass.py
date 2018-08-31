@@ -323,8 +323,6 @@ class Achtelbass(object):
 												first_note	 = previous_pitch_left_hand if (first_bar) else False,
 												previous_pitch = previous_pitch_left_hand)
 				
-				previous_pitch_left_hand = pitches_left_hand[-1]
-				
 				if i == 0 and self.Notes.index(pitches_left_hand[0]) < self.Notes.index('C'):
 					clef_left_hand = 'bass'
 					self.Clef_Left_Hand = clef_left_hand
@@ -337,14 +335,12 @@ class Achtelbass(object):
 												first_note	 = fifth if (fifth and first_bar) else previous_pitch_right_hand,
 												previous_pitch = previous_pitch_right_hand)
 				
-				previous_pitch_right_hand = pitches_right_hand[-1]
-				
 				if i == 0 and self.Notes.index(pitches_right_hand[0]) < self.Notes.index('C'):
 					clef_right_hand = 'bass'
 					self.Clef_Right_Hand = clef_right_hand
 				
-				bar_left_hand, clef_left_hand = self.glue_together(note_values_left_hand, pitches_left_hand, clef_left_hand)
-				bar_right_hand, clef_right_hand = self.glue_together(note_values_right_hand, pitches_right_hand, clef_right_hand)
+				bar_left_hand, clef_left_hand, previous_pitch_left_hand = self.glue_together(note_values_left_hand, pitches_left_hand, clef_left_hand)
+				bar_right_hand, clef_right_hand, previous_pitch_right_hand = self.glue_together(note_values_right_hand, pitches_right_hand, clef_right_hand)
 				
 				note_string_left_hand  += bar_left_hand
 				note_string_right_hand += bar_right_hand
@@ -396,6 +392,7 @@ class Achtelbass(object):
 			if tonics:
 				previous_pitch  = tonics[0]
 			
+			# TODO: Why not "if i == 0"?
 			first_bar = True
 			
 			# One bar after another
@@ -407,16 +404,14 @@ class Achtelbass(object):
 												note_values	= note_values,
 												first_note	 = previous_pitch if (first_bar) else False,
 												previous_pitch = previous_pitch)
-				
-				previous_pitch = pitches[-1]
-				
+
 				if i == 0 and self.Notes.index(pitches[0]) < self.Notes.index('C'):
 					clef = 'bass'
 					self.Clef_Left_Hand = clef
 				
-				bar, clef = self.glue_together(note_values, pitches, clef)
+				bar, clef, previous_pitch = self.glue_together(note_values, pitches, clef)
 				
-				note_string  += bar
+				note_string += bar
 
 				# Line break after 20 notes
 				if (note_string.count('/') > 20 or note_string.count('/') > 20):
@@ -478,28 +473,31 @@ class Achtelbass(object):
 
 
 	def glue_together(self, note_values, pitches, previous_clef):
-
 		note_string = ''
 
 		_tie_pending = False
-	
-		for i in range(len(note_values)):
-			if note_values[i] == " | ":
+
+		# Pitches are accessed by a separate counter variable because
+		# rests are inserted here and must not waste a pitch index.
+		# The pitch_index variable is not to increment when rest
+		pitch_index = 0
+		for note_value_index in range(len(note_values)):
+			if note_values[note_value_index] == " | ":
 				note_string += " | "
-			elif isinstance(note_values[i], str) and note_values[i][0] == '(':
-				note_string += note_values[i] + ' '
+			elif isinstance(note_values[note_value_index], str) and note_values[note_value_index][0] == '(':
+				note_string += note_values[note_value_index] + ' '
 			else:
 				if random.uniform(0, 1) < self.Rest_Frequency:
-					note_string += 'z/' + note_values[i] + ' '
+					note_string += 'z/' + note_values[note_value_index] + ' '
 				else:
-					# Nothing bad would happen if i were 0, except that
+					# Nothing bad would happen if note_value_index were 0, except that
 					# in the beginning of the piece the clef changes and
 					# there were two clefs or so.
-					if i > 0:
-						if previous_clef == 'bass' and self.Notes.index(pitches[i]) > self.Notes.index('E'):
+					if note_value_index > 0:
+						if previous_clef == 'bass' and self.Notes.index(pitches[pitch_index]) > self.Notes.index('E'):
 							note_string += ' [K:clef=treble] '
 							previous_clef = 'treble'
-						if previous_clef == 'treble' and self.Notes.index(pitches[i]) < self.Notes.index('A,'):
+						if previous_clef == 'treble' and self.Notes.index(pitches[pitch_index]) < self.Notes.index('A,'):
 							note_string += ' [K:clef=bass] '
 							previous_clef = 'bass'
 				
@@ -508,21 +506,25 @@ class Achtelbass(object):
 						# Calculate whether to show chords or not according
 						# to the propability that the user specified
 						if random.uniform(0, 1) < self.Chords_Frequency:
-							index_of_root = self.Notes.index(pitches[i])
+							index_of_root = self.Notes.index(pitches[pitch_index])
 							
 							# Only if the root note is not too high to form a chord
+							# CHANGEME seventh, ninth, eleventh chord etc.
 							if index_of_root + 5 <= len(self.Notes):
-								# CHANGEME septachords etc
-								# CHANGEME self.Chord_Inversion == 1 | 2 etc
-								note_string += '[' + self.Notes[index_of_root] + self.Notes[index_of_root+2] + self.Notes[index_of_root+4] + ']/' + note_values[i] + ' '
+								# CHANGEME self.Chord_Inversion == 1 | 2 etc.
+								note_string += '[' + self.Notes[index_of_root] + self.Notes[index_of_root+2] + self.Notes[index_of_root+4] + ']/' + note_values[note_value_index] + ' '
+								pitch_index += 1
 							else:
-								note_string += pitches[i] + '/' + note_values[i] + ' '
+								note_string += pitches[pitch_index] + '/' + note_values[note_value_index] + ' '
+								pitch_index += 1
 						else:
-							note_string += pitches[i] + '/' + note_values[i] + ' '
+							note_string += pitches[pitch_index] + '/' + note_values[note_value_index] + ' '
+							pitch_index += 1
 					else:
-						note_string += pitches[i] + '/' + note_values[i] + ' '
+						note_string += pitches[pitch_index] + '/' + note_values[note_value_index] + ' '
+						pitch_index += 1
 
-		return note_string, previous_clef
+		return note_string, previous_clef, pitches[pitch_index]
 
 	
 	def display(self):
