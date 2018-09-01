@@ -34,7 +34,7 @@ def index():
 				  'rest_frequency'		  : form.getvalue('rest_frequency', 0),
 				  'time_signature'		  : form.getvalue('time_signature','4/4'),
 				  'note_values'			 : form.getlist('note_values') or ['1', '1/2', '1/4'],
-				  'tuplets'				 : form.getlist('tuplets') or [0],
+				  'tuplets'				 : form.getlist('tuplets') or [3],
 				  'tuplet_same_pitch'	   : False,
 				  'tuplets_frequency'	   : form.getvalue('tuplets_frequency',0),
 				  'prolongations'		   : False,
