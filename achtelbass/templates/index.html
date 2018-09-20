@@ -5,13 +5,13 @@
 		<meta name="author" content="Artur Spengler (Backend), Petra Schanz (Frontend)">
 		<title>Achtelbass</title>
 		<link rel="stylesheet" type="text/css" href="/styles/achtelbass.css">
+		<link rel="stylesheet" type="text/css" href="/styles/abcjs-midi.css">
 		<meta name="viewport" content="width=device-width, initial-scale=1" />	
 		<!--http://nortago.deviantart.com/art/Bg-Texture-wood-38841113 Wood-Background by nortago, thanks a lot!-->
 	</head>
 	<body>
 		<div class="body">
 			{{ debugging_info }}
-			<!--applet id="MIDIPlugin" code="MIDIPlugin.class" name="MIDIPlugin" archive="http://dl.dropbox.com/u/223827/abcjs/MIDIPlugin.jar" height="1" width="1"></applet-->
 
 			<textarea id="abc">
 			{{ generated_notes }}
@@ -116,7 +116,7 @@
 				<span id="midi"></span>
 				<div id="canvas"></div>
 			</main>
-			<script src="/js/abcjs_basic_2.3-min.js" type="text/javascript"></script>
+			<script src="/js/abcjs_midi_5.2.0-min.js" type="text/javascript"></script>
 
 			<script src="/js/achtelbass.js" type="text/javascript"></script>
 			<script type="text/javascript">
