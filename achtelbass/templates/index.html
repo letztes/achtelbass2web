@@ -123,6 +123,16 @@
 			<script src="/js/achtelbass.js" type="text/javascript"></script>
 			<script type="text/javascript">
 
+				function colorRange(range, color) {
+					if (range && range.elements) {
+						range.elements.forEach(function (set) {
+							set.forEach(function (item) {
+								item.setAttribute("fill", color);
+							});
+						});
+					}
+				}
+
 				const tunes = ABCJS.renderAbc("canvas", document.getElementById("abc").value, { add_classes: true });
 				
 				ABCJS.renderMidi(
@@ -131,12 +141,16 @@
 					{
 						animate: {
 							listener: function(
-								abcjsElement,
-								currentEvent,
+								lastRange,
+								currentRange,
 								context
-							) {},
-							target: tunes[0],
-							qpm: 120
+							){
+								colorRange(lastRange, "#000000");
+								colorRange(currentRange, "#3D9AFC");
+								var startChar = currentRange.startChar;
+								var endChar = currentRange.endChar;
+							},
+							target: tunes[0]
 						},
 						generateDownload: true,
 						inlineControls: {
