@@ -48,7 +48,7 @@ form h2 {
 	}
 
 	#canvas {
-		float: right;
+		float: left;
 	}
 }
 
@@ -336,7 +336,7 @@ label[for="rest_frequency"] {
 	float: right !important;
 }
 
-.about {
+.about, .midi_link {
 	display: none;
 }
 
