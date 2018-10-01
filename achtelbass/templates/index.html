@@ -115,8 +115,8 @@
 				</form>
 				
 				<button id="hide_form_button" class="control_buttons">{{ controls_button_text }}</button>
-				<input type="button" id="submit_button" class="control_buttons" value="Generate anew" onclick='document.forms["configure"].submit();'>
-				<button id="download_midi_button" class="control_buttons" onclick=document.getElementById('download_midi_link').click()>{{ download_midi_button_text }}Download midi</button>
+				<input type="button" id="submit_button" class="control_buttons" value="{{ Locales.submit_button_text }}" onclick='document.forms["configure"].submit();'>
+				<button id="download_midi_button" class="control_buttons" onclick=document.getElementById('download_midi_link').click()>{{ Locales.download_midi }}</button>
 				<span id="midi"></span>
 				<div id="canvas"></div>
 			</main>

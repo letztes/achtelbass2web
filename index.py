@@ -88,11 +88,11 @@ def index():
 		# The form was submitted.
 		# Show result notes, but hide the controls.
 		context['controls_display_style'] = 'none'
-		context['controls_button_text'] = 'Show controls'
+		context['controls_button_text'] = locales['show_controls']
 	else:
 		# Show controls and notes.
 		context['controls_display_style'] = 'block'
-		context['controls_button_text'] = 'Hide controls'
+		context['controls_button_text'] = locales['hide_controls']
 	
 
 	print template.render(context)

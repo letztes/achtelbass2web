@@ -116,8 +116,11 @@ locales = {
             '0.9' : '90 %',
             '1' : '100 %',
 # General stuff
+            'hide_controls' : 'Hide controls',
+            'show_controls' : 'Show controls',
+            'submit_button_text' : 'Generate new',
+            'download_midi' : 'Download midi',
             'Show advanced settings' : 'Show advanced settings', 
-            'Generate' : '_Generate',
             'Warning' : 'Warning',
             'OK' : 'OK',
 # Other parameters

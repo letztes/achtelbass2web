@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		return;
 	} 
 	
-	document.querySelector('.body').onchange = function(evt) {
+	document.querySelector('#configure').onchange = function(evt) {
 		
 		// do not set cookies if user has not enabled cookies
 		if (getCookie("enable_cookies") == "") {
