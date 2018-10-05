@@ -16,6 +16,6 @@ form = cgi.FieldStorage()
 
 def index():
 
-    print template.render(context)
+    print template.render(context).encode( "utf-8" )
 
 index()
