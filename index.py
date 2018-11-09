@@ -95,6 +95,6 @@ def index():
 		context['controls_button_text'] = locales['hide_controls']
 	
 
-	print template.render(context).encode( "utf-8" )
+	print template.render(context)
 
 index()

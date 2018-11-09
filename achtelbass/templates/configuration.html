@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta name="author" content="Artur Spengler (Backend), Petra Schanz (Frontend)">
+	<title>Achtelbass</title>
+	<link rel="stylesheet" type="text/css" href="/styles/achtelbass.css">
+</head>
+<body>
+	<div class="body">
+		<div class="wood">
+			<input type="checkbox" name="enable_cookies" id="enable_cookies" class="configuration"> Enable cookies for saving configuration for next visit of this website<br><br>
+			<input type="checkbox" name="hide_controls_after_submit" id="hide_controls_after_submit" class="configuration"> Hide controls after each submit<br><br>
+			
+		</div>
+	</div>
+	{% include 'footer.html' %}
+
+	<script src="/js/achtelbass.js" type="text/javascript"></script>
+</body>
+</html>

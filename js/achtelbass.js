@@ -165,13 +165,3 @@ function deleteAllCookies() {
 }
 
 
-function switch_view(element_id) {
-    
-    document.querySelectorAll('div.body').forEach(div => {
-		div.style.display = "none";
-	});
-    
-    var x = document.getElementById(element_id).style.display = "block";
-    
-    return;
-} 
