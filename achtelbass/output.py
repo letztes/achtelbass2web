@@ -111,7 +111,7 @@ class Output(object):
 					"e" : "b",
 					"a" : "b"
 				},
-				"B" : {
+				"Bb" : {
 					"b" : "b",
 					"e" : "b",
 				},
