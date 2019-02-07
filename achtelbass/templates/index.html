@@ -32,7 +32,7 @@
 					</fieldset>
 					<fieldset class="controls intervals">
 						<h2>{{ Locales.Intervals }}</h2>
-						{% for interval_index, interval_name in Possible_Intervals.iteritems() %}
+						{% for interval_index, interval_name in Possible_Intervals.items() %}
 							<input type="checkbox" id="interval_{{ interval_name }}" name="intervals" value="{{ interval_name }}"{% if interval_name in preselected.intervals %} checked="checked"{% endif %} />
 							<label for="interval_{{ interval_name }}">{{ interval_name }}</label>
 						{% endfor %}

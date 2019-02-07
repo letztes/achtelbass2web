@@ -1,7 +1,7 @@
-#!/usr/bin/python2.7
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*- 
 
-print "content-type:text/html\n\n"
+print("content-type:text/html\n\n")
 
 import cgi
 import cgitb
@@ -16,6 +16,6 @@ form = cgi.FieldStorage()
 
 def index():
 
-    print template.render(context)
+    print(template.render(context))
 
 index()

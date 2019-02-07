@@ -1,11 +1,11 @@
-#!/usr/bin/python2.7
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*- 
 
-print "content-type:text/html\n\n"
+print("content-type:text/html\n\n")
 
 import cgi
 import cgitb
-#cgitb.enable()  # for troubleshooting
+cgitb.enable()  # for troubleshooting
 from jinja2 import Template, Environment, PackageLoader
 
 env  = Environment(loader=PackageLoader('achtelbass', 'templates'))
@@ -16,6 +16,6 @@ form = cgi.FieldStorage()
 
 def index():
 
-    print template.render(context).encode( "utf-8" )
+    print(template.render(context))
 
 index()

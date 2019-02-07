@@ -1,7 +1,7 @@
-#!/usr/bin/python2.7
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*- 
 
-print "content-type:text/html\n\n"
+print("content-type:text/html\n\n")
 
 import cgi
 import cgitb
@@ -69,13 +69,13 @@ def index():
 	context['preselected'] = parameters
 
 	context['note_value_symbols'] = {
-		'1'	: u'𝅝',
-		'1/2'  : u'𝅗𝅥',
-		'1/4'  : u'♩',
-		'1/8'  : u'♪',
-		'1/16' : u'𝅘𝅥𝅯',
-		'1/32' : u'𝅘𝅥𝅰',
-		'1/64' : u'𝅘𝅥𝅱',
+		'1'	: '𝅝',
+		'1/2'  : '𝅗𝅥',
+		'1/4'  : '♩',
+		'1/8'  : '♪',
+		'1/16' : '𝅘𝅥𝅯',
+		'1/32' : '𝅘𝅥𝅰',
+		'1/64' : '𝅘𝅥𝅱',
 	}
 
 	context['note_value_names'] =  achtelbass_obj.Note_Names
@@ -95,6 +95,6 @@ def index():
 		context['controls_button_text'] = locales['hide_controls']
 	
 
-	print template.render(context)
+	print(template.render(context))
 
 index()

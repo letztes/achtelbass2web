@@ -1,4 +1,4 @@
-#!/usr/bin/python2.7
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #TODO 
@@ -87,7 +87,7 @@ class Pitches(object):
 			# E.g. min_pitch=C, max_pitch=c, current_pitch=F, intervals=[1,2,3,4,5,6]
 			# would result in a problem if interval 5 or 6 get chosen
 			# Default to Unison if nothing else fits
-			_eligible_intervals = [interval for interval in self.Intervals if self.Selectable_Pitches.index(_current_pitch) + self.Interval_Values[interval] <= len(self.Selectable_Pitches) - 1 or self.Selectable_Pitches.index(_current_pitch) - self.Interval_Values[interval] >= 0] or [u'Unison']
+			_eligible_intervals = [interval for interval in self.Intervals if self.Selectable_Pitches.index(_current_pitch) + self.Interval_Values[interval] <= len(self.Selectable_Pitches) - 1 or self.Selectable_Pitches.index(_current_pitch) - self.Interval_Values[interval] >= 0] or ['Unison']
 			
 			_current_interval = random.choice(_eligible_intervals)
 			_step = self.Interval_Values[_current_interval]

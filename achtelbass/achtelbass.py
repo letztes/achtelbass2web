@@ -1,4 +1,4 @@
-#!/usr/bin/python2.7
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*- 
 
 # Author:	   Artur Spengler, letztes@gmail.com
@@ -11,9 +11,9 @@ import random
 import re
 import warnings
 
-import note_values
-import pitches
-import output
+from . import note_values
+from . import pitches
+from . import output
 
 # Version of the program
 version = '0.2'
@@ -135,7 +135,7 @@ class Achtelbass(object):
 		self.Tonic				   = parameters['tonic']
 		self.Mode					= parameters['mode']
 		
-		if isinstance(parameters['chords_frequency'], basestring):
+		if isinstance(parameters['chords_frequency'], str):
 			self.Chords_Frequency		= float(parameters['chords_frequency'])
 		elif isinstance(parameters['chords_frequency'], float):
 			self.Chords_Frequency		= parameters['chords_frequency']
@@ -144,7 +144,7 @@ class Achtelbass(object):
 			
 		self.Grand_Staff			 = parameters['grand_staff']
 		
-		if isinstance(parameters['prolongations_frequency'], basestring):
+		if isinstance(parameters['prolongations_frequency'], str):
 			self.Prolongations_Frequency		= float(parameters['prolongations_frequency'])
 		elif isinstance(parameters['prolongations_frequency'], float):
 			self.Prolongations_Frequency		= parameters['prolongations_frequency']
@@ -214,7 +214,7 @@ class Achtelbass(object):
 		self.Clef_Left_Hand		 = 'treble'
 		self.Clef_Right_Hand		= 'treble'
 		
-		if isinstance(parameters['rest_frequency'], basestring):
+		if isinstance(parameters['rest_frequency'], str):
 			self.Rest_Frequency		= float(parameters['rest_frequency'])
 		elif isinstance(parameters['rest_frequency'], float):
 			self.Rest_Frequency		= parameters['rest_frequency']
@@ -234,14 +234,14 @@ class Achtelbass(object):
 			if self.Time_Signature % note_value == 0:
 				can_sum_up = True
 		if not can_sum_up:
-			inverse_fractions   = dict([[v,k] for k,v in self.Fraction_Values.items() if '/' in k])
+			inverse_fractions   = dict([[v,k] for k,v in list(self.Fraction_Values.items()) if '/' in k])
 			self.Time_Signature = self.Selectable_Note_Values[-1]
 			self.Time_Signature_Numerator, self.Time_Signature_Denominator = inverse_fractions[self.Time_Signature].split('/')
 		
 		self.Tuplets		   = parameters['tuplets']
 		self.Tuplet_Same_Pitch = parameters['tuplet_same_pitch']
 
-		if isinstance(parameters['tuplets_frequency'], basestring):
+		if isinstance(parameters['tuplets_frequency'], str):
 			self.Tuplets_Frequency		= float(parameters['tuplets_frequency'])
 		elif isinstance(parameters['tuplets_frequency'], float):
 			self.Tuplets_Frequency		= parameters['tuplets_frequency']
@@ -545,7 +545,7 @@ if __name__ == '__main__':
 	import getopt, sys
 
 	def usage():
-		print sys.argv[0], """is a semi random generator for sheet music."
+		print(sys.argv[0], """is a semi random generator for sheet music."
 Usage: , sys.argv[0], [OPTIONS]
 None of the options are mandatory, any omitted options
 are set to default values listed below.
@@ -602,7 +602,7 @@ Options are:
 	  default='no tuplets'
 	
 	 --help  print this message and exit
-	 --version print version information and exit"""
+	 --version print version information and exit""")
    
 	# Definition of default parameters
 	parameters = {'tonic' : 'C',
@@ -646,8 +646,8 @@ Options are:
 					  'time_signature=', 'prolongations_frequency=',
 					  'note_values=', 'tuplets=', 'tuplet_same_pitch',
 					  'tuplets_frequency=', 'bpm=', 'tempo=', 'help', 'version'])
-	except getopt.GetoptError, err:
-		print str(err)
+	except getopt.GetoptError as err:
+		print(str(err))
 		usage()
 		exit()
 
@@ -657,9 +657,9 @@ Options are:
 					   'Gb', 'C#', 'Db', 'G#', 'Ab', 'D#', 'Eb', 'Bb', 'F'):
 				parameters['tonic'] = arg
 			else:
-				print arg, 'is not a valid value for tonic.'
-				print 'Tonic must be one of', 'C', 'G', 'D', 'A', 'E',\
-						'B', 'F#', 'Gb', 'C#', 'Db', 'G#', 'Ab', 'D#', 'Eb', 'Bb', 'F'
+				print(arg, 'is not a valid value for tonic.')
+				print('Tonic must be one of', 'C', 'G', 'D', 'A', 'E',\
+						'B', 'F#', 'Gb', 'C#', 'Db', 'G#', 'Ab', 'D#', 'Eb', 'Bb', 'F')
 				exit()
 
 	for opt, arg in opts:
@@ -667,8 +667,8 @@ Options are:
 			if arg in ():
 				parameters['tempo'] = arg
 			else:
-				print arg, 'is not a valid value for tempo.'
-				print 'Tempo must be one of', str(tempo_opt[1:-1])
+				print(arg, 'is not a valid value for tempo.')
+				print('Tempo must be one of', str(tempo_opt[1:-1]))
 				exit()
 
 	for opt, arg in opts:
@@ -677,16 +677,16 @@ Options are:
 			if arg >= 20 and arg <= 200:
 				parameters['bpm'] = arg
 			else:
-				print arg, 'is not a valid value for bpm.'
-				print 'Beats per minute must be an integer between 20 and 200'
+				print(arg, 'is not a valid value for bpm.')
+				print('Beats per minute must be an integer between 20 and 200')
 				exit()
 
 		if opt in ('-m', '--mode'):
 			if arg in ('Major', 'Minor'):
 				parameters['mode'] = arg
 			else:
-				print arg, 'is not a valid value for mode.'
-				print "mode must be one of Minor, Major"
+				print(arg, 'is not a valid value for mode.')
+				print("mode must be one of Minor, Major")
 				exit()
 
 		if opt in ('-k', '--changing_key'):
@@ -699,9 +699,9 @@ Options are:
 			if float(arg) >= 0 and float(arg) <= 1:
 				parameters['prolongations_frequency'] = arg
 			else:
-				print arg, 'is not a valid value for prolongations_frequency.'
-				print 'prolongations_frequency must be an integer between 0 and 1'
-				print 'For example 0.5'
+				print(arg, 'is not a valid value for prolongations_frequency.')
+				print('prolongations_frequency must be an integer between 0 and 1')
+				print('For example 0.5')
 				exit()
 			
 
@@ -709,8 +709,8 @@ Options are:
 			if arg in (intervals_opt):
 				parameters['intervals'][arg] = True
 			else:
-				print arg, 'is not a valid value for interval.'
-				print 'interval must be one of', str(intervals_opt[1:-1])
+				print(arg, 'is not a valid value for interval.')
+				print('interval must be one of', str(intervals_opt[1:-1]))
 				exit()
 
 		if opt in ('-e', '--inversion'):
@@ -720,34 +720,34 @@ Options are:
 			if arg in (pitches_opt):
 				parameters['min_pitch'] = arg
 			else:
-				print arg, 'is not a valid value for min_pitch.'
-				print 'min_pitch must be one of', str(pitches_opt)[1:-1]
+				print(arg, 'is not a valid value for min_pitch.')
+				print('min_pitch must be one of', str(pitches_opt)[1:-1])
 				exit()
 
 		if opt in ('-x', '--max_pitch'):
 			if arg in (pitches_opt):
 				parameters['max_pitch'] = arg
 			else:
-				print arg, 'is not a valid value for max_pitch.'
-				print 'max_pitch must be one of', str(pitches_opt)[1:-1]
+				print(arg, 'is not a valid value for max_pitch.')
+				print('max_pitch must be one of', str(pitches_opt)[1:-1])
 				exit()
 
 		if opt in ('-r', '--rest_frequency'):
 			if arg in ('no rests', '0.1', '0.2', '0.3', '0.4', '0.5'):
 				parameters['rest_frequency'] = arg
 			else:
-				print arg, 'is not a valid value for rest_frequency.'
-				print 'rest_frequency must be one of', 'no rests',\
-					  '0.1', '0.2', '0.3', '0.4', '0.5'
+				print(arg, 'is not a valid value for rest_frequency.')
+				print('rest_frequency must be one of', 'no rests',\
+					  '0.1', '0.2', '0.3', '0.4', '0.5')
 				exit()
 
 		if opt in ('-s', '--time_signature'):
 			if arg in ('2/2', '3/4', '4/4'):
 				parameters['time_signature'] = arg
 			else:
-				print arg, 'is not a valid value for time_signature.'
-				print 'max_pitch must be one of', 'no rests', '2/2',\
-					  '3/4', '4/4'
+				print(arg, 'is not a valid value for time_signature.')
+				print('max_pitch must be one of', 'no rests', '2/2',\
+					  '3/4', '4/4')
 				exit()
 
 
@@ -755,18 +755,18 @@ Options are:
 			if arg in ('1', '1/2', '1/4', '1/8', '1/16', '1/32'):
 				parameters['note_values'][arg] = True
 			else:
-				print arg, 'is not a valid value for note_values.'
-				print 'note_values must be one of',\
-						"'1',", "'1/2',", "'1/4',", "'1/8',", "'1/16',", "'1/32',"
+				print(arg, 'is not a valid value for note_values.')
+				print('note_values must be one of',\
+						"'1',", "'1/2',", "'1/4',", "'1/8',", "'1/16',", "'1/32',")
 				exit()
 
 		if opt in ('-u', '--tuplets'):
 			if arg in ('no tuplets', '2', '3', '4', '5', '6', '7'):
 				parameters['tuplets'] = arg
 			else:
-				print arg, 'is not a valid value for tuplets.'
-				print 'tuplets must be one of', "'no tuplets'",\
-						'2', '3', '4', '5', '6', '7'
+				print(arg, 'is not a valid value for tuplets.')
+				print('tuplets must be one of', "'no tuplets'",\
+						'2', '3', '4', '5', '6', '7')
 				exit()
 
 		if opt in ('-p', '--tuplet_same_pitch'):
@@ -777,10 +777,10 @@ Options are:
 					   '0.6', '0.7', '0.8', '0.9', '1'):
 				parameters['tuplets_frequency'] = arg
 			else:
-				print arg, 'is not a valid value for tuplets_frequency.'
-				print 'tuplets_frequency must be one of', 'no tuplets',\
+				print(arg, 'is not a valid value for tuplets_frequency.')
+				print('tuplets_frequency must be one of', 'no tuplets',\
 						'0.1', '0.2', '0.3', '0.4', '0.5', '0.6',\
-						'0.7', '0.8', '0.9', '1'
+						'0.7', '0.8', '0.9', '1')
 				exit()
 				
 		if opt == '--no_pdf':
@@ -791,8 +791,8 @@ Options are:
 			exit()
 
 		if opt in ('--version'):
-			print sys.argv[0], 'version', version
-			print ""
+			print(sys.argv[0], 'version', version)
+			print("")
 			exit()
 
 # These two are stored in a dict of dict, so their defaults must 
@@ -816,27 +816,27 @@ Options are:
 # When time signature is 3/4 and the only note value is 1 or 1/2, exit
 	if opt_fraction_values[parameters['time_signature']] < 1:
 		if '1' in parameters['note_values']:
-			print 'Cannot put whole notes into '+parameters['time_signature']+' bar.'
+			print('Cannot put whole notes into '+parameters['time_signature']+' bar.')
 			exit()
 		if opt_fraction_values[parameters['time_signature']] != 0.5 and \
 				parameters['note_values']['1/2']:
-			print 'Cannot put half notes into '+parameters['time_signature']+' bar.'
+			print('Cannot put half notes into '+parameters['time_signature']+' bar.')
 			exit()
 
 # If the span between min_pitch and max_pitch is smaller than the greatest
 # interval chosen, raise an error and exit.
-	names_of_chosen_intervals = parameters['intervals'].keys()
+	names_of_chosen_intervals = list(parameters['intervals'].keys())
 	names_of_chosen_intervals.sort()
 	greatest_interval_chosen = names_of_chosen_intervals[-1]
 	steps_in_note_span_chosen = abs(pitches_opt.index(parameters['max_pitch']) - pitches_opt.index(parameters['min_pitch']))
 	if steps_in_note_span_chosen < intervals_opt.index(greatest_interval_chosen):
 		#print steps_in_note_span_chosen; exit()
-		print 'You have chosen', greatest_interval_chosen, 'as the'
-		print 'greatest interval, but the span between the minimum'
-		print 'pitch', parameters['min_pitch'], 'and the maximum pitch', parameters['max_pitch'], ' is only a ', intervals_opt[steps_in_note_span_chosen]+'.'
-		print 'That will not fit.'
-		print 'Please choose either a smaller interval or a greater'
-		print "span between minimum pitch and maximum pitch.\n"
+		print('You have chosen', greatest_interval_chosen, 'as the')
+		print('greatest interval, but the span between the minimum')
+		print('pitch', parameters['min_pitch'], 'and the maximum pitch', parameters['max_pitch'], ' is only a ', intervals_opt[steps_in_note_span_chosen]+'.')
+		print('That will not fit.')
+		print('Please choose either a smaller interval or a greater')
+		print("span between minimum pitch and maximum pitch.\n")
 		exit()
 
 	from locales_en import locales
