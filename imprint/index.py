@@ -5,7 +5,7 @@ print("content-type:text/html\n\n")
 
 import cgi
 import cgitb
-cgitb.enable()  # for troubleshooting
+#cgitb.enable()  # for troubleshooting
 from jinja2 import Template, Environment, PackageLoader
 
 env  = Environment(loader=PackageLoader('achtelbass', 'templates'))
