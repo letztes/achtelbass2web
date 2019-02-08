@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", function(event) {
 	
 
+	// only relevant for start page
 	var submit_configure = function() {
 		if (document.getElementById("configure") !== null) {
 			var configure = document.getElementById('configure');
@@ -10,44 +11,19 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		return;
 	} 
 	
-	document.querySelector('#configure').onchange = function(evt) {
-		
-		// do not set cookies if user has not enabled cookies
-		if (getCookie("enable_cookies") == "") {
+	// configure section exists only on start page 
+    if (document.getElementById("configure") !== null) {
+		document.querySelector('#configure').onchange = function(evt) {
+
+			// do not set cookies if user has not enabled cookies
+			if (getCookie("enable_cookies") == "") {
+				submit_configure();
+			}
+
+			toggleCookie(evt);
 			submit_configure();
-			return "";
-		}
-		
-		// Store parameters onchange to cookie
-		
-		// range elements have not the property checked and must not be 
-		// deleted from cookie but instead set to 0 if deactivated
-		// radio buttons must have some value and are not deleted either
-		if (evt.target.type == 'range' || evt.target.type == 'radio') {
-			setCookie(evt.target.name, evt.target.value);
-		}
-		// all other elements are checkboxes and
-		// are deleted from cookie if deactivated
-		else {
-			var checkbox_name = evt.target.name;
-			deleteCookie(checkbox_name);
-
-			var list_of_checkbox_nodes = document.getElementsByName(evt.target.name);
-			var i;
-			var list_of_values = [];
-			var combined_string = '';
-			for (i = 0; i < list_of_checkbox_nodes.length; i++) {
-				if (list_of_checkbox_nodes[i].checked) {
-					list_of_values.push(list_of_checkbox_nodes[i].value);
-				}
-			}
-			if (list_of_values.length > 0) {
-				setCookie(checkbox_name, list_of_values.join('###'));
-			}
-		}
-
-		submit_configure();
-	};
+		};
+	}
 	
 	// Toggle visibility of all UI elements like buttons, checkboxes etc.
 	// only if the main page is displayed
@@ -61,6 +37,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	
 	// this is handled separately because all other ui elements set
 	// cookie only if this one was enabled
+	// enable_cookies switch exists only on configuration page
 	if (document.getElementById("enable_cookies") !== null) {
 		document.querySelector('#enable_cookies').onchange = function(evt) {
 			
@@ -91,6 +68,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
 				}
 			}
 		}
+		document.querySelector('#site_configuration').onchange = function(evt) {
+			toggleCookie(evt);
+		}
 	}
 	
 	// Prefill the UI elements in the configure site onload from cookie
@@ -99,6 +79,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		if (getCookie("enable_cookies") == "on") {
 			
 			for (var i = 0; i < configuration_elements.length; i++) {
+				
+				// prefill checkbox values
 				if (configuration_elements[i].type == 'checkbox') {
 					if (getCookie(configuration_elements[i].name) == "on") {
 						configuration_elements[i].checked = true;
@@ -110,7 +92,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
 			// Disable onload all configuration settings but for enabling
 			for (var i = 0; i < configuration_elements.length; i++) {
 				
-				// Don't want to disable the switch for enabling...
+				// Don't want to disable the switch for enabling.
+				// Must stay clickable.
 				if (configuration_elements[i].name == 'enable_cookies') {
 					continue;
 				}
@@ -121,6 +104,39 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	}
 	
 });
+
+function toggleCookie(evt) {
+	
+	// Store parameters onchange to cookie
+	
+	// range elements have not the property checked and must not be 
+	// deleted from cookie but instead set to 0 if deactivated
+	// radio buttons must have some value and are not deleted either
+	if (evt.target.type == 'range' || evt.target.type == 'radio') {
+		setCookie(evt.target.name, evt.target.value);
+	}
+	// all other elements are checkboxes and
+	// are deleted from cookie if deactivated
+	else {
+		var checkbox_name = evt.target.name;
+		deleteCookie(checkbox_name);
+
+		var list_of_checkbox_nodes = document.getElementsByName(evt.target.name);
+		var i;
+		var list_of_values = [];
+		var combined_string = '';
+		for (i = 0; i < list_of_checkbox_nodes.length; i++) {
+			if (list_of_checkbox_nodes[i].checked) {
+				list_of_values.push(list_of_checkbox_nodes[i].value);
+			}
+		}
+		if (list_of_values.length > 0) {
+			setCookie(checkbox_name, list_of_values.join('###'));
+		}
+	}
+	
+    return;
+}
 
 function deleteCookie(cname) {
     document.cookie = cname + "=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/";
