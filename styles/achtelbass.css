@@ -17,7 +17,7 @@ main {
 	display: none;
 }
 
-#configure {
+#music_parameters {
 	overflow: hidden;
 	background: url('/images/bg_texture___wood_by_nortago.jpg') top left #402107;
 	box-shadow: -5px -5px 5px #210 inset;
@@ -42,7 +42,7 @@ form h2 {
 }
 
 @media (min-width: 1200px) {
-	#configure {
+	#music_parameters {
 		float: left;
 		width: 300px;
 	}
@@ -53,25 +53,25 @@ form h2 {
 }
 
 @media (min-width: 1300px) {
-	#configure {
+	#music_parameters {
 		width: 400px;
 	}
 }
 
 @media (min-width: 1500px) {
-	#configure {
+	#music_parameters {
 		width: 600px;
 	}
 }
 
 @media (min-width: 1700px) {
-	#configure {
+	#music_parameters {
 		width: 800px;
 	}
 }
 
 @media (min-width: 1900px) {
-	#configure {
+	#music_parameters {
 		width: 1000px;
 	}
 }

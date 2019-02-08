@@ -2,26 +2,26 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	
 
 	// only relevant for start page
-	var submit_configure = function() {
-		if (document.getElementById("configure") !== null) {
-			var configure = document.getElementById('configure');
-			configure.submit();
+	var submit_music_parameters = function() {
+		if (document.getElementById("music_parameters") !== null) {
+			var music_parameters = document.getElementById('music_parameters');
+			music_parameters.submit();
 		}
 
 		return;
 	} 
 	
-	// configure section exists only on start page 
-    if (document.getElementById("configure") !== null) {
-		document.querySelector('#configure').onchange = function(evt) {
+	// music_parameters section exists only on start page 
+    if (document.getElementById("music_parameters") !== null) {
+		document.querySelector('#music_parameters').onchange = function(evt) {
 
 			// do not set cookies if user has not enabled cookies
 			if (getCookie("enable_cookies") == "") {
-				submit_configure();
+				submit_music_parameters();
 			}
 
 			toggleCookie(evt);
-			submit_configure();
+			submit_music_parameters();
 		};
 	}
 	
@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     if (document.getElementById("hide_form_button") !== null) {
 			
 		document.getElementById('hide_form_button').onclick=function(){
-			document.getElementById('configure').style.display = (document.getElementById('configure').style.display == 'none') ? 'block' : 'none';
+			document.getElementById('music_parameters').style.display = (document.getElementById('music_parameters').style.display == 'none') ? 'block' : 'none';
 			document.getElementById('hide_form_button').innerHTML = (document.getElementById('hide_form_button').innerHTML == "Show controls") ? "Hide controls" : "Show controls";
 		};
 	}
@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		}
 	}
 	
-	// Prefill the UI elements in the configure site onload from cookie
+	// Prefill the UI elements in the configuration site onload from cookie
 	if (document.getElementById("enable_cookies") !== null) {
 		var configuration_elements = document.getElementsByClassName('configuration');
 		if (getCookie("enable_cookies") == "on") {
