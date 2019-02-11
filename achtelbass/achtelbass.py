@@ -267,10 +267,15 @@ class Achtelbass(object):
 
 
 		# default to 8, set to parameter if is integer and not too big
-		self.Amount_Of_Bars = 8
-		if isinstance(parameters['amount_of_bars'], int):
-			if parameters['amount_of_bars'] > 1 and parameters['amount_of_bars'] < 100: # prevent dos attack
+		if isinstance(parameters['amount_of_bars'], str):
+			# prevent dos attack
+			if int(parameters['amount_of_bars']) > 0 and int(parameters['amount_of_bars']) < 100:
+				self.Amount_Of_Bars = int(parameters['amount_of_bars'])
+		elif isinstance(parameters['amount_of_bars'], int):
+			if parameters['amount_of_bars'] > 0 and parameters['amount_of_bars'] < 100:
 				self.Amount_Of_Bars = parameters['amount_of_bars']
+		else:
+			self.Amount_Of_Bars = 8
 		
 		self.Note_String	= ''
 				

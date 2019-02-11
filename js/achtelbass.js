@@ -86,6 +86,12 @@ document.addEventListener("DOMContentLoaded", function(event) {
 						configuration_elements[i].checked = true;
 					}
 				}
+				
+				else {
+					if (typeof getCookie(configuration_elements[i].name) !== "undefined") {
+						configuration_elements[i].value = getCookie(configuration_elements[i].name);
+					}
+				}
 			}
 		}
 		else {
@@ -112,7 +118,7 @@ function toggleCookie(evt) {
 	// range elements have not the property checked and must not be 
 	// deleted from cookie but instead set to 0 if deactivated
 	// radio buttons must have some value and are not deleted either
-	if (evt.target.type == 'range' || evt.target.type == 'radio') {
+	if (evt.target.type == 'range' || evt.target.type == 'radio' || evt.target.type == 'number') {
 		setCookie(evt.target.name, evt.target.value);
 	}
 	// all other elements are checkboxes and
