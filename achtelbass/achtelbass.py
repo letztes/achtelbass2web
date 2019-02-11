@@ -265,7 +265,13 @@ class Achtelbass(object):
 		except KeyError:
 			self.BPM = self.BPM_For_Tempo[self.Tempo]
 
+
+		# default to 8, set to parameter if is integer and not too big
 		self.Amount_Of_Bars = 8
+		if isinstance(parameters['amount_of_bars'], int):
+			if parameters['amount_of_bars'] > 1 and parameters['amount_of_bars'] < 100: # prevent dos attack
+				self.Amount_Of_Bars = parameters['amount_of_bars']
+		
 		self.Note_String	= ''
 				
 		if self.Grand_Staff:

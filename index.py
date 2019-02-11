@@ -41,6 +41,7 @@ def index():
 				  'prolongations_frequency' : 0,
 				  'bpm'					 : 60,
 				  'tempo'				   : 'andante',
+				  'amount_of_bars'		   : form.getvalue('amount_of_bars', 8),
 				 }
 
 	# Cookies override cgi forms
