@@ -8,7 +8,10 @@ import cgitb
 #cgitb.enable()  # for troubleshooting
 from jinja2 import Template, Environment, PackageLoader
 
-from locales import locales
+from locales import Locales
+
+locales_obj = Locales('en')
+locales = locales_obj.get_locales()
 
 env  = Environment(loader=PackageLoader('achtelbass', 'templates'))
 template = env.get_template('about.html')
