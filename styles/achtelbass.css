@@ -345,3 +345,7 @@ label[for="rest_frequency"] {
 	color: #888;
 	background-color: #fff;
 }
+
+input[id="amount_of_bars"] {
+	width:3em;
+}

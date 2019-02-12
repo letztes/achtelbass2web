@@ -93,6 +93,12 @@ document.addEventListener("DOMContentLoaded", function(event) {
 					}
 				}
 			}
+			// Some defaults
+			if (document.getElementById("amount_of_bars") !== null) {
+				if (typeof getCookie('amount_of_bars') == "undefined" || getCookie('amount_of_bars') < 1 || getCookie('amount_of_bars') > 64) {
+					document.getElementById('amount_of_bars').value = 8;
+				}
+			}
 		}
 		else {
 			// Disable onload all configuration settings but for enabling
