@@ -8,9 +8,13 @@ import cgitb
 #cgitb.enable()  # for troubleshooting
 from jinja2 import Template, Environment, PackageLoader
 
+from locales import locales
+
 env  = Environment(loader=PackageLoader('achtelbass', 'templates'))
 template = env.get_template('configuration.html')
 context  = {}
+
+context['locales'] = locales
 
 form = cgi.FieldStorage()
 

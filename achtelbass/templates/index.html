@@ -24,21 +24,21 @@
 			<main>
 				<form id="music_parameters" action="." method="post" style="display:{{ controls_display_style }}">
 					<fieldset class="controls tonic">
-						<h2>{{ Locales.Tonic }}</h2>
+						<h2>{{ locales.Tonic }}</h2>
 						{% for tonic in Tonics %}
 							<input type="radio" id="tonic_{{ tonic }}" name="tonic" value="{{ tonic }}"{% if tonic == preselected.tonic %} checked="checked"{% endif %} />
 							<label for="tonic_{{ tonic }}">{{ tonic }}</label>
 						{% endfor %}
 					</fieldset>
 					<fieldset class="controls intervals">
-						<h2>{{ Locales.Intervals }}</h2>
+						<h2>{{ locales.Intervals }}</h2>
 						{% for interval_index, interval_name in Possible_Intervals.items() %}
 							<input type="checkbox" id="interval_{{ interval_name }}" name="intervals" value="{{ interval_name }}"{% if interval_name in preselected.intervals %} checked="checked"{% endif %} />
 							<label for="interval_{{ interval_name }}">{{ interval_name }}</label>
 						{% endfor %}
 					</fieldset>
 					<fieldset class="controls note_values">
-						<h2>{{ Locales.note_values }}</h2>
+						<h2>{{ locales.note_values }}</h2>
 						{% for note_value in Possible_Note_Values %}
 							<input type="checkbox" id="{{ note_value_names[note_value] }}" name="note_values" value="{{ note_value }}"{% if note_value in preselected.note_values %} checked="checked"{% endif %} />
 							<label for="{{ note_value_names[note_value] }}">
@@ -48,7 +48,7 @@
 					</fieldset>
 					{# commented out while only triplets are supported #}
 					{% if 1 == 0 %}<!--<fieldset class="controls tuplets">
-						<h2>{{ Locales.Tuplets }} </h2>
+						<h2>{{ locales.Tuplets }} </h2>
 						{% for tuplet in Possible_Tuplets %}
 							<input type="checkbox" id="tuplets_{{ tuplet }}" name="tuplets" value="{{ tuplet }}"{% if tuplet in preselected.tuplets %} checked="checked"{% endif %} />
 							<label for="tuplets_{{ tuplet }}">{{ tuplet }}</label>
@@ -76,14 +76,14 @@
 					</div>
 					
 					<fieldset class="controls time_signature">
-						<h2>{{ Locales.time_signature }}</h2>
+						<h2>{{ locales.time_signature }}</h2>
 						{% for time_signature in Possible_Time_Signatures %}
 							<input type="radio" id="time_signature_{{ time_signature }}" name="time_signature" value="{{ time_signature }}"{% if time_signature == preselected.time_signature %} checked="checked"{% endif %} />
 							<label for="time_signature_{{ time_signature }}">{{ time_signature }}</label>
 						{% endfor %}
 					</fieldset>
 					<fieldset class="controls mode">
-						<h2>{{ Locales.Mode }}</h2>
+						<h2>{{ locales.Mode }}</h2>
 						{% for mode in Modes %}
 							<input type="radio" id="mode_{{ mode }}" name="mode" value="{{ mode }}"{% if mode == preselected.mode %} checked="checked"{% endif %} />
 							<label for="mode_{{ mode }}">{{ mode }}</label>
@@ -96,17 +96,17 @@
 					</fieldset>
 					<div style="float: left;">
 						<fieldset class="controls chords">
-							<h2>{{ Locales.Chords }}</h2>
+							<h2>{{ locales.Chords }}</h2>
 							<input type="range" min="0" max="1" step="0.01" name="chords_frequency" id="chords_frequency" value="{{ preselected.chords_frequency }}" />
 							<label for="chords_frequency">{{ preselected.chords_frequency }}%</label>
 						</fieldset>
 						<fieldset class="controls rests">
-							<h2>{{ Locales.Rests }}</h2>
+							<h2>{{ locales.Rests }}</h2>
 							<input type="range" min="0" max="1" step="0.01" name="rest_frequency" id="rest_frequency" value="{{ preselected.rest_frequency }}" />
 							<label for="rest_frequency">{{ preselected.rest_frequency }}%</label>
 						</fieldset>
 						<fieldset class="controls tuplets">
-							<h2>{{ Locales.Triplets }}</h2>
+							<h2>{{ locales.Triplets }}</h2>
 							<input type="hidden" id="tuplets_3" name="tuplets" value="3"/> {# for the time being only triplets are supported #}
 							<input type="range" min="0" max="1" step="0.01" name="tuplets_frequency" id="tuplets_frequency" value="{{ preselected.tuplets_frequency }}" />
 							<label for="tuplets_frequency">{{ preselected.tuplets_frequency }}%</label>
@@ -115,8 +115,8 @@
 				</form>
 				
 				<button id="hide_form_button" class="control_buttons">{{ controls_button_text }}</button>
-				<input type="button" id="submit_button" class="control_buttons" value="{{ Locales.submit_button_text }}" onclick='document.forms["music_parameters"].submit();'>
-				<button id="download_midi_button" class="control_buttons" onclick=document.getElementById('download_midi_link').click()>{{ Locales.download_midi }}</button>
+				<input type="button" id="submit_button" class="control_buttons" value="{{ locales.generate_new }}" onclick='document.forms["music_parameters"].submit();'>
+				<button id="download_midi_button" class="control_buttons" onclick=document.getElementById('download_midi_link').click()>{{ locales.download_midi }}</button>
 				<span id="midi"></span>
 				<div id="canvas"></div>
 			</main>

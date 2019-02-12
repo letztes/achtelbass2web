@@ -847,7 +847,7 @@ Options are:
 		print("span between minimum pitch and maximum pitch.\n")
 		exit()
 
-	from locales_en import locales
+	from locales import locales
 	Achtelbass(parameters, locales)
 
 #

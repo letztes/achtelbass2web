@@ -1,8 +1,8 @@
 locales = {
 # Menu
-            'File' : '_File',
-            'Quit' : '_Quit',
-            'Help' : '_Help',
+            'Home' : 'Home',
+            'Configuration' : 'Configuration',
+            'Imprint' : 'Imprint',
             'About' : 'About',
 # Tonic
             'Tonic' : 'Tonic',
@@ -24,8 +24,6 @@ locales = {
             'Bb' : 'Bb',
             'F' : 'F',
 # min pitch and max pitch
-            'Min pitch' : 'Min pitch',
-            'Max pitch' : 'Max pitch',
             'c1' : 'c1',
             'd1' : 'd1',
             'e1' : 'e1',
@@ -80,20 +78,15 @@ locales = {
             'Inversion' : 'Inversion',
 # Rest
             'Rests' : 'Rests',
-            'Rest frequency' : 'Rest frequency',
-            'no rests' : 'no rests',
 # Time signature
-            'Time signature' : 'Time signature',
             'time_signature' : 'Time signature',
 # Note value
-            'Note values' : 'Note values',
             'note_values' : 'Note values',
 # Tempo
             'Tempo' : 'Tempo',
 # Tuplet
             'Triplets' : 'Triplets',
             'Tuplets' : 'Tuplets',
-            'Same pitch in tuplet' : 'Same pitch in tuplet',
             'None' : 'None',
             '2' : '2',
             '3' : '3',
@@ -115,32 +108,35 @@ locales = {
             '0.8' : '80 %',
             '0.9' : '90 %',
             '1' : '100 %',
+# Configuration of website
+			'enable_cookies' : 'Enable cookies for saving configuration for next visit of this website',
+			'hide_controls_after_submit' : 'Hide controls after each submit',
+			'set_amount_of_bars' : 'Set amount of bars',
+# About page
+			'achtelbass_is_helpful' : 'Achtelbass is meant to help you practice sight reading at your individual level.',
+			'contains_random_generator' : 'All notes are randomly generated and very unlikely to be seen ever again in the same combination.',
+			'no_memorization_effect' : 'This way you will not memorize the notes of the exercise as it happens often with traditional literature.',
+			'achtelbass_is_versatile' : 'You can increase the difficulty level gradually by adding options evenly or concentrate on certain options like triplets, chords, exotic time signatures or whatever you want to master.',
+			'achtelbass_is_versatile_really' : 'Prepare for exams, target your personal weak spots or just begin to learn sight reading.',
+			'free_2_play' : 'Achtelbass is free of charge and does not bother you with advertisement.',
+			'please_contact_me' : 'If you miss a feature or find a bug please contact me at',
+			'please_report_issues' : 'or open an issue at',
+			'please_fork_the_repo' : 'If you are into python then you might fork the project and fix the issue by yourself.',
+			'request_for_donation' : 'If you do not code but like the website and want to contribute you can make a donation.',
 # General stuff
             'hide_controls' : 'Hide controls',
             'show_controls' : 'Show controls',
-            'submit_button_text' : 'Generate new',
+            'generate_new' : 'Generate new',
             'download_midi' : 'Download midi',
-            'Show advanced settings' : 'Show advanced settings', 
             'Warning' : 'Warning',
             'OK' : 'OK',
 # Other parameters
-            'Other parameters' : 'Other parameters',
+            'other_parameters' : 'Other parameters',
             'Accents' : 'Accents',
             'Anacrusis' : 'Anacrusis',
-            'Dots and ties' : 'Dots and ties',
-# Warning message
-# The %s are placeholders for interval, min_pitch and max_pitch.
-            'Interval too big' : "Interval %s does not fit between %s and %s.\nPlease choose either a smaller interval or a greater span between minimum pitch and maximum pitch.",
-            'All intervals unselected' : "At least one interval must be selected.",
-            'All note values unselected' : "At least one note value must be selected.",
-            'Bad note value.' : 'Bad note value.',
-            'Bad time signature.' : 'Bad time signature.',
-# About Dialog
-            'Artur Spengler' : 'Artur Spengler',
-            'License text' : 'This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option) any later version.\n\nThis program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.\n\nYou should have received a copy of the GNU General Public License along with this program; if not, see http://www.gnu.org/licenses/',
-            'Dialog comment' : 'Generates sheet music in a random fashion for practicing sight reading.',
+            'dots_and_ties' : 'Dots and ties',
 # Other words
             'and' : 'and'
-
+			
 
 }

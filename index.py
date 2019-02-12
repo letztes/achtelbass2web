@@ -13,7 +13,7 @@ from jinja2 import Template, Environment, PackageLoader
 
 from achtelbass import achtelbass
 
-from locales_en import locales
+from locales import locales
 
 env  = Environment(loader=PackageLoader('achtelbass', 'templates'))
 template = env.get_template('index.html')
@@ -66,6 +66,8 @@ def index():
 	achtelbass_obj = achtelbass.Achtelbass(parameters, locales)
 	
 	context.update(achtelbass_obj.__dict__)
+	
+	context['locales'] = locales
 	
 	context['preselected'] = parameters
 
