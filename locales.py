@@ -13,6 +13,7 @@ class Locales(object):
 			},
 			'Configuration' : {
 				'en' : 'Configuration',
+				'de' : 'Einstellungen',
 			},
 			'Imprint' : {
 				'en' : 'Imprint',

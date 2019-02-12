@@ -15,9 +15,6 @@ from achtelbass import achtelbass
 
 from locales import Locales
 
-locales_obj = Locales('en')
-locales = locales_obj.get_locales()
-
 env  = Environment(loader=PackageLoader('achtelbass', 'templates'))
 template = env.get_template('index.html')
 context  = {}
@@ -47,6 +44,11 @@ def index():
 				  'amount_of_bars'		   : form.getvalue('amount_of_bars', 8),
 				 }
 
+	# language defaults to english
+	# but is overridden by cookie
+	# which is overridden by GET parameter
+	parameters['language'] = 'en'
+
 	# Cookies override cgi forms
 	if 'HTTP_COOKIE' in os.environ:
 		cookies_string = os.environ['HTTP_COOKIE']
@@ -65,6 +67,12 @@ def index():
 				values_list = cookie[1].split('###')
 				if len(values_list) > 1:
 					parameters[cookie[0]] = values_list
+	
+	# GET parameter overrides cookie, important for sitemap
+	language = form.getvalue('language', parameters['language'])
+
+	locales_obj = Locales(language)
+	locales = locales_obj.get_locales()
 	
 	achtelbass_obj = achtelbass.Achtelbass(parameters, locales)
 	
