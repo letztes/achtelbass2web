@@ -30,161 +30,72 @@ class Locales(object):
 				'de' : 'Grundton',
 			},
 			'C' : {
-				'en' : 'D',
+				'en' : 'C',
+				'de' : 'C',
 			},
 			'G' : {
 				'en' : 'G',
+				'de' : 'G',
 			},
 			'D' : {
 				'en' : 'D',
+				'de' : 'D',
 			},
 			'A' : {
 				'en' : 'A',
+				'de' : 'A',
 			},
 			'E' : {
 				'en' : 'E',
+				'de' : 'E',
 			},
 			'B' : {
-				'en' : 'B',
+				'en' : '♭',
+				'de' : '♭',
 			},
 			'F#' : {
-				'en' : 'F#',
+				'en' : 'F♯',
+				'de' : 'F♯',
 			},
 			'C#' : {
-				'en' : 'C#',
+				'en' : 'C♯',
+				'de' : 'C♯',
 			},
 			'G#' : {
-				'en' : 'G#',
+				'en' : 'G♯',
+				'de' : 'G♯',
 			},
 			'D#' : {
-				'en' : 'D#',
+				'en' : 'D♯',
+				'de' : 'D♯',
 			},
 			'A#' : {
-				'en' : 'A#',
+				'en' : 'A♯',
+				'de' : 'A♯',
 			},
 			'Gb' : {
-				'en' : 'Gb',
+				'en' : 'G♭',
+				'de' : 'G♭',
 			},
 			'Db' : {
-				'en' : 'Db',
+				'en' : 'D♭',
+				'de' : 'D♭',
 			},
 			'Ab' : {
-				'en' : 'Ab',
+				'en' : 'A♭',
+				'de' : 'A♭',
 			},
 			'Eb' : {
-				'en' : 'Eb',
+				'en' : 'E♭',
+				'de' : 'E♭',
 			},
 			'Bb' : {
-				'en' : 'Bb',
+				'en' : 'B♭',
+				'de' : 'B♭',
 			},
 			'F' : {
 				'en' : 'F',
-			},
-# min pitch and max pitch
-			'c1' : {
-				'en' : 'c1',
-			},
-			'd1' : {
-				'en' : 'd1',
-			},
-			'e1' : {
-				'en' : 'e1',
-			},
-			'f1' : {
-				'en' : 'f1',
-			},
-			'g1' : {
-				'en' : 'g1',
-			},
-			'a1' : {
-				'en' : 'a1',
-			},
-			'b1' : {
-				'en' : 'b1',
-			},
-			'c2' : {
-				'en' : 'c2',
-			},
-			'd2' : {
-				'en' : 'd2',
-			},
-			'e2' : {
-				'en' : 'e2',
-			},
-			'f2' : {
-				'en' : 'f2',
-			},
-			'g2' : {
-				'en' : 'g2',
-			},
-			'a2' : {
-				'en' : 'a2',
-			},
-			'b2' : {
-				'en' : 'b2',
-			},
-			'c3' : {
-				'en' : 'c3',
-			},
-			'd3' : {
-				'en' : 'd3',
-			},
-			'e3' : {
-				'en' : 'e3',
-			},
-			'f3' : {
-				'en' : 'f3',
-			},
-			'g3' : {
-				'en' : 'g3',
-			},
-			'a3' : {
-				'en' : 'a3',
-			},
-			'b3' : {
-				'en' : 'b3',
-			},
-			'c4' : {
-				'en' : 'c4',
-			},
-			'd4' : {
-				'en' : 'd4',
-			},
-			'e4' : {
-				'en' : 'e4',
-			},
-			'f4' : {
-				'en' : 'f4',
-			},
-			'g4' : {
-				'en' : 'g4',
-			},
-			'a4' : {
-				'en' : 'a4',
-			},
-			'b4' : {
-				'en' : 'b4',
-			},
-			'c5' : {
-				'en' : 'c5',
-			},
-			'd5' : {
-				'en' : 'd5',
-			},
-			'e5' : {
-				'en' : 'e5',
-			},
-			'f5' : {
-				'en' : 'f5',
-			},
-			'g5' : {
-				'en' : 'g5',
-			},
-			'a5' : {
-				'en' : 'a5',
-			},
-			'b5' : {
-				'en' : 'b5',
+				'de' : 'F',
 			},
 # Mode
 			'Mode' : {
@@ -291,59 +202,10 @@ class Locales(object):
 				'en' : 'None',
 				'de' : 'Kein',
 			},
-			'2' : {
-				'en' : '2',
-			},
-			'3' : {
-				'en' : '3',
-			},
-			'4' : {
-				'en' : '4',
-			},
-			'5' : {
-				'en' : '5',
-			},
-			'6' : {
-				'en' : '6',
-			},
-			'7' : {
-				'en' : '7',
-			},
 # Chords
 			'Chords' : {
 				'en' : 'Chords',
 				'de' : 'Akkorde',
-			},
-# Frequency values
-			'0.1' : {
-				'en' : '10 %',
-			},
-			'0.2' : {
-				'en' : '20 %',
-			},
-			'0.3' : {
-				'en' : '30 %',
-			},
-			'0.4' : {
-				'en' : '40 %',
-			},
-			'0.5' : {
-				'en' : '50 %',
-			},
-			'0.6' : {
-				'en' : '60 %',
-			},
-			'0.7' : {
-				'en' : '70 %',
-			},
-			'0.8' : {
-				'en' : '80 %',
-			},
-			'0.9' : {
-				'en' : '90 %',
-			},
-			'1' : {
-				'en' : '100 %',
 			},
 # Configuration of website
 			'enable_cookies' : {
@@ -448,7 +310,6 @@ class Locales(object):
 			
 			# try the language of the user
 			try:
-				#result[key] = str(self.Translations[key][self.Language_Code].encode('utf-8'))
 				result[key] = self.Translations[key][self.Language_Code]
 				
 			# if the language of the user is not in the translation,
@@ -463,3 +324,19 @@ class Locales(object):
 					result[key] = key
 			
 		return result
+	
+	def get_missing_translations(self):
+		
+		# This is the place to define which languages to check
+		# Add new language by adding 'xy':[] to the list of keys here
+		missing_translations = {'en':[], 'de':[],}
+		
+		for key in self.Translations:
+			#print(key)
+			for language in missing_translations:
+				if language not in self.Translations[key]:
+					#print(language+' '+key)
+					missing_translations[language].append(key)
+					
+		return missing_translations
+				
