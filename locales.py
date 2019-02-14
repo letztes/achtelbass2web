@@ -10,7 +10,7 @@ class Locales(object):
 # Menu
 			'Home' : {
 				'en' : 'Home',
-				'de' : 'Home',
+				'de' : 'Startseite',
 			},
 			'Configuration' : {
 				'en' : 'Configuration',
@@ -22,7 +22,7 @@ class Locales(object):
 			},
 			'About' : {
 				'en' : 'About',
-				'de' : 'Über',
+				'de' : 'Über achtelbass',
 			},
 # Tonic
 			'Tonic' : {
@@ -30,7 +30,7 @@ class Locales(object):
 				'de' : 'Grundton',
 			},
 			'C' : {
-				'en' : 'C',
+				'en' : 'D',
 			},
 			'G' : {
 				'en' : 'G',
@@ -203,6 +203,11 @@ class Locales(object):
 				'en' : 'Modulation',
 				'de' : 'Modulation',
 			},
+# Pitch / Ambitus
+			'Pitch' : {
+				'en' : 'Range',
+				'de' : 'Tonumfang',
+			},
 # Interval
 			'Interval' : {
 				'en' : 'Interval',
@@ -247,6 +252,11 @@ class Locales(object):
 			'Inversion' : {
 				'en' : 'Inversion',
 				'de' : 'Inversion',
+			},
+# Grand Staff
+			'grand_staff' : {
+				'en' : 'Grand Staff',
+				'de' : 'Klaviersystem',
 			},
 # Rest
 			'Rests' : {
@@ -367,7 +377,7 @@ class Locales(object):
 			},
 			'achtelbass_is_versatile_really' : {
 				'en' : 'Prepare for exams, target your personal weak spots or just begin to learn sight reading.',
-				'de' : 'Bereiten Sie sich auf Prüfungen vor, gehen Sie Ihre Schwachstellen an oder beginnen Sie einfach nur damit, endlich Notenlesen zu lernen',
+				'de' : 'Bereiten Sie sich auf Prüfungen vor, gehen Sie Ihre Schwachstellen an oder beginnen Sie einfach nur damit, endlich Notenlesen zu lernen.',
 			},
 			'free_2_play' : {
 				'en' : 'Achtelbass is free of charge and does not bother you with advertisement.',
@@ -383,7 +393,7 @@ class Locales(object):
 			},
 			'please_fork_the_repo' : {
 				'en' : 'If you are into python then you might fork the project and fix the issue by yourself.',
-				'de' : 'Wenn Sie gerne in python programmieren, können Sie das Projekt gerne forken und das Problem selbst beheben.',
+				'de' : 'Wenn Sie gerne in Python programmieren, können Sie zum Projekt direkt beitragen.',
 			},
 			'request_for_donation' : {
 				'en' : 'If you do not code but like the website and want to contribute you can make a donation.',

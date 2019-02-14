@@ -27,14 +27,14 @@
 						<h2>{{ locales.Tonic }}</h2>
 						{% for tonic in Tonics %}
 							<input type="radio" id="tonic_{{ tonic }}" name="tonic" value="{{ tonic }}"{% if tonic == preselected.tonic %} checked="checked"{% endif %} />
-							<label for="tonic_{{ tonic }}">{{ tonic }}</label>
+							<label for="tonic_{{ tonic }}">{{ locales[tonic] }}</label>
 						{% endfor %}
 					</fieldset>
 					<fieldset class="controls intervals">
 						<h2>{{ locales.Intervals }}</h2>
 						{% for interval_index, interval_name in Possible_Intervals.items() %}
 							<input type="checkbox" id="interval_{{ interval_name }}" name="intervals" value="{{ interval_name }}"{% if interval_name in preselected.intervals %} checked="checked"{% endif %} />
-							<label for="interval_{{ interval_name }}">{{ interval_name }}</label>
+							<label for="interval_{{ interval_name }}">{{ locales[interval_name] }}</label>
 						{% endfor %}
 					</fieldset>
 					<fieldset class="controls note_values">
@@ -56,7 +56,7 @@
 					</fieldset> -->{% endif %}
 
 					<div class="pitch_container">
-						<h2>Pitch</h2>
+						<h2>{{ locales.Pitch }}</h2>
 						<fieldset class="controls min_pitch">
 							{% for note_object in Note_Objects %}
 								<p class="{{ note_object.line_type }}{% if note_object.note == preselected.min_pitch %} min_pitch{% endif %}{% if note_object.note == preselected.max_pitch %} max_pitch{% endif %}">
@@ -86,13 +86,13 @@
 						<h2>{{ locales.Mode }}</h2>
 						{% for mode in Modes %}
 							<input type="radio" id="mode_{{ mode }}" name="mode" value="{{ mode }}"{% if mode == preselected.mode %} checked="checked"{% endif %} />
-							<label for="mode_{{ mode }}">{{ mode }}</label>
+							<label for="mode_{{ mode }}">{{ locales[mode] }}</label>
 						{% endfor %}
 					</fieldset>
 					<fieldset class="controls grand_staff">
-						<h2>Grand Staff</h2>
+						<h2>{{ locales.grand_staff }}</h2>
 						<input type="checkbox" id="grand_staff_{{ grand_staff }}" name="grand_staff" value="1"{% if preselected.grand_staff %} checked="checked"{% endif %} />
-						<label for="grand_staff_{{ grand_staff }}">Grand Staff</label>
+						<label for="grand_staff_{{ grand_staff }}">{{ locales.grand_staff }}</label>
 					</fieldset>
 					<div style="float: left;">
 						<fieldset class="controls chords">
