@@ -50,8 +50,8 @@ class Locales(object):
 				'de' : 'E',
 			},
 			'B' : {
-				'en' : '♭',
-				'de' : '♭',
+				'en' : 'B',
+				'de' : 'B',
 			},
 			'F#' : {
 				'en' : 'F♯',
