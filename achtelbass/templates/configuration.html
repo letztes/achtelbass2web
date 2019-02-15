@@ -7,12 +7,18 @@
 	<link rel="stylesheet" type="text/css" href="/styles/achtelbass.css">
 </head>
 <body>
-	<div class="body" id="site_configuration">
-		<div class="wood">
-			<input type="checkbox" name="enable_cookies" id="enable_cookies" class="configuration"> {{ locales.enable_cookies }}<br><br>
-			<input type="checkbox" name="hide_controls_after_submit" id="hide_controls_after_submit" class="configuration"> {{ locales.hide_controls_after_submit }}<br><br>
-			<input type="number" id="amount_of_bars" name="amount_of_bars" class="configuration" min="1" max="64" placeholder="8"> {{ locales.set_amount_of_bars }}
-		</div>
+	<div class="body">
+		<form action="." method="post" id="site_configuration">
+			<div class="wood">
+				<input type="checkbox" name="enable_cookies" id="enable_cookies" class="configuration"> {{ locales.enable_cookies }}<br><br>
+				<input type="checkbox" name="hide_controls_after_submit" id="hide_controls_after_submit" class="configuration"> {{ locales.hide_controls_after_submit }}<br><br>
+				<input type="number" id="amount_of_bars" name="amount_of_bars" class="configuration" min="1" max="64" placeholder="8"> {{ locales.set_amount_of_bars }}<br><br>
+				<fieldset class="controls language_controls" id="language_controls">
+					<input type="radio" name="language" id="language_de" value="de"{% if language == 'de' %} checked="checked"{% endif %}><label for="language_de">Deutsch</label>
+					<input type="radio" name="language" id="language_en" value="en"{% if language == 'en' %} checked="checked"{% endif %}><label for="language_en">English</label>
+				</fieldset>
+			</div>
+		</form>
 	</div>
 	{% include 'footer.html' %}
 

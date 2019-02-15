@@ -17,7 +17,8 @@ main {
 	display: none;
 }
 
-#music_parameters {
+#music_parameters,
+.wood {
 	overflow: hidden;
 	background: url('/images/bg_texture___wood_by_nortago.jpg') top left #402107;
 	box-shadow: -5px -5px 5px #210 inset;
@@ -306,7 +307,6 @@ label[for="rest_frequency"] {
 .wood {
 	background: #402107 url("/images/bg_texture___wood_by_nortago.jpg") repeat scroll left top;
 	color: #f2ecdc;
-	font-size: x-large;
 	padding: 1em;
 }
 

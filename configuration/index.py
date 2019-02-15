@@ -52,6 +52,7 @@ def index():
 	locales_obj = Locales(language)
 
 	context['locales'] = locales_obj.get_locales()
+	context['language'] = language
 
 	print(template.render(context))
 

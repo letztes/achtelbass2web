@@ -115,11 +115,22 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		}
 	}
 	
+	// submit site configuration if language was changed
+    if (document.getElementById("language_controls") !== null) {
+		document.querySelector('#language_controls').onchange = function(evt) {
+
+			document.querySelector('#site_configuration').submit();
+		};
+	}
+	
 });
 
 function toggleCookie(evt) {
 	
 	// Store parameters onchange to cookie
+	if (getCookie("enable_cookies") !== "on") {
+		return;
+	}
 	
 	// range elements have not the property checked and must not be 
 	// deleted from cookie but instead set to 0 if deactivated
