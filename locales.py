@@ -213,8 +213,8 @@ class Locales(object):
 				'de' : 'Cookies zulassen, um Einstellungen zu speichern',
 			},
 			'hide_controls_after_submit' : {
-				'en' : 'Hide controls after each submit',
-				'de' : 'Auswahlwerkzeuge ausgeblendet lassen nach Absenden des Formulars',
+				'en' : 'Hide controls after each submit on home page',
+				'de' : 'Auswahlwerkzeuge auf Startseite ausgeblendet lassen nach Absenden des Formulars',
 			},
 			'set_amount_of_bars' : {
 				'en' : 'Set amount of bars',
