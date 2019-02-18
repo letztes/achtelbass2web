@@ -116,7 +116,7 @@
 				
 				<button id="hide_form_button" class="control_buttons">{{ controls_button_text }}</button>
 				<input type="button" id="submit_button" class="control_buttons" value="{{ locales.generate_new }}" onclick='document.forms["music_parameters"].submit();'>
-				<button id="download_midi_button" class="control_buttons" onclick=document.getElementById('download_midi_link').click()>{{ locales.download_midi }}</button>
+				<button id="download_midi_button" class="control_buttons" onclick="document.getElementById('download_midi_link').click()">{{ locales.download_midi }}</button>
 				<span id="midi"></span>
 				<div id="canvas"></div>
 			</main>
