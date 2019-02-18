@@ -124,6 +124,17 @@
 
 			<script src="/js/achtelbass.js" type="text/javascript"></script>
 			<script type="text/javascript">
+				
+				/* function is called in achtelbass.js but defined here
+				   because it needs translations substituted by template
+				   processor
+				 */
+				function toggle_controls() {
+					document.getElementById('hide_form_button').onclick=function(){
+						document.getElementById('music_parameters').style.display = (document.getElementById('music_parameters').style.display == 'none') ? 'block' : 'none';
+						document.getElementById('hide_form_button').innerHTML = (document.getElementById('hide_form_button').innerHTML == "{{ locales.show_controls }}") ? "{{ locales.hide_controls }}" : "{{ locales.show_controls }}";
+					};
+				}
 
 				function colorRange(range, color) {
 					if (range && range.elements) {

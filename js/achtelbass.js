@@ -28,11 +28,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	// Toggle visibility of all UI elements like buttons, checkboxes etc.
 	// only if the main page is displayed
     if (document.getElementById("hide_form_button") !== null) {
-			
-		document.getElementById('hide_form_button').onclick=function(){
-			document.getElementById('music_parameters').style.display = (document.getElementById('music_parameters').style.display == 'none') ? 'block' : 'none';
-			document.getElementById('hide_form_button').innerHTML = (document.getElementById('hide_form_button').innerHTML == "Show controls") ? "Hide controls" : "Show controls";
-		};
+		toggle_controls();
 	}
 	
 	// this is handled separately because all other ui elements set
