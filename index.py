@@ -81,6 +81,8 @@ def index():
 	context['locales'] = locales
 	
 	context['preselected'] = parameters
+	
+	context['language'] = language
 
 	context['note_value_symbols'] = {
 		'1'	: '𝅝',
