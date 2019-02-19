@@ -15,6 +15,7 @@
   </url>
   <url>
     <loc>https://achtelbass.de/?language=de</loc>
+    <priority>1</priority>
     <xhtml:link 
                rel="alternate"
                hreflang="en"
