@@ -3,6 +3,7 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://achtelbass.de/?language=en</loc>
+    <priority>1</priority>
     <xhtml:link 
                rel="alternate"
                hreflang="en"
