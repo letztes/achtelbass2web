@@ -220,6 +220,11 @@ class Locales(object):
 				'en' : 'Set amount of bars',
 				'de' : 'Anzahl der Takte',
 			},
+# About div on start page
+			'about_div' : {
+				'en' : 'Generates sheet music in a random fashion for practicing sight reading. It uses a random number generator when picking the note values, pitches or chunks of notes so that new notes are generated in each call, thus preventing learning them by memory. Practice for free.',
+				'de' : 'Erstellt Musiknoten per Zufallsgenerator. Notenwerte, Tonhöhen und Notengruppen werden so gewählt, dass bei jedem Seitenaufruf neues Übungsmaterial entsteht. Dadurch wird Auswendiglernen verhindert und Lesen gelernt. Kostenlos.',
+			},
 # About page
 			'achtelbass_is_helpful' : {
 				'en' : 'Achtelbass is meant to help you practice sight reading at your individual level.',
