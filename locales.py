@@ -24,6 +24,47 @@ class Locales(object):
 				'en' : 'About',
 				'de' : 'Über achtelbass',
 			},
+# Tooltips
+			'tooltip_tonic' : {
+				'en' : 'The tonic in combination with the mode yields the key of the sheet music.',
+				'de' : 'Die Tonika ergibt zusammen mit dem Tongeschlecht die Tonart. Z.B. C-Dur oder A-moll. Daraus ergibt sich die Anzahl der Vorzeichen.',
+			},
+			'tooltip_intervals' : {
+				'en' : 'The distance between pitches in the given key that may appear in the sheet music. When more than one interval is selected, all of them have the same probability in the random generator. There is no guarantee that an interval will occur at least one time per sheet.',
+				'de' : 'Welcher Notenabstand in der zufällig generierten Musik vorkommen soll. Wenn mehrere Intervalle ausgewählt sind, sind deren Wahrscheinlichkeiten gleich groß. Es gibt allerdings keine Garantie, dass jedes Intervall mindestens ein Mal vorkommen wird.',
+			},
+			'tooltip_note_values' : {
+				'en' : 'The note values that may appear in the sheet music. When more than one note value is selected, all of them have the same probability in the begin of the measure. In the end of the measure only the smaller ones may find enough space to fit in.',
+				'de' : 'Welcher Notenwert in der zufällig generierten Musik vorkommen soll. Wenn mehrere Notenwerte ausgewählt sind, sind deren Wahrscheinlichkeiten am Anfang des Taktes gleich groß. Gegen Ende des Taktes kann es passieren, dass nur noch die kleineren Notenwerte hineinpassen.',
+			},
+			'tooltip_range' : {
+				'en' : 'The lowest and the highest possible notes from which the random generator will create the sheet music.',
+				'de' : 'Die niedrigst mögliche und die höchst mögliche Note, aus denen die Musik per Zufallsgenerator erstellt wird.',
+			},
+			'tooltip_time_signature' : {
+				'en' : 'The time signature. When combined with a sole incompatible note value the note value has priority. E.g. 3/4 time signature combined with a sole 1/2 note value results in a 1/2 time signature.',
+				'de' : 'Die Taktart. Wenn Notenwerte ausgewählt werden, die mit der Taktart nicht übereinstimmen, z.B. ausschließlich halbe Noten in einem 3/4 Takt, wird die Taktart an die Notenwerte angepasst, in diesem Beispiel 1/2.',
+			},
+			'tolltip_mode' : {
+				'en' : 'The mode and the tonica yield the key signature of the sheet music.',
+				'de' : 'Das Tongeschlecht in Kombination mit dem Grundton bestimmt die Tonart, d.h. die Anzahl der Vorzeichen.',
+			},
+			'tooltip_grand_staff' : {
+				'en' : 'Two combined staffs to be played simultaniously. One for the left hand and one for the right hand.',
+				'de' : 'Zwei gleichzeitig erklingende Notenzeilen. Eine für die linke Hand und eine für die rechte Hand.',
+			},
+			'tooltip_chords' : {
+				'en' : 'The probability of chords. Slider left means 0%, no chords. Slider right means 100%, all notes are grouped into chords.',
+				'de' : 'Die Wahrscheinlichkeit, mit der Akkorde vorkommen. Regler links bedeutet 0%, bewirkt keinerlei Akkorde. Regler rechts bedeutet 100%, so dass ausschließlich Akkorde und keine einzelnen Noten vorkommen.',
+			},
+			'tooltip_rests' : {
+				'en' : 'The probability of rests. Slider left means 0%, no rests. Slider right means 100%, all rests and no notes.',
+				'de' : 'Die Wahrscheinlichkeit, mit der Pausen vorkommen. Regler links bedeutet 0%, bewirkt keinerlei Pausen. Regler rechts bedeutet 100%, so dass ausschließlich Pausen und keine Noten vorkommen.',
+			},
+			'tooltip_triplets' : {
+				'en' : 'The probability of triplets. Slider left means 0%, no triplets. Slider right means 100%, all notes are grouped into triplets.',
+				'de' : 'Die Wahrscheinlichkeit, mit der Triolen vorkommen. Regler links bedeutet 0%, bewirkt keinerlei Triolen. Regler rechts bedeutet 100%, so dass ausschließlich Triolen und keine einzelnen Noten vorkommen.',
+			},
 # Tonic
 			'Tonic' : {
 				'en' : 'Tonic',
