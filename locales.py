@@ -11,23 +11,28 @@ class Locales(object):
 			'Home' : {
 				'en' : 'Home',
 				'de' : 'Startseite',
+				'es' : 'Inicio',
 			},
 			'Configuration' : {
 				'en' : 'Configuration',
 				'de' : 'Einstellungen',
+				'es' : 'Configuración',
 			},
 			'Imprint' : {
 				'en' : 'Imprint',
 				'de' : 'Impressum',
+				'es' : 'Impressum',
 			},
 			'About' : {
 				'en' : 'About',
 				'de' : 'Über achtelbass',
+				'es' : 'Acerca de achtelbass',
 			},
 # Tooltips
 			'tooltip_tonic' : {
 				'en' : 'The tonic in combination with the mode yields the key of the sheet music.',
 				'de' : 'Die Tonika ergibt zusammen mit dem Tongeschlecht die Tonart. Z.B. C-Dur oder A-moll. Daraus ergibt sich die Anzahl der Vorzeichen.',
+				'es' : 'La tónica y el modo forman la tonalidad.',
 			},
 			'tooltip_intervals' : {
 				'en' : 'The distance between pitches in the given key that may appear in the sheet music. When more than one interval is selected, all of them have the same probability in the random generator. There is no guarantee that an interval will occur at least one time per sheet.',
@@ -40,6 +45,7 @@ class Locales(object):
 			'tooltip_range' : {
 				'en' : 'The lowest and the highest possible notes from which the random generator will create the sheet music.',
 				'de' : 'Die niedrigst mögliche und die höchst mögliche Note, aus denen die Musik per Zufallsgenerator erstellt wird.',
+				'es' : 'La nota más aguda y la nota más grave cuales el generador de números aleatorios utiliza para crear la partitura.',
 			},
 			'tooltip_time_signature' : {
 				'en' : 'The time signature. When combined with a sole incompatible note value the note value has priority. E.g. 3/4 time signature combined with a sole 1/2 note value results in a 1/2 time signature.',
@@ -47,7 +53,8 @@ class Locales(object):
 			},
 			'tolltip_mode' : {
 				'en' : 'The mode and the tonica yield the key signature of the sheet music.',
-				'de' : 'Das Tongeschlecht in Kombination mit dem Grundton bestimmt die Tonart, d.h. die Anzahl der Vorzeichen.',
+				'de' : 'Das Tongeschlecht in Kombination mit dem Grundton bestimmt die Tonart, d.h. die Anzahl der Vorzeichen. Dur hat eine große Terz über dem Grundton, Moll eine kleine.',
+				'es' : 'El modo y la tónica forman la tonalidad. El modo mayor tiene una distancia de tercera mayor entre el primer y el tercer grado. El modo minor tiene una distancia de tercera minor el mismo lugar.',
 			},
 			'tooltip_grand_staff' : {
 				'en' : 'Two combined staffs to be played simultaniously. One for the left hand and one for the right hand.',
@@ -69,197 +76,279 @@ class Locales(object):
 			'Tonic' : {
 				'en' : 'Tonic',
 				'de' : 'Grundton',
+				'es' : 'Tónica',
 			},
 			'C' : {
 				'en' : 'C',
 				'de' : 'C',
+				'es' : 'Do',
 			},
 			'G' : {
 				'en' : 'G',
 				'de' : 'G',
+				'es' : 'Sol',
 			},
 			'D' : {
 				'en' : 'D',
 				'de' : 'D',
+				'es' : 'Re',
 			},
 			'A' : {
 				'en' : 'A',
 				'de' : 'A',
+				'es' : 'La',
 			},
 			'E' : {
 				'en' : 'E',
 				'de' : 'E',
+				'es' : 'Mi',
 			},
 			'B' : {
 				'en' : 'B',
 				'de' : 'B',
+				'es' : 'Si',
 			},
 			'F#' : {
 				'en' : 'F♯',
 				'de' : 'F♯',
+				'es' : 'Fa♯',
 			},
 			'C#' : {
 				'en' : 'C♯',
 				'de' : 'C♯',
+				'es' : 'Do♯',
 			},
 			'G#' : {
 				'en' : 'G♯',
 				'de' : 'G♯',
+				'es' : 'Sol♯',
 			},
 			'D#' : {
 				'en' : 'D♯',
 				'de' : 'D♯',
+				'es' : 'Re♯',
 			},
 			'A#' : {
 				'en' : 'A♯',
 				'de' : 'A♯',
+				'es' : 'La♯',
 			},
 			'Gb' : {
 				'en' : 'G♭',
 				'de' : 'G♭',
+				'es' : 'Sol♭',
 			},
 			'Db' : {
 				'en' : 'D♭',
 				'de' : 'D♭',
+				'es' : 'Re♭',
 			},
 			'Ab' : {
 				'en' : 'A♭',
 				'de' : 'A♭',
+				'es' : 'La♭',
 			},
 			'Eb' : {
 				'en' : 'E♭',
 				'de' : 'E♭',
+				'es' : 'Mi♭',
 			},
 			'Bb' : {
 				'en' : 'B♭',
 				'de' : 'B♭',
+				'es' : 'Si♭',
 			},
 			'F' : {
 				'en' : 'F',
 				'de' : 'F',
+				'es' : 'Fa♭',
+			},
+# Pitch letters for output.py
+			'c' : {
+				'en' : 'c',
+				'de' : 'c',
+				'es' : 'do',
+			},
+			'd' : {
+				'en' : 'd',
+				'de' : 'd',
+				'es' : 're',
+			},
+			'e' : {
+				'en' : 'e',
+				'de' : 'e',
+				'es' : 'mi',
+			},
+			'f' : {
+				'en' : 'f',
+				'de' : 'f',
+				'es' : 'fa',
+			},
+			'g' : {
+				'en' : 'g',
+				'de' : 'g',
+				'es' : 'sol',
+			},
+			'a' : {
+				'en' : 'a',
+				'de' : 'a',
+				'es' : 'la',
+			},
+			'b' : {
+				'en' : 'b',
+				'de' : 'b',
+				'es' : 'si',
 			},
 # Mode
 			'Mode' : {
 				'en' : 'Mode',
 				'de' : 'Tongeschlecht',
+				'es' : 'Modo',
 			},
 			'Major' : {
 				'en' : 'Major',
 				'de' : 'Dur',
+				'es' : 'Mayor'
 			},
 			'Minor' : {
 				'en' : 'Minor',
 				'de' : 'Moll',
+				'es' : 'Menor',
 			},
 			'Modulation' : {
 				'en' : 'Modulation',
 				'de' : 'Modulation',
+				'es' : 'Modulación',
 			},
 # Pitch / Ambitus
 			'Pitch' : {
 				'en' : 'Range',
 				'de' : 'Tonumfang',
+				'es' : 'Ámbito',
 			},
 # Interval
 			'Interval' : {
 				'en' : 'Interval',
 				'de' : 'Intervall',
+				'es' : 'Intervalo',
 			},
 			'Intervals' : {
 				'en' : 'Intervals',
 				'de' : 'Intervalle',
+				'es' : 'Intervalos',
 			},
 			'Unison' : {
 				'en' : 'Unison',
 				'de' : 'Prime',
+				'es' : 'Unísono',
 			},
 			'Second' : {
 				'en' : 'Second',
 				'de' : 'Sekunde',
+				'es' : 'Segunda',
 			},
 			'Third' : {
 				'en' : 'Third',
 				'de' : 'Terz',
+				'es' : 'Tercera',
 			},
 			'Fourth' : {
 				'en' : 'Fourth',
 				'de' : 'Quart',
+				'es' : 'Cuarta',
 			},
 			'Fifth' : {
 				'en' : 'Fifth',
 				'de' : 'Quint',
+				'es' : 'Quinta',
 			},
 			'Sixth' : {
 				'en' : 'Sixth',
 				'de' : 'Sext',
+				'es' : 'Sexta',
 			},
 			'Seventh' : {
 				'en' : 'Seventh',
 				'de' : 'Septime',
+				'es' : 'Séptima',
 			},
 			'Octave' : {
 				'en' : 'Octave',
 				'de' : 'Oktave',
+				'es' : 'Octava',
 			},
 			'Inversion' : {
 				'en' : 'Inversion',
 				'de' : 'Inversion',
+				'es' : 'Inversión',
 			},
 # Grand Staff
 			'grand_staff' : {
 				'en' : 'Grand Staff',
-				'de' : 'Klaviersystem',
+				'de' : 'Notation für Klavier',
+				'es' : 'Notacíon para piano',
 			},
 # Rest
 			'Rests' : {
 				'en' : 'Rests',
 				'de' : 'Pausen',
+				'es' : 'Silencio',
 			},
 # Time signature
 			'time_signature' : {
 				'en' : 'Time signature',
 				'de' : 'Taktart',
+				'es' : 'Compás',
 			},
 # Note value
 			'note_values' : {
 				'en' : 'Note values',
 				'de' : 'Notenwerte',
+				'es' : 'Figuras',
 			},
 # Tempo
 			'Tempo' : {
 				'en' : 'Tempo',
 				'de' : 'Tempo',
+				'es' : 'Tempo',
 			},
 # Tuplet
 			'Triplets' : {
 				'en' : 'Triplets',
 				'de' : 'Triolen',
+				'es' : 'Tresillos',
 			},
 			'Tuplets' : {
 				'en' : 'Tuplets',
 				'de' : 'Multiolen',
+				'es' : 'Grupillos',
 			},
 			'None' : {
 				'en' : 'None',
 				'de' : 'Kein',
+				'es' : 'Ningún',
 			},
 # Chords
 			'Chords' : {
 				'en' : 'Chords',
 				'de' : 'Akkorde',
+				'es' : 'Acordes',
 			},
 # Configuration of website
 			'enable_cookies' : {
 				'en' : 'Enable cookies for saving configuration for next visit of this website',
 				'de' : 'Cookies zulassen, um Einstellungen zu speichern',
+				'es' : 'Permitir cookies para memorizar la configuración',
 			},
 			'hide_controls_after_submit' : {
 				'en' : 'Hide controls after each submit on home page',
 				'de' : 'Auswahlwerkzeuge auf Startseite ausgeblendet lassen nach Absenden des Formulars',
+				'es' : 'Ocultar los botones en la página de inicio',
 			},
 			'set_amount_of_bars' : {
 				'en' : 'Set amount of bars',
 				'de' : 'Anzahl der Takte',
+				'es' : 'Cantidad de los compases',
 			},
 # About div on start page
 			'about_div' : {
@@ -311,39 +400,54 @@ class Locales(object):
 			'hide_controls' : {
 				'en' : 'Hide controls',
 				'de' : 'Knöpfe verbergen',
+				'es' : 'Ocultar botones',
 			},
 			'show_controls' : {
 				'en' : 'Show controls',
 				'de' : 'Knöpfe einblenden',
+				'es' : 'Mostrar botones',
 			},
 			'generate_new' : {
 				'en' : 'Generate new',
 				'de' : 'Neu erstellen',
+				'es' : 'Crear nuevo',
 			},
 			'download_midi' : {
 				'en' : 'Download midi',
 				'de' : 'Midi herunterladen',
+				'es' : 'Descargar Midi',
 			},
 			'Warning' : {
 				'en' : 'Warning',
 				'de' : 'Warnung',
+				'es' : 'Alerta',
 			},
 			'OK' : {
 				'en' : 'OK',
+				'de' : 'OK',
+				'es' : 'OK',
 			},
 # Other parameters
 			'Accents' : {
 				'en' : 'Accents',
 				'de' : 'Akzente',
+				'es' : 'Acentuación',
 			},
 			'dots_and_ties' : {
 				'en' : 'Dots and ties',
 				'de' : 'Punkte und Bögen',
+				'es' : 'Ligadura',
 			},
 # Other words
 			'and' : {
 				'en' : 'and',
 				'de' : 'und',
+				'es' : 'y',
+			},
+			'in' : { # Second and Third in C - c
+				'en' : 'in',
+				'de' : 'in',
+				'es' : 'en',
 			},
 		}
 
