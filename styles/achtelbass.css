@@ -349,3 +349,13 @@ label[for="rest_frequency"] {
 input[id="amount_of_bars"] {
 	width:3em;
 }
+
+a.bright_href:link {
+	color:3399ff;
+}
+a.bright_href:visited {
+	color:#3399ff;
+}
+a.bright_href:hover {
+	color:aqua; # slightly brighter than #3399ff
+}
