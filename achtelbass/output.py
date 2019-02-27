@@ -31,7 +31,7 @@ class Output(object):
 					  "c", "d", "e", "f", "g", "a", "b",
 					  "c'", "d'", "e'", "f'", "g'", "a'", "b'"
 					  "c''", "d''", "e''", "f''", "g''", "a''", "b''"
-	]
+		]
 		# mode: tonic : notes with accidentals if any
 		self.Title_Accidentals = {
 			"Major" : {
@@ -221,23 +221,21 @@ class Output(object):
 		intervals_string = ''
 		for interval in self.Intervals:
 			intervals_string += self.Locales[interval] + ', '
-		intervals_string = re.sub(', $', ' in ', intervals_string)
+		intervals_string = re.sub(', $', ' '+locales['in']+' ', intervals_string)
 		intervals_string = re.sub(r'(.+),(.+?)$', r'\g<1> '+locales['and']+' \g<2>', intervals_string)
 
 		# min pitch defaults to value from form
-		min_pitch_corrected = self.Min_Pitch
+		min_pitch_corrected = locales[self.Min_Pitch]
 		min_pitch_letter = re.findall(r"[A-G]", self.Min_Pitch, re.IGNORECASE)[0]
 		# only if there exists an accidental for that letter, add it
 		if min_pitch_letter.lower() in self.Title_Accidentals[self.Mode][self.Tonic]:
 			# self.Title_Accidentals = mode: tonic : notes with accidentals if any
-			min_pitch_corrected = min_pitch_letter + self.Title_Accidentals[self.Mode][self.Tonic][min_pitch_letter.lower()]
-			min_pitch_corrected = re.sub(r"[A-Ga-g]", min_pitch_corrected, self.Min_Pitch)
+			min_pitch_corrected = locales[min_pitch_letter] + self.Title_Accidentals[self.Mode][self.Tonic][min_pitch_letter.lower()]
 		
-		max_pitch_corrected = self.Max_Pitch
-		max_pitch_letter = re.findall(r"[A-G]", self.Max_Pitch, re.IGNORECASE)[0]
+		max_pitch_corrected = locales[self.Max_Pitch] # Do for C in spanish
+		max_pitch_letter = re.findall(r"[A-G]", self.Max_Pitch, re.IGNORECASE)[0] # for finding accidentals
 		if max_pitch_letter.lower() in self.Title_Accidentals[self.Mode][self.Tonic]:
-			max_pitch_corrected = max_pitch_letter + self.Title_Accidentals[self.Mode][self.Tonic][max_pitch_letter.lower()]
-			max_pitch_corrected = re.sub(r"[A-Ga-g]", max_pitch_corrected, self.Max_Pitch)
+			max_pitch_corrected = locales[max_pitch_letter] + self.Title_Accidentals[self.Mode][self.Tonic][max_pitch_letter.lower()]
 		
 		
 		
