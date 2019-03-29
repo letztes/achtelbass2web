@@ -140,6 +140,11 @@ class Locales(object):
 				'de' : 'A♯',
 				'es' : 'La♯',
 			},
+			'Cb' : {
+				'en' : 'C♭',
+				'de' : 'C♭',
+				'es' : 'Do♭',
+			},
 			'Gb' : {
 				'en' : 'G♭',
 				'de' : 'G♭',

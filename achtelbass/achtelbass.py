@@ -82,9 +82,17 @@ class Achtelbass(object):
 								'1/16' : 0.0625,
 								'1/32' : 0.03125,
 							   }
-		self.Diatonic_Notes		  = 'C D E F G A B C'.split()
-		self.Tonics				  = ['C', 'G', 'D', 'A', 'E', 'B', 'F#', 'Gb', 'C#', 'Db', 'G#', 'Ab', 'D#', 'Eb', 'Bb', 'F']
-		self.Modes				   = ['Major', 'Minor']
+		self.Diatonic_Notes		= 'C D E F G A B C'.split()
+		self.Modes				= ['Major', 'Minor']
+		self.Tonics				= ['C', 'G', 'D', 'A', 'E', 'B', 'F#', 'C#', 'Cb', 'Gb', 'Db', 'Ab', 'Eb', 'Bb', 'F']
+		if self.Parameters['mode'] == 'Minor':
+			self.Tonics				= [ 'A', 'E', 'B', 'F#', 'C#', 'G#', 'D#', 'A#', 'Ab', 'Eb', 'Bb', 'F', 'C', 'G', 'D']
+		
+		# default to C Major if invalid combination of tonic and mode
+		if self.Parameters['tonic'] not in self.Tonics:
+			self.Parameters['mode']  = 'Major'
+			self.Parameters['tonic'] = 'C'
+
 		self.Interval_Values = {
 								'Unison'  : 0,
 								'Second'  : 1,
