@@ -379,21 +379,6 @@ class Locales(object):
 				'de' : 'Noten werden per Zufallsgenerator erstellt, so dass sie sich in derselben Kombination eher nicht mehr wiederholen werden.',
 				'es' : 'Las notas estan creadas por un generador aleatorio así que no se repitan en la misma combinación.',
 			},
-			'no_memorization_effect' : {
-				'en' : 'This way you will not memorize the notes of the exercise as it happens often with traditional literature.',
-				'de' : 'Dadurch vermeiden Sie das Auswendiglernen von Notenmaterial, was leider mit traditioneller Übungsliteratur häufig vorkommt.',
-				'es' : 'Por eso no memoriza los ejercicios, que pasa con literatura ejercicio tradicional.',
-			},
-			'achtelbass_is_versatile' : {
-				'en' : 'You can increase the difficulty level gradually by adding options evenly or concentrate on certain options like triplets, chords, exotic time signatures or whatever you want to master.',
-				'de' : 'Sie können den Schwierigkeitsgrad gemäß Ihrem persönlichen Lernfortschritt erhöhen oder sich auf bestimmte Aspekte wie Triolen, Akkorde oder exotische Taktarten konzentrieren.',
-				'es' : 'Puede aumentar el nivel de dificultad conforme a su progreso individual o concentrarse en ciertos elementos como tresillos, acordes o compases exóticos.',
-			},
-			'achtelbass_is_versatile_really' : {
-				'en' : 'Prepare for exams, target your personal weak spots or just begin to learn sight reading.',
-				'de' : 'Bereiten Sie sich auf Prüfungen vor, gehen Sie Ihre Schwachstellen an oder beginnen Sie einfach nur damit, endlich Notenlesen zu lernen.',
-				'es' : 'Preparese para exámenos, trabaje en su puntos débiles o empiece a aprender de leer las notas.',
-			},
 			'free_2_play' : {
 				'en' : 'Achtelbass is free of charge and does not bother you with advertisement.',
 				'de' : 'Achtelbass ist kostenlos und belästigt Sie auch nicht mit Werbung.',
@@ -408,11 +393,6 @@ class Locales(object):
 				'en' : 'or open an issue at',
 				'de' : 'oder öffnen Sie einen Vorgang unter',
 				'es' : 'o informe me de un problema con',
-			},
-			'please_fork_the_repo' : {
-				'en' : 'If you are into python then you might fork the project and fix the issue by yourself.',
-				'de' : 'Wenn Sie gerne in Python programmieren, können Sie zum Projekt direkt beitragen.',
-				'es' : 'Si le gusta programar con Python, puede contribuir al proyecto directamente.',
 			},
 			'request_for_donation' : {
 				'en' : 'If you do not code but like the website and want to contribute you can make a donation.',
