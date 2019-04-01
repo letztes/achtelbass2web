@@ -394,11 +394,6 @@ class Locales(object):
 				'de' : 'oder öffnen Sie einen Vorgang unter',
 				'es' : 'o informe me de un problema con',
 			},
-			'request_for_donation' : {
-				'en' : 'If you do not code but like the website and want to contribute you can make a donation.',
-				'de' : 'Wenn Ihnen das Programmieren nicht liegt, Sie die Webseite aber gerne unterstützen möchten, können Sie einen kleinen Betrag spenden.',
-				'es' : 'Si no le gusta programar pero quiere ayudar el sitio del red, puede subvencionarlo con un donativo.',
-			},
 # General stuff
 			'hide_controls' : {
 				'en' : 'Hide controls',
