@@ -387,7 +387,7 @@ class Locales(object):
 			'please_contact_me' : {
 				'en' : 'If you miss a feature or find a bug please contact me at',
 				'de' : 'Wenn Ihnen ein Fehler auffällt oder Sie eine Funktionalität vermissen, kontaktieren Sie mich unter',
-				'es' : 'Si le da cuenta de un error o si echa de menos a una funcionalidad, por favor, contacta me con', 
+				'es' : 'Si le da cuenta de un error o si echa de menos a una funcionalidad, por favor, contacte me con', 
 			},
 			'please_report_issues' : {
 				'en' : 'or open an issue at',
