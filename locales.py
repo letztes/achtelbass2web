@@ -392,7 +392,7 @@ class Locales(object):
 			'please_report_issues' : {
 				'en' : 'or open an issue at',
 				'de' : 'oder öffnen Sie einen Vorgang unter',
-				'es' : 'o informe me de un problema con',
+				'es' : 'o cree un incidente en',
 			},
 # General stuff
 			'hide_controls' : {
