@@ -1,6 +1,8 @@
-The achtelbass python, html, css and javascript code is Copyright (c) 2015-2018 Artur Spengler and Petra Schanz.
+# MIT License
 
-The abcjs Javascript library is Copyright (c) 2009-2018 Paul Rosen and Gregory Dyke.
+The achtelbass python, html, css and javascript code is Copyright (c) 2015-2019 Artur Spengler and Petra Schanz.
+
+The abcjs Javascript library is Copyright (c) 2009-2019 Paul Rosen and Gregory Dyke.
 
 The Font Awesome library is Copyright (c) Font Awesome.
 
