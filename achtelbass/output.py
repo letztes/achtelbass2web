@@ -225,7 +225,7 @@ class Output(object):
 		intervals_string = re.sub(r'(.+),(.+?)$', r'\g<1> '+locales['and']+' \g<2>', intervals_string)
 
 		# min pitch defaults to value from form
-		min_pitch_corrected = locales[self.Min_Pitch]
+		min_pitch_corrected = self.Min_Pitch
 		min_pitch_letter = re.findall(r"[A-G]", self.Min_Pitch, re.IGNORECASE)[0]
 		# only if there exists an accidental for that letter, add it
 		if min_pitch_letter.lower() in self.Title_Accidentals[self.Mode][self.Tonic]:
