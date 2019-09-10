@@ -173,7 +173,7 @@ class Locales(object):
 			'F' : {
 				'en' : 'F',
 				'de' : 'F',
-				'es' : 'Fa♭',
+				'es' : 'Fa',
 			},
 # Pitch letters for output.py
 			'c' : {
