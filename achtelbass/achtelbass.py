@@ -85,6 +85,11 @@ class Achtelbass(object):
 		self.Diatonic_Notes		= 'C D E F G A B C'.split()
 		self.Modes				= ['Major', 'Minor']
 		self.Tonics				= ['C', 'G', 'D', 'A', 'E', 'B', 'F#', 'C#', 'Cb', 'Gb', 'Db', 'Ab', 'Eb', 'Bb', 'F']
+		
+		# default to Major if invalid mode value was submitted
+		if self.Parameters['mode'] not in self.Modes:
+			self.Parameters['mode']  = 'Major'
+		
 		if self.Parameters['mode'] == 'Minor':
 			self.Tonics				= [ 'A', 'E', 'B', 'F#', 'C#', 'G#', 'D#', 'A#', 'Ab', 'Eb', 'Bb', 'F', 'C', 'G', 'D']
 		
@@ -144,7 +149,10 @@ class Achtelbass(object):
 		self.Mode					= parameters['mode']
 		
 		if isinstance(parameters['chords_frequency'], str):
-			self.Chords_Frequency		= float(parameters['chords_frequency'])
+			try:
+				self.Chords_Frequency		= float(parameters['chords_frequency'])
+			except:
+				self.Chords_Frequency		= 0
 		elif isinstance(parameters['chords_frequency'], float):
 			self.Chords_Frequency		= parameters['chords_frequency']
 		else:
@@ -153,7 +161,10 @@ class Achtelbass(object):
 		self.Grand_Staff			 = parameters['grand_staff']
 		
 		if isinstance(parameters['prolongations_frequency'], str):
-			self.Prolongations_Frequency		= float(parameters['prolongations_frequency'])
+			try:
+				self.Prolongations_Frequency		= float(parameters['prolongations_frequency'])
+			except:
+				self.Prolongations_Frequency		= 0
 		elif isinstance(parameters['prolongations_frequency'], float):
 			self.Prolongations_Frequency		= parameters['prolongations_frequency']
 		else:
@@ -199,7 +210,14 @@ class Achtelbass(object):
 		self.Notes = [x["note"] for x in reversed(self.Note_Objects)]
 		
 		self.Min_Pitch = parameters['min_pitch']
+		if self.Parameters['min_pitch'] not in self.Tonics:
+			parameters['min_pitch'] = 'C'
+			self.Min_Pitch = 'C'
 		self.Max_Pitch = parameters['max_pitch']
+		if self.Parameters['max_pitch'] not in self.Tonics:
+			parameters['max_pitch'] = 'c'
+			self.Max_Pitch = 'c'
+			
 		
 		#if max_pitch is lower than min_pitch, swap them
 		if self.Notes.index(self.Min_Pitch) > self.Notes.index(self.Max_Pitch):
@@ -212,8 +230,11 @@ class Achtelbass(object):
 		# intervals that are too big
 		self.Intervals = []
 		for current_interval in parameters['intervals']:
-			if self.Interval_Values[current_interval] <= self.Pitch_Range:
-				self.Intervals.append(current_interval)
+			try:
+				if self.Interval_Values[current_interval] <= self.Pitch_Range:
+					self.Intervals.append(current_interval)
+			except:
+				parameters['intervals'] = ['Unison']
 		if not self.Intervals:
 			# fall back to unison
 			self.Intervals = ['Unison']
@@ -223,16 +244,31 @@ class Achtelbass(object):
 		self.Clef_Right_Hand		= 'treble'
 		
 		if isinstance(parameters['rest_frequency'], str):
-			self.Rest_Frequency		= float(parameters['rest_frequency'])
+			try:
+				self.Rest_Frequency		= float(parameters['rest_frequency'])
+			except:
+				self.Rest_Frequency		= 0
+			
 		elif isinstance(parameters['rest_frequency'], float):
 			self.Rest_Frequency		= parameters['rest_frequency']
 		else:
 			self.Rest_Frequency		= 0
-		
-		self.Selectable_Note_Values = [self.Fraction_Values[note_value] for note_value in parameters['note_values']]
+			
+		self.Selectable_Note_Values = []
+		for note_value in parameters['note_values']:
+			try:
+				
+				self.Selectable_Note_Values.append(self.Fraction_Values[note_value])
+			except:
+				parameters['note_values'] = ['1', '1/2', '1/4']
+				self.Selectable_Note_Values = [self.Fraction_Values[note_value] for note_value in parameters['note_values']]
 		self.Selectable_Note_Values.sort()
 
-		self.Time_Signature_Numerator, self.Time_Signature_Denominator = parameters['time_signature'].split('/')
+		try:
+			self.Time_Signature_Numerator, self.Time_Signature_Denominator = parameters['time_signature'].split('/')
+		except:
+			parameters['time_signature'] = '4/4'
+			self.Time_Signature_Numerator, self.Time_Signature_Denominator = parameters['time_signature'].split('/')
 		self.Time_Signature	= self.Fraction_Values[parameters['time_signature']]
 		
 		# if note values can not sum up to one full bar, change the
@@ -250,7 +286,11 @@ class Achtelbass(object):
 		self.Tuplet_Same_Pitch = parameters['tuplet_same_pitch']
 
 		if isinstance(parameters['tuplets_frequency'], str):
-			self.Tuplets_Frequency		= float(parameters['tuplets_frequency'])
+			
+			try:
+				self.Tuplets_Frequency		= float(parameters['tuplets_frequency'])
+			except:
+				self.Tuplets_Frequency		= 0
 		elif isinstance(parameters['tuplets_frequency'], float):
 			self.Tuplets_Frequency		= parameters['tuplets_frequency']
 		else:
@@ -267,7 +307,12 @@ class Achtelbass(object):
 							'vivace' : 160,
 							'presto' : 184,
 		}
-		self.Tempo = parameters['tempo']
+		try:
+			self.BPM_For_Tempo[parameters['tempo']]
+		except:
+			parameters['tempo'] = 'andante'
+			self.Tempo = parameters['tempo']
+
 		try:
 			self.BPM = parameters['bpm']
 		except KeyError:
@@ -275,12 +320,16 @@ class Achtelbass(object):
 
 
 		# default to 8, set to parameter if is integer and not too big
-		if isinstance(parameters['amount_of_bars'], str) and int(parameters['amount_of_bars']) > 0 and int(parameters['amount_of_bars']) < 65:
+		try:
+			if isinstance(parameters['amount_of_bars'], str) and int(parameters['amount_of_bars']) > 0 and int(parameters['amount_of_bars']) < 65:
 				self.Amount_Of_Bars = int(parameters['amount_of_bars'])
-		elif isinstance(parameters['amount_of_bars'], int) and parameters['amount_of_bars'] > 0 and parameters['amount_of_bars'] < 65:
+			elif isinstance(parameters['amount_of_bars'], int) and parameters['amount_of_bars'] > 0 and parameters['amount_of_bars'] < 65:
 				self.Amount_Of_Bars = parameters['amount_of_bars']
-		else:
-			self.Amount_Of_Bars = 8
+			else:
+				self.Amount_Of_Bars = 8
+		except:
+			parameters['amount_of_bars'] = 8
+			self.Amount_Of_Bars = parameters['amount_of_bars']
 		
 		self.Note_String	= ''
 				

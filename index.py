@@ -74,6 +74,13 @@ def index():
 	locales_obj = Locales(language)
 	locales = locales_obj.get_locales()
 	
+	# Sanitize form input, discard everything containing "<"
+	# as it starts html and javascript tags indicating xss
+	for dict_key in parameters:
+		if isinstance(parameters.get(dict_key, 'foo'), str):
+			if '<' in parameters.get(dict_key, 'foo'):
+				parameters[dict_key] = 'character "lower than" detected for parameter' + dict_key + '. Suspecting cross site scripting attempt.'
+
 	achtelbass_obj = achtelbass.Achtelbass(parameters, locales)
 	
 	context.update(achtelbass_obj.__dict__)
