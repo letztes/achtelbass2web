@@ -69,10 +69,15 @@ def index():
 					parameters[cookie[0]] = values_list
 	
 	# GET parameter overrides cookie, important for sitemap
+	
 	language = form.getvalue('language', parameters['language'])
 
 	locales_obj = Locales(language)
 	locales = locales_obj.get_locales()
+
+	# Locales checks for valid languages defaulting to en
+	parameters['language'] = locales_obj.Language_Code
+	language = locales_obj.Language_Code
 	
 	# Sanitize form input, discard everything containing "<"
 	# as it starts html and javascript tags indicating xss

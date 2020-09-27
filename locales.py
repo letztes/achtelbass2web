@@ -5,13 +5,13 @@ class Locales(object):
 	def __init__(self, language_code):
 		
 		# sanitize form input, discard invalid values
-		languages = {
+		self.Languages = {
 			'de' : 'de',
 			'en' : 'en',
 			'es' : 'es',
 		}
 		
-		self.Language_Code = languages.get(language_code, 'en')
+		self.Language_Code = self.Languages.get(language_code, 'en')
 		
 		self.Translations = {
 # Menu
@@ -456,6 +456,9 @@ class Locales(object):
 			},
 		}
 
+
+	def get_languages(self):
+		return self.Language_Code
 
 	def get_locales(self):
 		
