@@ -54,6 +54,13 @@ def index():
 	# Locales checks for valid languages defaulting to en
 	parameters['language'] = locales_obj.Language_Code
 	language = locales_obj.Language_Code
+	
+	# Sanitize form input, discard everything containing "<"
+	# as it starts html and javascript tags indicating xss
+	for dict_key in parameters:
+		if isinstance(parameters.get(dict_key, 'foo'), str):
+			if '<' in parameters.get(dict_key, 'foo'):
+				parameters[dict_key] = 'character "lower than" detected for parameter' + dict_key + '. Suspecting cross site scripting attempt.'
 
 	context['locales'] = locales_obj.get_locales()
 	context['language'] = language
