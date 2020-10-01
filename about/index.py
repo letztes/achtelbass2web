@@ -50,6 +50,10 @@ def index():
 	language = form.getvalue('language', parameters['language'])
 
 	locales_obj = Locales(language)
+	
+	# Locales checks for valid languages defaulting to en
+	parameters['language'] = locales_obj.Language_Code
+	language = locales_obj.Language_Code
 
 	context['locales'] = locales_obj.get_locales()
 	context['language'] = language
